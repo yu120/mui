@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="renderer" content="webkit">
 
-    <title>微服务神经元 - Neural</title>
+    <title>微服务协调 - Mui</title>
 
     <meta name="keywords" content="">
     <meta name="description" content="">
@@ -36,58 +36,80 @@
                                 <span class="clear">
                                     <span class="block m-t-xs" style="font-size:20px;">
                                         <i class="fa fa-map-signs"></i>
-                                        <strong class="font-bold">微服务神经元</strong>
+                                        <strong class="font-bold">微服务协调</strong>
                                     </span>
                                 </span>
                             </a>
                         </div>
-                        <div class="logo-element">Neural</div>
+                        <div class="logo-element">Mui</div>
                     </li>
                     <li class="hidden-folded padder m-t m-b-sm text-muted text-xs">
                         <span class="ng-scope">监控统计</span>
                     </li>
                     <li>
-                        <a class="J_menuItem" href="${ctx}/web/main">
+                        <a class="J_menuItem" href="index_v1.html">
                             <i class="fa fa-home"></i>
-                            <span class="nav-label">首页</span>
+                            <span class="nav-label">主页</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class="fa fa fa-bar-chart-o"></i>
+                            <span class="nav-label">统计分析</span>
+                            <span class="fa arrow"></span>
+                        </a>
+                        <ul class="nav nav-second-level">
+                            <li><a class="J_menuItem" href="mailbox.html">应用分析</a>
+                            </li>
+                            <li><a class="J_menuItem" href="mail_detail.html">服务分析</a>
+                            </li>
+                            <li><a class="J_menuItem" href="mail_compose.html">流量分析</a>
+                            </li>
+                        </ul>
+					</li>
+                    <li class="line dk"></li>
+                    <li class="hidden-folded padder m-t m-b-sm text-muted text-xs">
+                        <span class="ng-scope">注册中心</span>
+                    </li>
+                    <li>
+                        <a href="mailbox.html" class="J_menuItem">
+                        	<i class="fa fa-envelope"></i>
+                        	<span class="nav-label">应用中心 </span>
+                        	<span class="label label-warning pull-right">16</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="J_menuItem">
+                        	<i class="fa fa-picture-o"></i>
+                        	<span class="nav-label">服务中心</span>
+                        	<span class="fa arrow"></span>
                         </a>
                     </li>
                     <li class="line dk"></li>
                     <li class="hidden-folded padder m-t m-b-sm text-muted text-xs">
-                        <span class="ng-scope">功能模块</span>
+                        <span class="ng-scope">配置中心</span>
+                    </li>
+                    <li>
+                        <a class="J_menuItem" href="css_animation.html">
+                        	<i class="fa fa-magic"></i>
+                        	<span class="nav-label">微配置</span>
+                       	</a>
+                    </li>
+                    <li class="line dk"></li>
+                    <li class="hidden-folded padder m-t m-b-sm text-muted text-xs">
+                        <span class="ng-scope">微治理</span>
                     </li>
                     <li>
                         <a href="#">
-                        	<i class="fa fa-bitbucket"></i> 
-                        	<span class="nav-label">限流</span>
-                        	<span class="fa arrow"></span>
+                        	<i class="fa fa-picture-o"></i>
+                        	<span class="nav-label">分布式限流</span>
                         </a>
-                        <ul class="nav nav-second-level collapse" aria-expanded="false" style="height: 0px;">
-                            <li><a class="J_menuItem" href="${ctx}/web/limiterRules">限流规则</a></li>
-                            <li><a class="J_menuItem" href="${ctx}/web/limiterStatistics">告警记录</a></li>
-                        </ul>
                     </li>
                     <li>
                         <a href="#">
-                        	<i class="fa fa-eye-slash"></i> 
-                        	<span class="nav-label">降级</span>
-                        	<span class="fa arrow"></span>
+                        	<i class="fa fa-cutlery"></i>
+                        	<span class="nav-label">服务熔断 </span>
                         </a>
-                        <ul class="nav nav-second-level collapse" aria-expanded="false" style="height: 0px;">
-                            <li><a class="J_menuItem" href="${ctx}/web/limiterRules">限流规则</a></li>
-                            <li><a class="J_menuItem" href="${ctx}/web/limiterStatistics">告警记录</a></li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="#">
-                        	<i class="fa fa-fire-extinguisher"></i> 
-                        	<span class="nav-label">熔断</span>
-                        	<span class="fa arrow"></span>
-                        </a>
-                        <ul class="nav nav-second-level collapse" aria-expanded="false" style="height: 0px;">
-                            <li><a class="J_menuItem" href="${ctx}/web/limiterRules">限流规则</a></li>
-                            <li><a class="J_menuItem" href="${ctx}/web/limiterStatistics">告警记录</a></li>
-                        </ul>
                     </li>
                 </ul>
             </div>
