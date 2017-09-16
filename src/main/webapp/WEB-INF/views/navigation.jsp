@@ -75,7 +75,7 @@
                         </a>
                     </li>
                     <li>
-                        <a class="J_menuItem" href="${ctx}/mreg/services">
+                        <a class="J_menuItem" href="${ctx}/mconf/confs">
                         	<i class="fa fa-magic"></i>
                         	<span class="nav-label">配置中心</span>
                        	</a>
