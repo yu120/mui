@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import cn.ms.mui.service.MconfService;
 
 @Controller
-@RequestMapping("web")
+@RequestMapping("mconf")
 public class MconfCtrl {
 
 	@Resource

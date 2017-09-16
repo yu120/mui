@@ -79,10 +79,9 @@
                         </a>
                     </li>
                     <li>
-                        <a href="#" class="J_menuItem">
+                        <a href="${ctx}/mreg/services" class="J_menuItem">
                         	<i class="fa fa-picture-o"></i>
                         	<span class="nav-label">服务中心</span>
-                        	<span class="fa arrow"></span>
                         </a>
                     </li>
                     <li class="line dk"></li>
