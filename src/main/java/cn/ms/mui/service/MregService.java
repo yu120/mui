@@ -2,8 +2,8 @@ package cn.ms.mui.service;
 
 import java.util.Map;
 
-import cn.ms.coon.support.mreg.monitor.MregGovernor.Application;
-import cn.ms.coon.support.mreg.monitor.MregGovernor.ServiceUnit;
+import cn.ms.coon.support.mreg.MregGovernor.Application;
+import cn.ms.coon.support.mreg.MregGovernor.ServiceUnit;
 
 public interface MregService {
 	

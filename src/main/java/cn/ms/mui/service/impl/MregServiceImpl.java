@@ -6,9 +6,9 @@ import org.springframework.stereotype.Service;
 
 import cn.ms.coon.CoonFactory;
 import cn.ms.coon.service.Mreg;
-import cn.ms.coon.support.mreg.monitor.MregGovernor;
-import cn.ms.coon.support.mreg.monitor.MregGovernor.Application;
-import cn.ms.coon.support.mreg.monitor.MregGovernor.ServiceUnit;
+import cn.ms.coon.support.mreg.MregGovernor;
+import cn.ms.coon.support.mreg.MregGovernor.Application;
+import cn.ms.coon.support.mreg.MregGovernor.ServiceUnit;
 import cn.ms.mui.service.MregService;
 import cn.ms.neural.NURL;
 
