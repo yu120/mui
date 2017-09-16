@@ -54,7 +54,7 @@
                     </li>
                     <li>
                         <a class="J_menuItem" href="${ctx}/mreg/services">
-                            <i class="fa fa fa-bar-chart-o"></i>
+                            <i class="fa fa fa-line-chart"></i>
                             <span class="nav-label">统计分析</span>
                         </a>
 					</li>
@@ -86,14 +86,26 @@
                     </li>
                     <li>
                         <a class="J_menuItem" href="${ctx}/mreg/services">
-                        	<i class="fa fa-picture-o"></i>
-                        	<span class="nav-label">分布式限流</span>
+                        	<i class="fa fa-forumbee"></i>
+                        	<span class="nav-label">OAuth </span>
                         </a>
                     </li>
                     <li>
                         <a class="J_menuItem" href="${ctx}/mreg/services">
-                        	<i class="fa fa-cutlery"></i>
-                        	<span class="nav-label">服务熔断 </span>
+                        	<i class="fa fa-stumbleupon"></i>
+                        	<span class="nav-label">服务降级 </span>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="J_menuItem" href="${ctx}/mreg/services">
+                        	<i class="fa fa-chain-broken"></i>
+                        	<span class="nav-label">熔断隔离 </span>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="J_menuItem" href="${ctx}/mreg/services">
+                        	<i class="fa fa-bitbucket"></i>
+                        	<span class="nav-label">分布式限流</span>
                         </a>
                     </li>
                 </ul>
