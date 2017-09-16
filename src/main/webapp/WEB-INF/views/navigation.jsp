@@ -92,7 +92,7 @@
                     </li>
                     <li>
                         <a class="J_menuItem" href="${ctx}/mreg/services">
-                        	<i class="fa fa-stumbleupon"></i>
+                        	<i class="fa fa-fire-extinguisher"></i>
                         	<span class="nav-label">服务降级 </span>
                         </a>
                     </li>
