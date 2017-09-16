@@ -16,28 +16,16 @@ public class WebCtrl {
 	@Resource
 	private LimiterService limiterService;
 
-	@RequestMapping(value = "index")
-	public String index(HttpServletRequest request) {
-		return "index";
+	@RequestMapping("navigation")
+	public String navigation(HttpServletRequest request) {
+		return "navigation";
 	}
 
-	/**
-	 * 首页
-	 * 
-	 * @param request
-	 * @return
-	 */
 	@RequestMapping(value = "main")
 	public String main(HttpServletRequest request) {
 		return "main";
 	}
 
-	/**
-	 * 限流规则列表
-	 * 
-	 * @param request
-	 * @return
-	 */
 	@RequestMapping(value = "limiterRules")
 	public String limiterRules(String keywords, HttpServletRequest request) {
 		if(keywords == null){

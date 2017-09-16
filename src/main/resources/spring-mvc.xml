@@ -16,7 +16,7 @@
         http://www.springframework.org/schema/tx   
         http://www.springframework.org/schema/tx/spring-tx-4.0.xsd">  
   	
-  	<mvc:view-controller path="/" view-name="redirect:/web/index"/>
+  	<mvc:view-controller path="/" view-name="redirect:/web/navigation"/>
   	
   	<!-- 防止@ResponseBody中文乱码 -->
     <bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">
