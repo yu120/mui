@@ -47,65 +47,51 @@
                         <span class="ng-scope">监控统计</span>
                     </li>
                     <li>
-                        <a class="J_menuItem" href="index_v1.html">
+                        <a class="J_menuItem" href="${ctx}/web/main">
                             <i class="fa fa-home"></i>
                             <span class="nav-label">主页</span>
                         </a>
                     </li>
                     <li>
-                        <a href="#">
+                        <a class="J_menuItem" href="${ctx}/mreg/services">
                             <i class="fa fa fa-bar-chart-o"></i>
                             <span class="nav-label">统计分析</span>
-                            <span class="fa arrow"></span>
                         </a>
-                        <ul class="nav nav-second-level">
-                            <li><a class="J_menuItem" href="mailbox.html">应用分析</a>
-                            </li>
-                            <li><a class="J_menuItem" href="mail_detail.html">服务分析</a>
-                            </li>
-                            <li><a class="J_menuItem" href="mail_compose.html">流量分析</a>
-                            </li>
-                        </ul>
 					</li>
                     <li class="line dk"></li>
                     <li class="hidden-folded padder m-t m-b-sm text-muted text-xs">
-                        <span class="ng-scope">注册中心</span>
+                        <span class="ng-scope">分布式中心</span>
                     </li>
                     <li>
-                        <a href="mailbox.html" class="J_menuItem">
+                        <a class="J_menuItem" href="${ctx}/mreg/services">
                         	<i class="fa fa-envelope"></i>
                         	<span class="nav-label">应用中心 </span>
-                        	<span class="label label-warning pull-right">16</span>
                         </a>
                     </li>
                     <li>
-                        <a href="${ctx}/mreg/services" class="J_menuItem">
-                        	<i class="fa fa-picture-o"></i>
+                        <a class="J_menuItem" href="${ctx}/mreg/services">
+                        	<i class="fa fa-strikethrough"></i>
                         	<span class="nav-label">服务中心</span>
                         </a>
                     </li>
-                    <li class="line dk"></li>
-                    <li class="hidden-folded padder m-t m-b-sm text-muted text-xs">
-                        <span class="ng-scope">配置中心</span>
-                    </li>
                     <li>
-                        <a class="J_menuItem" href="css_animation.html">
+                        <a class="J_menuItem" href="${ctx}/mreg/services">
                         	<i class="fa fa-magic"></i>
-                        	<span class="nav-label">微配置</span>
+                        	<span class="nav-label">配置中心</span>
                        	</a>
                     </li>
                     <li class="line dk"></li>
                     <li class="hidden-folded padder m-t m-b-sm text-muted text-xs">
-                        <span class="ng-scope">微治理</span>
+                        <span class="ng-scope">治理中心</span>
                     </li>
                     <li>
-                        <a href="#">
+                        <a class="J_menuItem" href="${ctx}/mreg/services">
                         	<i class="fa fa-picture-o"></i>
                         	<span class="nav-label">分布式限流</span>
                         </a>
                     </li>
                     <li>
-                        <a href="#">
+                        <a class="J_menuItem" href="${ctx}/mreg/services">
                         	<i class="fa fa-cutlery"></i>
                         	<span class="nav-label">服务熔断 </span>
                         </a>

@@ -29,22 +29,48 @@
     		<div class="col-sm-12">
     			<div class="ibox float-e-margins">
 					<div class="ibox-title">
-	                    <h5><font color="gray">注册中心 > </font>服务中心</h5>
+	                    <h5><font color="gray">分布式中心 > </font>服务中心</h5>
 	                </div>
                 </div>
 			</div>
 			
     		<c:forEach items="${services}" var="service">
     			<c:set var="categories" value="${service.value}"/>
+    			<c:set var="providersNum" value="${fn:length(categories['providers'].analysis['hosts'])}"/>
+    			<c:set var="consumersNum" value="${fn:length(categories['consumers'].analysis['hosts'])}"/>
+    			<c:set var="providersColor" value="${providersNum>0?'text-success':'text-muted'}"/>
+    			<c:set var="consumersColor" value="${consumersNum>0?'text-warning':'text-muted'}"/>
+    			<c:choose>
+	    			<c:when test="${providersNum > 0}">
+		    			<c:choose>
+			    			<c:when test="${consumersNum > 0}">
+			    				<c:set var="serviceColor" value="text-navy"/>
+			    			</c:when>
+			    			<c:otherwise>
+			    				<c:set var="serviceColor" value="text-success"/>
+			    			</c:otherwise>
+		    			</c:choose>
+	    			</c:when>
+	    			<c:otherwise>
+	    				<c:choose>
+			    			<c:when test="${consumersNum > 0}">
+			    				<c:set var="serviceColor" value="text-warning"/>
+			    			</c:when>
+			    			<c:otherwise>
+			    				<c:set var="serviceColor" value="text-muted"/>
+			    			</c:otherwise>
+		    			</c:choose>
+	    			</c:otherwise>
+    			</c:choose>
 				<div class="col-sm-4">
 	                <div class="ibox float-e-margins">
 	                    <div class="ibox-title">
-	                        <h5><i class="fa fa-paper-plane"></i> ${fn:substring(service.key, 0, fn:indexOf(service.key, "/"))}</h5>
+	                        <h5><i class="fa fa-strikethrough ${serviceColor}"></i> ${fn:substring(service.key, 0, fn:indexOf(service.key, "/"))}</h5>
 	                        <div class="ibox-tools">
-	                        	<c:if test="${(fn:length(categories['providers'].analysis['hosts'])) > 0}">
-	                        		<span class="badge badge-blue">P</span>
+	                        	<c:if test="${providersNum > 0}">
+	                        		<span class="badge badge-success">P</span>
 	                        	</c:if>
-	                        	<c:if test="${(fn:length(categories['consumers'].analysis['hosts'])) > 0}">
+	                        	<c:if test="${consumersNum > 0}">
 	                        		<span class="badge badge-warning">C</span>
 	                        	</c:if>
 	                        </div>
@@ -61,25 +87,25 @@
 	                        	</thead>
 	                            <tbody>
 	                            	<tr>
-	                                   	<td><i class="fa fa-circle text-navy"> Providers</i></td>
-	                                    <td><i class="fa text-navy">[ ${fn:length(categories['providers'].analysis['hosts'])} ]</i></td>
-	                                    <td><i class="fa text-navy">[ ${fn:length(categories['providers'].analysis['instances'])} ]</i></td>
-	                                    <td><i class="fa text-navy">[ ${fn:length(categories['providers'].statistics)} ]</i></td>
+	                                   	<td><i class="fa fa-tree ${providersColor}"> Providers</i></td>
+	                                    <td><i class="fa ${providersColor}"><i class="fa fa fa-television"></i>[${fn:length(categories['providers'].analysis['hosts'])}]</i></td>
+	                                    <td><i class="fa ${providersColor}"><i class="fa fa fa-heartbeat"></i>[${fn:length(categories['providers'].analysis['instances'])}]</i></td>
+	                                    <td><i class="fa ${providersColor}"><i class="fa fa fa-glass"></i>[${fn:length(categories['providers'].statistics)}]</i></td>
 	                                </tr>
 	                                <tr>
-	                                   	<td><i class="fa fa-circle text-warning"> Consumers</i></td>
-	                                    <td><i class="fa text-warning">[ ${fn:length(categories['consumers'].analysis['hosts'])} ]</i></td>
-	                                    <td><i class="fa text-warning">[ ${fn:length(categories['consumers'].analysis['instances'])} ]</i></td>
-	                                    <td><i class="fa text-warning">[ ${fn:length(categories['consumers'].statistics)} ]</i></td>
+	                                   	<td><i class="fa fa-truck ${consumersColor}"> Consumers</i></td>
+	                                    <td><i class="fa ${consumersColor}"><i class="fa fa fa-television"></i>[${fn:length(categories['consumers'].analysis['hosts'])}]</i></td>
+	                                    <td><i class="fa ${consumersColor}"><i class="fa fa fa-heartbeat"></i>[${fn:length(categories['consumers'].analysis['instances'])}]</i></td>
+	                                    <td><i class="fa ${consumersColor}"><i class="fa fa fa-cutlery"></i>[${fn:length(categories['consumers'].statistics)}]</i></td>
 	                                </tr>
 	                            </tbody>
 	                        </table>
 	                        <div class="stat-percent font-bold">
-								<i class="fa fa-vimeo"></i>
+								<i class="fa fa-vimeo ${serviceColor}"></i>
 								<a href="#" style="color: gray">${fn:substring(service.key, fn:indexOf(service.key, ":")+1, fn:length(service.key))}</a>
 	                        </div>
 	                        <small class="font-bold">
-	                         	<i class="fa fa-google"></i>
+	                         	<i class="fa fa-google ${serviceColor}"></i>
 	                       		<a href="#" style="color: gray">${fn:substring(service.key, fn:indexOf(service.key, "/")+1, fn:indexOf(service.key, ":"))}</a>
 	                        </small>
 	                    </div>

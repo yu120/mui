@@ -1203,7 +1203,7 @@ button.dim:active:before {
 
 .label-success,
 .badge-success {
-    background-color: #1c84c6;
+    background-color: #23c6c8;
     color: #FFFFFF;
 }
 
@@ -4319,7 +4319,7 @@ table.table-mail tr td {
 }
 
 .text-success {
-    color: #1c84c6;
+    color: #23c6c8;
 }
 
 .text-info {
