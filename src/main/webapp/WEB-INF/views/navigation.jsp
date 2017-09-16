@@ -64,7 +64,7 @@
                     </li>
                     <li>
                         <a class="J_menuItem" href="${ctx}/mreg/applications">
-                        	<i class="fa fa-envelope"></i>
+                        	<i class="fa fa-font"></i>
                         	<span class="nav-label">应用中心 </span>
                         </a>
                     </li>
@@ -76,7 +76,7 @@
                     </li>
                     <li>
                         <a class="J_menuItem" href="${ctx}/mconf/confs">
-                        	<i class="fa fa-magic"></i>
+                        	<i class="fa fa-creative-commons"></i>
                         	<span class="nav-label">配置中心</span>
                        	</a>
                     </li>

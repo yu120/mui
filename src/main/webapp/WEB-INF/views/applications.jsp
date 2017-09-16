@@ -63,26 +63,30 @@
 	    			</c:otherwise>
     			</c:choose>
     			<div class="col-sm-3">
-	                <div class="ibox">
-	                    <div class="ibox-content">
-	                        <h5>
-	                        	<small class="font-bold">Application</small>
-	                        	<div class="stat-percent font-bold ${serviceColor}" title="Data Node">
-	                        	${fn:length(app.nodes)} <i class="fa fa-cloud"></i></div>
-	                        </h5>
-	                        <h1 class="no-margins">${app.app}</h1>
-	                        <div class="stat-percent font-bold ${serviceColor}" title="Environments">${fn:length(app.envs)} <i class="fa fa-eye-slash"></i></div>
+	                <div class="widget yellow-bg p-lg text-center">
+	                    <div class="m-b-md">
+	                        <i class="fa fa-font fa-4x"></i>
+	                        <h1 class="m-xs">${app.app}</h1>
+	                        <h3 class="font-bold no-margins"></h3>
 	                        <small class="font-bold" title="Providers">
-	                         	<i class="fa fa-tree ${serviceColor}"></i>
-	                       		<a href="#" style="color: gray">[${fn:length(app.providers)}]</a>
+	                         	<i class="fa fa-tree"></i>
+	                       		<a href="#" style="color: white">[${fn:length(app.providers)}]</a>
 	                        </small>
 	                        <small class="font-bold" title="Consumers">
-	                         	<i class="fa fa-truck ${serviceColor}"></i>
-	                       		<a href="#" style="color: gray">[${fn:length(app.consumers)}]</a>
+	                         	<i class="fa fa-truck"></i>
+	                       		<a href="#" style="color: white">[${fn:length(app.consumers)}]</a>
 	                        </small>
 	                        <small class="font-bold" title="Configurations"> 
-	                         	<i class="fa fa-book ${serviceColor}"></i>
-	                       		<a href="#" style="color: gray">[${fn:length(app.confs)}]</a>
+	                         	<i class="fa fa-book"></i>
+	                       		<a href="#" style="color: white">[${fn:length(app.confs)}]</a>
+	                        </small>
+	                        <small class="font-bold" title="Configurations"> 
+	                         	<i class="fa fa-eye-slash"></i>
+	                       		<a href="#" style="color: white">[${fn:length(app.envs)}]</a>
+	                        </small>
+	                        <small class="font-bold" title="Configurations"> 
+	                         	<i class="fa fa-cloud"></i>
+	                       		<a href="#" style="color: white">[${fn:length(app.nodes)}]</a>
 	                        </small>
 	                    </div>
 	                </div>
@@ -99,25 +103,6 @@
     <script src="${ctx}/res/js/content.js?v=1.0.0"></script>
     <!-- Sweet alert -->
     <script src="${ctx}/res/js/plugins/sweetalert/sweetalert.min.js"></script>
-    <script>
-        $(document).ready(function() {
-            $('.footable').footable();
-	        $('.demo3').click(function () {
-	            swal({
-	                title: "您确定要删除该配置数据项吗",
-	                text: "删除后将无法恢复，请谨慎操作！",
-	                type: "warning",
-	                showCancelButton: true,
-	                confirmButtonColor: "#DD6B55",
-	                confirmButtonText: "删除",
-	                closeOnConfirm: false
-	            }, function () {
-	            	swal("删除成功！", "您已经永久删除了该配置数据项。", "success");
-	            });
-	        });
-        });
-    </script>
-
 </body>
 
 </html>
