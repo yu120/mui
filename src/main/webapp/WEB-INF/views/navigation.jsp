@@ -63,7 +63,7 @@
                         <span class="ng-scope">分布式中心</span>
                     </li>
                     <li>
-                        <a class="J_menuItem" href="${ctx}/mreg/services">
+                        <a class="J_menuItem" href="${ctx}/mreg/applications">
                         	<i class="fa fa-envelope"></i>
                         	<span class="nav-label">应用中心 </span>
                         </a>

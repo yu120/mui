@@ -15,8 +15,14 @@ public class MregCtrl {
 	@Resource
 	private MregService mregService;
 
+	@RequestMapping("applications")
+	public String applications(HttpServletRequest request) {
+		request.setAttribute("applications", mregService.getApplications());
+		return "applications";
+	}
+	
 	@RequestMapping("services")
-	public String main(HttpServletRequest request) {
+	public String services(HttpServletRequest request) {
 		request.setAttribute("services", mregService.getServices());
 		return "services";
 	}
