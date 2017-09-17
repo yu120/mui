@@ -111,14 +111,14 @@
 			                                   	<td><i class="fa ${providersColor}"><i class="fa fa fa-glass"></i>[${fn:length(categories['providers'].statistics)}]</i></td>
 			                                    <td>
 			                                    	<i class="fa ${providersColor}">
-			                                    		<i class="fa fa fa-television"></i>
+			                                    		<i class="fa fa-television"></i>
 			                                    		[<font title="Host: ${fn:length(categories['providers'].analysis['hosts'])}">${fn:length(categories['providers'].analysis['hosts'])}</font>/<font 
 			                                    		title="Instance: ${fn:length(categories['providers'].analysis['instances'])}">${fn:length(categories['providers'].analysis['instances'])}</font>]
 			                                    	</i>
 			                                    </td>
 			                                    <td>
 			                                    	<i class="fa ${providersColor}">
-			                                    		<i class="fa fa fa-cloud"></i>
+			                                    		<i class="fa fa-cloud"></i>
 			                                    		[<font title="Node: ${fn:length(categories['providers'].analysis['hosts'])}">${fn:length(categories['providers'].nodes)}</font>/<font 
 			                                    		title="Env ${fn:length(categories['providers'].analysis['instances'])}">${fn:length(categories['providers'].envs)}</font>]
 			                                    	</i>
@@ -129,14 +129,14 @@
 			                                   	<td><i class="fa ${consumersColor}"><i class="fa fa fa-cutlery"></i>[${fn:length(categories['consumers'].statistics)}]</i></td>
 			                                    <td>
 			                                    	<i class="fa ${consumersColor}">
-			                                    		<i class="fa fa fa-television"></i>
+			                                    		<i class="fa fa-television"></i>
 			                                    		[<font title="Host: ${fn:length(categories['consumers'].analysis['hosts'])}">${fn:length(categories['consumers'].analysis['hosts'])}</font>/<font 
 			                                    		title="Instance: ${fn:length(categories['consumers'].analysis['instances'])}">${fn:length(categories['consumers'].analysis['instances'])}</font>]
 			                                    	</i>
 			                                    </td>
 			                                    <td>
 			                                    	<i class="fa ${consumersColor}">
-			                                    		<i class="fa fa fa-cloud"></i>
+			                                    		<i class="fa fa-cloud"></i>
 			                                    		[<font title="Node: ${fn:length(categories['consumers'].analysis['hosts'])}">${fn:length(categories['consumers'].nodes)}</font>/<font 
 			                                    		title="Env ${fn:length(categories['consumers'].analysis['instances'])}">${fn:length(categories['consumers'].envs)}</font>]
 			                                    	</i>
@@ -169,24 +169,6 @@
     <script src="${ctx}/res/js/content.js?v=1.0.0"></script>
     <!-- Sweet alert -->
     <script src="${ctx}/res/js/plugins/sweetalert/sweetalert.min.js"></script>
-    <script>
-        $(document).ready(function() {
-            $('.footable').footable();
-	        $('.demo3').click(function () {
-	            swal({
-	                title: "您确定要删除该配置数据项吗",
-	                text: "删除后将无法恢复，请谨慎操作！",
-	                type: "warning",
-	                showCancelButton: true,
-	                confirmButtonColor: "#DD6B55",
-	                confirmButtonText: "删除",
-	                closeOnConfirm: false
-	            }, function () {
-	            	swal("删除成功！", "您已经永久删除了该配置数据项。", "success");
-	            });
-	        });
-        });
-    </script>
 
 </body>
 

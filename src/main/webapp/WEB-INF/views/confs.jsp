@@ -52,7 +52,7 @@
 				<c:otherwise>
 					<c:forEach items="${confs}" var="conf">
 		               <div class="col-sm-3">
-		                  <div class="panel panel-primary">
+		                  <div class="panel panel-success">
 		                      <div class="panel-heading" style="font-weight: bold;">
 		                          <i class="fa fa-creative-commons"></i> ${conf.key}
 		                      </div>
@@ -61,7 +61,7 @@
 			                            <tbody>
 			                            	<c:forEach items="${conf.value}" var="attr">
 				                                <tr>
-				                                    <td class="no-borders"><i class="fa fa-circle text-navy"></i> ${attr.key}</td>
+				                                    <td class="no-borders"><i class="fa fa-circle" style="color: #1c84c6"></i> ${attr.key}</td>
 				                                    <td class="no-borders">${attr.value}</td>
 				                                </tr>
 			                                </c:forEach>
@@ -84,24 +84,6 @@
     <script src="${ctx}/res/js/content.js?v=1.0.0"></script>
     <!-- Sweet alert -->
     <script src="${ctx}/res/js/plugins/sweetalert/sweetalert.min.js"></script>
-    <script>
-        $(document).ready(function() {
-            $('.footable').footable();
-	        $('.demo3').click(function () {
-	            swal({
-	                title: "您确定要删除该配置数据项吗",
-	                text: "删除后将无法恢复，请谨慎操作！",
-	                type: "warning",
-	                showCancelButton: true,
-	                confirmButtonColor: "#DD6B55",
-	                confirmButtonText: "删除",
-	                closeOnConfirm: false
-	            }, function () {
-	            	swal("删除成功！", "您已经永久删除了该配置数据项。", "success");
-	            });
-	        });
-        });
-    </script>
 
 </body>
 

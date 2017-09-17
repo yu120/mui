@@ -53,57 +53,58 @@
 				<c:otherwise>
 					<c:forEach items="${applications}" var="application">
 		    			<c:set var="app" value="${application.value}"/>
-		    			<c:set var="providersNum" value="${fn:length(app.providers)}"/>
-		    			<c:set var="consumersNum" value="${fn:length(app.consumers)}"/>
-		    			<c:set var="providersColor" value="${providersNum>0?'text-success':'text-muted'}"/>
-		    			<c:set var="consumersColor" value="${consumersNum>0?'text-warning':'text-muted'}"/>
-		    			<c:choose>
-			    			<c:when test="${providersNum > 0}">
-				    			<c:choose>
-					    			<c:when test="${consumersNum > 0}">
-					    				<c:set var="serviceColor" value="text-navy"/>
-					    			</c:when>
-					    			<c:otherwise>
-					    				<c:set var="serviceColor" value="text-success"/>
-					    			</c:otherwise>
-				    			</c:choose>
-			    			</c:when>
-			    			<c:otherwise>
-			    				<c:choose>
-					    			<c:when test="${consumersNum > 0}">
-					    				<c:set var="serviceColor" value="text-warning"/>
-					    			</c:when>
-					    			<c:otherwise>
-					    				<c:set var="serviceColor" value="text-muted"/>
-					    			</c:otherwise>
-				    			</c:choose>
-			    			</c:otherwise>
-		    			</c:choose>
-		    			<div class="col-sm-3">
-			                <div class="widget yellow-bg p-lg text-center">
-			                    <div class="m-b-md">
-			                        <i class="fa fa-font fa-4x"></i>
-			                        <h1 class="m-xs">${app.app}</h1>
-			                        <h3 class="font-bold no-margins"></h3>
-			                        <small class="font-bold" title="Providers">
-			                         	<i class="fa fa-tree"></i>
-			                       		<a href="#" style="color: white">[${fn:length(app.providers)}]</a>
-			                        </small>
-			                        <small class="font-bold" title="Consumers">
-			                         	<i class="fa fa-truck"></i>
-			                       		<a href="#" style="color: white">[${fn:length(app.consumers)}]</a>
-			                        </small>
-			                        <small class="font-bold" title="Configurations"> 
-			                         	<i class="fa fa-book"></i>
-			                       		<a href="#" style="color: white">[${fn:length(app.confs)}]</a>
-			                        </small>
-			                        <small class="font-bold" title="Configurations"> 
-			                         	<i class="fa fa-eye-slash"></i>
-			                       		<a href="#" style="color: white">[${fn:length(app.envs)}]</a>
-			                        </small>
-			                        <small class="font-bold" title="Configurations"> 
-			                         	<i class="fa fa-cloud"></i>
-			                       		<a href="#" style="color: white">[${fn:length(app.nodes)}]</a>
+						<div class="col-sm-4">
+			                <div class="ibox float-e-margins">
+			                    <div class="ibox-title" style="color:white;background-color: #ed5565">
+			                        <h5><i class="fa fa-font text-fff"></i> ${app.app}</h5>
+			                        <div class="ibox-tools">
+			                        	<c:if test="${fn:length(app.providers) > 0}">
+			                        		<span class="badge badge-white text-danger">P</span>
+			                        	</c:if>
+			                        	<c:if test="${fn:length(app.consumers) > 0}">
+			                        		<span class="badge badge-white text-danger">C</span>
+			                        	</c:if>
+			                        </div>
+			                    </div>
+			                    <div class="ibox-content">
+			                        <table class="table table-stripped small m-t-md" style="margin-top:-10px;margin-bottom: 0px">
+			                        	<thead>
+			                        		<tr>
+			                                	<th>Providers</th>
+			                                    <th>Consumers</th>
+			                                    <th>Configuration</th>
+			                               	</tr>
+			                        	</thead>
+			                            <tbody>
+			                            	<tr>
+			                                    <td>
+			                                    	<i class="fa ${fn:length(app.providers) > 0?'text-danger':'text-muted'}">
+			                                    		<i class="fa fa-tree"></i>
+			                                    		[<font title="Providers: ${fn:length(app.providers)}">${fn:length(app.providers)}</font>]
+			                                    	</i>
+			                                    </td>
+			                                    <td>
+			                                    	<i class="fa ${fn:length(app.consumers) > 0?'text-danger':'text-muted'}">
+			                                    		<i class="fa fa-truck"></i>
+			                                    		[<font title="Consumers: ${fn:length(app.consumers)}">${fn:length(app.consumers)}</font>]
+			                                    	</i>
+			                                    </td>
+			                                    <td>
+			                                    	<i class="fa ${fn:length(app.confs) > 0?'text-danger':'text-muted'}">
+			                                    		<i class="fa fa-creative-commons"></i>
+			                                    		[<font title="Configuration: ${fn:length(app.confs)}">${fn:length(app.confs)}</font>]
+			                                    	</i>
+			                                    </td>
+			                                </tr>
+			                            </tbody>
+			                        </table>
+			                        <div class="stat-percent font-bold">
+										<i class="fa fa-internet-explorer text-danger"></i>
+										<a href="#" style="color: #ed5565" target="Envs: ${fn:length(app.envs)}">[${fn:length(app.envs)}]</a>
+			                        </div>
+			                        <small class="font-bold">
+			                         	<i class="fa fa-cloud text-danger"></i>
+			                       		<a href="#" style="color: #ed5565" title="Nodes: ${fn:length(app.nodes)}">[${fn:length(app.nodes)}]</a>
 			                        </small>
 			                    </div>
 			                </div>
