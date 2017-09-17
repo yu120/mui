@@ -60,29 +60,29 @@
 					</li>
                     <li class="line dk"></li>
                     <li class="hidden-folded padder m-t m-b-sm text-muted text-xs">
-                        <span class="ng-scope">分布式中心</span>
+                        <span class="ng-scope">微视角</span>
                     </li>
                     <li>
                         <a class="J_menuItem" href="${ctx}/mreg/applications">
                         	<i class="fa fa-font"></i>
-                        	<span class="nav-label">应用中心 </span>
+                        	<span class="nav-label">微应用 </span>
                         </a>
                     </li>
                     <li>
                         <a class="J_menuItem" href="${ctx}/mreg/services">
                         	<i class="fa fa-strikethrough"></i>
-                        	<span class="nav-label">服务中心</span>
+                        	<span class="nav-label">微服务</span>
                         </a>
                     </li>
                     <li>
                         <a class="J_menuItem" href="${ctx}/mconf/confs">
                         	<i class="fa fa-creative-commons"></i>
-                        	<span class="nav-label">配置中心</span>
+                        	<span class="nav-label">微配置</span>
                        	</a>
                     </li>
                     <li class="line dk"></li>
                     <li class="hidden-folded padder m-t m-b-sm text-muted text-xs">
-                        <span class="ng-scope">治理中心</span>
+                        <span class="ng-scope">微治理</span>
                     </li>
                     <li>
                         <a class="J_menuItem" href="${ctx}/mreg/services">

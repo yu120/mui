@@ -26,7 +26,6 @@ public class MconfServiceImpl implements MconfService {
 
 	@Override
 	public Map<String, Map<String, String>> getConfs() {
-		System.out.println(mconf.confs());
 		return mconf.confs();
 	}
 
