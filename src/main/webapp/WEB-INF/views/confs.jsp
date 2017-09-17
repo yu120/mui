@@ -33,28 +33,46 @@
 	                </div>
                 </div>
 			</div>
-			
-    		<c:forEach items="${confs}" var="conf">
-               <div class="col-sm-3">
-                  <div class="panel panel-primary">
-                      <div class="panel-heading" style="font-weight: bold;">
-                          <i class="fa fa-creative-commons"></i> ${conf.key}
-                      </div>
-                      <div class="panel-body">
-                      		<table class="table table-stripped small m-t-md" style="margin-bottom: 0px; margin-top: 0px">
-	                            <tbody>
-	                            	<c:forEach items="${conf.value}" var="attr">
-		                                <tr>
-		                                    <td class="no-borders"><i class="fa fa-circle text-navy"></i> ${attr.key}</td>
-		                                    <td class="no-borders">${attr.value}</td>
-		                                </tr>
-	                                </c:forEach>
-	                            </tbody>
-	                        </table>
-                      </div>
-                  </div>
-              </div>
-			</c:forEach>
+			<c:choose>
+				<c:when test="${empty confs}">
+					<div class="wrapper wrapper-content">
+				        <div class="row">
+				            <div class="col-sm-12">
+				                <div class="middle-box text-center animated fadeInRightBig">
+				                    <h3 class="font-bold">没有发现配置</h3>
+				                    <div class="error-desc">
+				                        您可以先注册数据后进行查看
+				                        <br><a href="${ctx}/web/main" class="btn btn-info m-t">打开主页</a>
+				                    </div>
+				                </div>
+				            </div>
+				        </div>
+				    </div>
+				</c:when>
+				<c:otherwise>
+					<c:forEach items="${confs}" var="conf">
+		               <div class="col-sm-3">
+		                  <div class="panel panel-primary">
+		                      <div class="panel-heading" style="font-weight: bold;">
+		                          <i class="fa fa-creative-commons"></i> ${conf.key}
+		                      </div>
+		                      <div class="panel-body">
+		                      		<table class="table table-stripped small m-t-md" style="margin-bottom: 0px; margin-top: 0px">
+			                            <tbody>
+			                            	<c:forEach items="${conf.value}" var="attr">
+				                                <tr>
+				                                    <td class="no-borders"><i class="fa fa-circle text-navy"></i> ${attr.key}</td>
+				                                    <td class="no-borders">${attr.value}</td>
+				                                </tr>
+			                                </c:forEach>
+			                            </tbody>
+			                        </table>
+		                      </div>
+		                  </div>
+		              </div>
+					</c:forEach>
+				</c:otherwise>
+			</c:choose>
         </div>
     </div>
     <!-- 全局js -->

@@ -34,64 +34,83 @@
                 </div>
 			</div>
 			
-    		<c:forEach items="${applications}" var="application">
-    			<c:set var="app" value="${application.value}"/>
-    			<c:set var="providersNum" value="${fn:length(app.providers)}"/>
-    			<c:set var="consumersNum" value="${fn:length(app.consumers)}"/>
-    			<c:set var="providersColor" value="${providersNum>0?'text-success':'text-muted'}"/>
-    			<c:set var="consumersColor" value="${consumersNum>0?'text-warning':'text-muted'}"/>
-    			<c:choose>
-	    			<c:when test="${providersNum > 0}">
+			<c:choose>
+				<c:when test="${empty applications}">
+					<div class="wrapper wrapper-content">
+				        <div class="row">
+				            <div class="col-sm-12">
+				                <div class="middle-box text-center animated fadeInRightBig">
+				                    <h3 class="font-bold">没有发现应用</h3>
+				                    <div class="error-desc">
+				                        您可以先注册数据后进行查看
+				                        <br><a href="${ctx}/web/main" class="btn btn-info m-t">打开主页</a>
+				                    </div>
+				                </div>
+				            </div>
+				        </div>
+				    </div>
+				</c:when>
+				<c:otherwise>
+					<c:forEach items="${applications}" var="application">
+		    			<c:set var="app" value="${application.value}"/>
+		    			<c:set var="providersNum" value="${fn:length(app.providers)}"/>
+		    			<c:set var="consumersNum" value="${fn:length(app.consumers)}"/>
+		    			<c:set var="providersColor" value="${providersNum>0?'text-success':'text-muted'}"/>
+		    			<c:set var="consumersColor" value="${consumersNum>0?'text-warning':'text-muted'}"/>
 		    			<c:choose>
-			    			<c:when test="${consumersNum > 0}">
-			    				<c:set var="serviceColor" value="text-navy"/>
+			    			<c:when test="${providersNum > 0}">
+				    			<c:choose>
+					    			<c:when test="${consumersNum > 0}">
+					    				<c:set var="serviceColor" value="text-navy"/>
+					    			</c:when>
+					    			<c:otherwise>
+					    				<c:set var="serviceColor" value="text-success"/>
+					    			</c:otherwise>
+				    			</c:choose>
 			    			</c:when>
 			    			<c:otherwise>
-			    				<c:set var="serviceColor" value="text-success"/>
+			    				<c:choose>
+					    			<c:when test="${consumersNum > 0}">
+					    				<c:set var="serviceColor" value="text-warning"/>
+					    			</c:when>
+					    			<c:otherwise>
+					    				<c:set var="serviceColor" value="text-muted"/>
+					    			</c:otherwise>
+				    			</c:choose>
 			    			</c:otherwise>
 		    			</c:choose>
-	    			</c:when>
-	    			<c:otherwise>
-	    				<c:choose>
-			    			<c:when test="${consumersNum > 0}">
-			    				<c:set var="serviceColor" value="text-warning"/>
-			    			</c:when>
-			    			<c:otherwise>
-			    				<c:set var="serviceColor" value="text-muted"/>
-			    			</c:otherwise>
-		    			</c:choose>
-	    			</c:otherwise>
-    			</c:choose>
-    			<div class="col-sm-3">
-	                <div class="widget yellow-bg p-lg text-center">
-	                    <div class="m-b-md">
-	                        <i class="fa fa-font fa-4x"></i>
-	                        <h1 class="m-xs">${app.app}</h1>
-	                        <h3 class="font-bold no-margins"></h3>
-	                        <small class="font-bold" title="Providers">
-	                         	<i class="fa fa-tree"></i>
-	                       		<a href="#" style="color: white">[${fn:length(app.providers)}]</a>
-	                        </small>
-	                        <small class="font-bold" title="Consumers">
-	                         	<i class="fa fa-truck"></i>
-	                       		<a href="#" style="color: white">[${fn:length(app.consumers)}]</a>
-	                        </small>
-	                        <small class="font-bold" title="Configurations"> 
-	                         	<i class="fa fa-book"></i>
-	                       		<a href="#" style="color: white">[${fn:length(app.confs)}]</a>
-	                        </small>
-	                        <small class="font-bold" title="Configurations"> 
-	                         	<i class="fa fa-eye-slash"></i>
-	                       		<a href="#" style="color: white">[${fn:length(app.envs)}]</a>
-	                        </small>
-	                        <small class="font-bold" title="Configurations"> 
-	                         	<i class="fa fa-cloud"></i>
-	                       		<a href="#" style="color: white">[${fn:length(app.nodes)}]</a>
-	                        </small>
-	                    </div>
-	                </div>
-	            </div>
-			</c:forEach>
+		    			<div class="col-sm-3">
+			                <div class="widget yellow-bg p-lg text-center">
+			                    <div class="m-b-md">
+			                        <i class="fa fa-font fa-4x"></i>
+			                        <h1 class="m-xs">${app.app}</h1>
+			                        <h3 class="font-bold no-margins"></h3>
+			                        <small class="font-bold" title="Providers">
+			                         	<i class="fa fa-tree"></i>
+			                       		<a href="#" style="color: white">[${fn:length(app.providers)}]</a>
+			                        </small>
+			                        <small class="font-bold" title="Consumers">
+			                         	<i class="fa fa-truck"></i>
+			                       		<a href="#" style="color: white">[${fn:length(app.consumers)}]</a>
+			                        </small>
+			                        <small class="font-bold" title="Configurations"> 
+			                         	<i class="fa fa-book"></i>
+			                       		<a href="#" style="color: white">[${fn:length(app.confs)}]</a>
+			                        </small>
+			                        <small class="font-bold" title="Configurations"> 
+			                         	<i class="fa fa-eye-slash"></i>
+			                       		<a href="#" style="color: white">[${fn:length(app.envs)}]</a>
+			                        </small>
+			                        <small class="font-bold" title="Configurations"> 
+			                         	<i class="fa fa-cloud"></i>
+			                       		<a href="#" style="color: white">[${fn:length(app.nodes)}]</a>
+			                        </small>
+			                    </div>
+			                </div>
+			            </div>
+					</c:forEach>
+				</c:otherwise>
+			</c:choose>
         </div>
     </div>
     <!-- 全局js -->
