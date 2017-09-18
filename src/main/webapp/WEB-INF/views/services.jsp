@@ -85,7 +85,11 @@
 						<div class="col-sm-4">
 			                <div class="ibox float-e-margins">
 			                    <div class="ibox-title" style="color:white;background-color: ${titleBgColor}">
-			                        <h5><i class="fa fa-strikethrough text-fff"></i> ${fn:substring(service.key, 0, fn:indexOf(service.key, "/"))}</h5>
+			                        <h5><i class="fa fa-strikethrough text-fff"></i> 
+			                        	<a href="${ctx}/mreg/service?serviceName=${service.key}" style="color: white">
+			                        		${fn:substring(service.key, 0, fn:indexOf(service.key, "/"))}
+			                        	</a>
+			                        </h5>
 			                        <div class="ibox-tools">
 			                        	<c:if test="${providersNum > 0}">
 			                        		<span class="badge badge-white ${serviceColor}">P</span>

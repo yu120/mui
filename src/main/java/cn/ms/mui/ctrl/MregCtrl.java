@@ -1,11 +1,15 @@
 package cn.ms.mui.ctrl;
 
+import java.util.Map;
+
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
+import cn.ms.coon.support.mreg.MregGovernor.ServiceUnit;
 import cn.ms.mui.service.MregService;
 
 @Controller
@@ -25,6 +29,17 @@ public class MregCtrl {
 	public String services(HttpServletRequest request) {
 		request.setAttribute("services", mregService.getServices());
 		return "services";
+	}
+	
+	@RequestMapping("service")
+	public String service(@RequestParam("serviceName") String serviceName, HttpServletRequest request) {
+		request.setAttribute("serviceName", serviceName);
+		Map<String, ServiceUnit> serviceUnitMap = mregService.getServices().get(serviceName);
+		if(serviceUnitMap != null){
+			request.setAttribute("service", serviceUnitMap);
+		}
+		
+		return "service";
 	}
 
 }

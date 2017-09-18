@@ -53,7 +53,7 @@
 				<c:otherwise>
 					<c:forEach items="${applications}" var="application">
 		    			<c:set var="app" value="${application.value}"/>
-						<div class="col-sm-4">
+						<div class="col-sm-6">
 			                <div class="ibox float-e-margins">
 			                    <div class="ibox-title" style="color:white;background-color: #ed5565">
 			                        <h5><i class="fa fa-font text-fff"></i> ${app.app}</h5>
@@ -64,6 +64,9 @@
 			                        	<c:if test="${fn:length(app.consumers) > 0}">
 			                        		<span class="badge badge-white text-danger">C</span>
 			                        	</c:if>
+			                        	<c:if test="${fn:length(app.confs) > 0}">
+			                        		<span class="badge badge-white text-danger">CF</span>
+			                        	</c:if>
 			                        </div>
 			                    </div>
 			                    <div class="ibox-content">
@@ -72,7 +75,9 @@
 			                        		<tr>
 			                                	<th>Providers</th>
 			                                    <th>Consumers</th>
-			                                    <th>Configuration</th>
+			                                    <th>Configures</th>
+			                                    <th>Environments</th>
+			                                    <th>Nodes</th>
 			                               	</tr>
 			                        	</thead>
 			                            <tbody>
@@ -92,20 +97,24 @@
 			                                    <td>
 			                                    	<i class="fa ${fn:length(app.confs) > 0?'text-danger':'text-muted'}">
 			                                    		<i class="fa fa-creative-commons"></i>
-			                                    		[<font title="Configuration: ${fn:length(app.confs)}">${fn:length(app.confs)}</font>]
+			                                    		[<font title="Configures: ${fn:length(app.confs)}">${fn:length(app.confs)}</font>]
+			                                    	</i>
+			                                    </td>
+			                                    <td>
+			                                    	<i class="fa ${fn:length(app.envs) > 0?'text-danger':'text-muted'}">
+			                                    		<i class="fa fa-internet-explorer"></i>
+			                                    		[<font title="Environments: ${fn:length(app.envs)}">${fn:length(app.envs)}</font>]
+			                                    	</i>
+			                                    </td>
+			                                    <td>
+			                                    	<i class="fa ${fn:length(app.nodes) > 0?'text-danger':'text-muted'}">
+			                                    		<i class="fa fa-cloud"></i>
+			                                    		[<font title="Nodes: ${fn:length(app.nodes)}">${fn:length(app.nodes)}</font>]
 			                                    	</i>
 			                                    </td>
 			                                </tr>
 			                            </tbody>
 			                        </table>
-			                        <div class="stat-percent font-bold">
-										<i class="fa fa-internet-explorer text-danger"></i>
-										<a href="#" style="color: #ed5565" target="Envs: ${fn:length(app.envs)}">[${fn:length(app.envs)}]</a>
-			                        </div>
-			                        <small class="font-bold">
-			                         	<i class="fa fa-cloud text-danger"></i>
-			                       		<a href="#" style="color: #ed5565" title="Nodes: ${fn:length(app.nodes)}">[${fn:length(app.nodes)}]</a>
-			                        </small>
 			                    </div>
 			                </div>
 			            </div>
