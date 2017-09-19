@@ -1,5 +1,7 @@
 package cn.ms.mui.ctrl;
 
+import io.coon.support.mreg.MregGovernor.ServiceUnit;
+
 import java.util.Map;
 
 import javax.annotation.Resource;
@@ -9,7 +11,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import cn.ms.coon.support.mreg.MregGovernor.ServiceUnit;
 import cn.ms.mui.service.MregService;
 
 @Controller
