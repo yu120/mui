@@ -1,5 +1,7 @@
 package cn.ms.mui.service.impl;
 
+import io.neural.NURL;
+
 import java.util.Map;
 
 import org.springframework.stereotype.Service;
@@ -10,7 +12,6 @@ import cn.ms.coon.support.mreg.MregGovernor;
 import cn.ms.coon.support.mreg.MregGovernor.Application;
 import cn.ms.coon.support.mreg.MregGovernor.ServiceUnit;
 import cn.ms.mui.service.MregService;
-import cn.ms.neural.NURL;
 
 @Service
 public class MregServiceImpl implements MregService {

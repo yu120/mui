@@ -1,5 +1,7 @@
 package cn.ms.mui.ctrl;
 
+import io.neural.limiter.RuleData;
+
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
@@ -7,7 +9,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import cn.ms.mui.service.LimiterService;
-import cn.ms.neural.limiter.RuleData;
 
 @Controller
 @RequestMapping("web")

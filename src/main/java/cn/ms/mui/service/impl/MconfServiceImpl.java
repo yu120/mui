@@ -1,5 +1,7 @@
 package cn.ms.mui.service.impl;
 
+import io.neural.NURL;
+
 import java.util.Map;
 
 import org.springframework.stereotype.Service;
@@ -7,7 +9,6 @@ import org.springframework.stereotype.Service;
 import cn.ms.coon.CoonFactory;
 import cn.ms.coon.service.Mconf;
 import cn.ms.mui.service.MconfService;
-import cn.ms.neural.NURL;
 
 @Service
 public class MconfServiceImpl implements MconfService {

@@ -1,10 +1,11 @@
 package cn.ms.mui.service.impl;
 
+import io.neural.limiter.Limiter;
+import io.neural.limiter.RuleData;
+
 import org.springframework.stereotype.Service;
 
 import cn.ms.mui.service.LimiterService;
-import cn.ms.neural.limiter.Limiter;
-import cn.ms.neural.limiter.RuleData;
 
 @Service
 public class LimiterServiceImpl implements LimiterService {
