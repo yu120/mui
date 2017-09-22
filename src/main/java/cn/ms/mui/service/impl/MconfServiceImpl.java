@@ -1,6 +1,6 @@
 package cn.ms.mui.service.impl;
 
-import io.coon.CoonFactory;
+import io.coon.Coon;
 import io.coon.api.Mconf;
 import io.neural.NURL;
 
@@ -17,7 +17,7 @@ public class MconfServiceImpl implements MconfService {
 	
 	public MconfServiceImpl() {
 		NURL nurl = NURL.valueOf("zookeeper://127.0.0.1:2181/mconf?timeout=15000&session=60000&node=node01");
-		mconf = CoonFactory.CF.getCoon(nurl, Mconf.class);
+		mconf = Coon.CF.getCoon(nurl, Mconf.class);
 	}
 	
 	@Override

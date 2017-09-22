@@ -1,6 +1,6 @@
 package cn.ms.mui.service.impl;
 
-import io.coon.CoonFactory;
+import io.coon.Coon;
 import io.coon.api.Mreg;
 import io.coon.support.mreg.MregGovernor;
 import io.coon.support.mreg.MregGovernor.Application;
@@ -20,7 +20,7 @@ public class MregServiceImpl implements MregService {
 	
 	public MregServiceImpl() {
 		NURL nurl = NURL.valueOf("zookeeper://127.0.0.1:2181/mconf?timeout=15000&session=60000&node=node01");
-		Mreg mreg = CoonFactory.CF.getCoon(nurl, Mreg.class);
+		Mreg mreg = Coon.CF.getCoon(nurl, Mreg.class);
 		governor = new MregGovernor(mreg);
 	}
 	
