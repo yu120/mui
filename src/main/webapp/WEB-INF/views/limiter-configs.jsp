@@ -141,9 +141,11 @@
                                     <button class="btn btn-success btn-xs" type="button" style="background-color: rgb(26, 179, 148)">
                                         <i class="fa fa-paste"></i> 编辑
                                     </button>
-                                    <button class="btn btn-info btn-xs" type="button">
-                                        <i class="fa fa-line-chart"></i> 监控
-                                    </button>
+                                    <a href="${ctx}/limiter/limiter-monitor">
+                                        <button class="btn btn-info btn-xs" type="button">
+                                            <i class="fa fa-line-chart"></i> 监控
+                                        </button>
+                                    </a>
                                 </td>
                             </tr>
                         </c:forEach>

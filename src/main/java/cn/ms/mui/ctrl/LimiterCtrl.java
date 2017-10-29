@@ -27,4 +27,10 @@ public class LimiterCtrl
         return "limiter-configs";
     }
 
+    @RequestMapping(value = "limiter-monitor")
+    public String limiterMonitor(HttpServletRequest request)
+    {
+        return "limiter-monitor";
+    }
+
 }
