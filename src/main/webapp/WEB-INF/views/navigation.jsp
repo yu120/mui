@@ -103,10 +103,18 @@
                         </a>
                     </li>
                     <li>
-                        <a class="J_menuItem" href="${ctx}/mreg/services">
+                        <a href="#">
                         	<i class="fa fa-bitbucket"></i>
                         	<span class="nav-label">分布式限流</span>
+                            <span class="fa arrow"></span>
                         </a>
+                        <ul class="nav nav-second-level collapse" aria-expanded="false" style="height: 0px;">
+
+                            <li><a class="J_menuItem" href="${ctx}/limiter/global-config">全局配置</a>
+                            </li>
+                            <li><a class="J_menuItem" href="${ctx}/limiter/limiter-configs">限流中心</a>
+                            </li>
+                        </ul>
                     </li>
                 </ul>
             </div>

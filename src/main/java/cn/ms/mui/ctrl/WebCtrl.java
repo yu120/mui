@@ -1,7 +1,5 @@
 package cn.ms.mui.ctrl;
 
-import io.neural.limiter.RuleData;
-
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
@@ -25,16 +23,6 @@ public class WebCtrl {
 	@RequestMapping(value = "main")
 	public String main(HttpServletRequest request) {
 		return "main";
-	}
-
-	@RequestMapping(value = "limiterRules")
-	public String limiterRules(String keywords, HttpServletRequest request) {
-		if(keywords == null){
-			keywords = "";
-		}
-		RuleData limiterData = limiterService.search(keywords);
-		request.setAttribute("limiterData", limiterData);
-		return "limiter_rules";
 	}
 
 }
