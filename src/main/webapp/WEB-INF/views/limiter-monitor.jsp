@@ -40,7 +40,7 @@
 <script src="${ctx}/res/chart/js/jquery-ui.min.js"></script>
 <script src="${ctx}/res/chart/js/select-widget-min.js"></script>
 <script src="${ctx}/res/chart/js/jquery.animsition.min.js"></script>
-<script src="${ctx}/res/chart/js/echarts.min.js"></script>
+<script src="https://cdn.bootcss.com/echarts/3.5.3/echarts.min.js"></script>
 <script src="${ctx}/res/chart/js/macarons .js"></script>
 <script src="${ctx}/res/chart/js/common.js"></script>
 
@@ -205,7 +205,6 @@
                     return;
                 }
                 myChart3.setOption({
-                    xAxis: [{data: my_time()}],
                     series: [
                         {data: my_data()},
                         {data: my_data()},

@@ -32,58 +32,66 @@
                         <small>微治理 > 分布式限流</small>
                     </h5>
                 </div>
-                <div class="ibox-content">
-                    <table border="0" class="col-sm-12">
-                        <tr>
-                            <td><h4 style="display:inline">全局配置</h4><small>（集群限流系统参数值配置）</small></td>
-                            <td style="text-align: right">
-                                <button class="btn btn-danger btn-xs" type="button">
-                                    <i class="fa fa-check"></i> 修改配置
-                                </button>
-                            </td>
-                        </tr>
-                    </table>
-                </div>
-                <div class="ibox-content">
-                    <div class="table-responsive">
-                        <table class="table table-bordered table-striped">
-                            <thead>
+                <form action="${ctx}/limiter/update-global-config" method="post">
+                    <div class="ibox-content">
+                        <table border="0" class="col-sm-12">
                             <tr>
-                                <th rowspan="2">限流总开关</th>
-                                <th rowspan="2">拉取配置周期</th>
-                                <th colspan="3" style="text-align: center">监控统计配置</th>
-                                <th colspan="5" style="text-align: center">打印日志配置开关<small>（高并发会输出大量日志）</small></th>
+                                <td><h4 style="display:inline">全局配置</h4><small>（集群限流系统参数值配置）</small></td>
+                                <td style="text-align: right">
+                                    <button class="btn btn-danger btn-xs" type="submit">
+                                        <i class="fa fa-check"></i> 修改配置
+                                    </button>
+                                </td>
                             </tr>
-                            <tr>
-                                <th>监控开关</th>
-                                <th>监控上报周期</th>
-                                <th>数据过期时间</th>
-                                <th>刷新配置</th>
-                                <th>流量溢出</th>
-                                <th>未启动限流</th>
-                                <th>统计任务</th>
-                                <th>统计异常</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr>
-                                <th><input type="checkbox" class="js-switch_1" ${globalConfig.enable?'checked':''}/></th>
-                                <th><input type="text" placeholder="请输入参数……" class="form-control"
-                                           value="${globalConfig.pullCycle}" style="width:75px;display:inline"/> ms</th>
-                                <th><input type="checkbox" class="js-switch_2" ${globalConfig.statisticReportEnable?'checked':''}/></th>
-                                <th><input type="text" placeholder="请输入参数……" class="form-control"
-                                           value="${globalConfig.statisticReportCycle}" style="width:75px;display:inline"/> ms</th>
-                                <th><input type="text" placeholder="请输入参数……" class="form-control"
-                                           value="${globalConfig.statisticDataExpire}" style="width:90px;display:inline"/> ms</th>
-                                <th><input type="checkbox" class="js-switch_3" ${globalConfig.printRefreshLog?'checked':''}/></th>
-                                <th><input type="checkbox" class="js-switch_4" ${globalConfig.printExceedLog?'checked':''}/></th>
-                                <th><input type="checkbox" class="js-switch_5" ${globalConfig.printNoStartedLog?'checked':''}/></th>
-                                <th><input type="checkbox" class="js-switch_6" ${globalConfig.printStatisticsTaskLog?'checked':''}/></th>
-                                <th><input type="checkbox" class="js-switch_7" ${globalConfig.printStatisticsExceptionLog?'checked':''}/></th>
-                            </tr>
-                            </tbody>
                         </table>
                     </div>
+                    <div class="ibox-content">
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-striped">
+                                <thead>
+                                <tr>
+                                    <th rowspan="2">限流总开关</th>
+                                    <th rowspan="2">拉取配置周期</th>
+                                    <th colspan="3" style="text-align: center">监控统计配置</th>
+                                    <th colspan="5" style="text-align: center">打印日志配置开关<small>（高并发会输出大量日志）</small></th>
+                                </tr>
+                                <tr>
+                                    <th>监控开关</th>
+                                    <th>监控上报周期</th>
+                                    <th>数据过期时间</th>
+                                    <th>刷新配置</th>
+                                    <th>流量溢出</th>
+                                    <th>未启动限流</th>
+                                    <th>统计任务</th>
+                                    <th>统计异常</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <th><input type="checkbox" name="enable" class="js-switch_1" ${globalConfig.enable?'checked':''}/></th>
+                                    <th><input type="text" placeholder="请输入参数……" name="pullCycle" class="form-control" onblur="onblus()"
+                                               value="${globalConfig.pullCycle}" style="width:75px;display:inline"/> ms</th>
+                                    <th><input type="checkbox" name="statisticReportEnable"
+                                               class="js-switch_2" ${globalConfig.statisticReportEnable?'checked':''}/></th>
+                                    <th><input type="text" placeholder="请输入参数……" name="statisticReportCycle"
+                                               class="form-control" value="${globalConfig.statisticReportCycle}" style="width:75px;display:inline"/> ms</th>
+                                    <th><input type="text" placeholder="请输入参数……" name="statisticDataExpire"
+                                               class="form-control" value="${globalConfig.statisticDataExpire}" style="width:90px;display:inline"/> ms</th>
+                                    <th><input type="checkbox" name="printRefreshLog"
+                                               class="js-switch_3" ${globalConfig.printRefreshLog?'checked':''}/></th>
+                                    <th><input type="checkbox" name="printExceedLog"
+                                               class="js-switch_4" ${globalConfig.printExceedLog?'checked':''}/></th>
+                                    <th><input type="checkbox" name="printNoStartedLog"
+                                               class="js-switch_5" ${globalConfig.printNoStartedLog?'checked':''}/></th>
+                                    <th><input type="checkbox" name="printStatisticsTaskLog"
+                                               class="js-switch_6" ${globalConfig.printStatisticsTaskLog?'checked':''}/></th>
+                                    <th><input type="checkbox" name="printStatisticsExceptionLog"
+                                               class="js-switch_7" ${globalConfig.printStatisticsExceptionLog?'checked':''}/></th>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </form>
                     <h4 style="display:inline">限流规则</h4><small>（限流资源集群参数配置）</small>
                     <table class="table table-striped table-bordered table-hover dataTables-example">
                         <thead>
