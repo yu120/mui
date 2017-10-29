@@ -109,11 +109,11 @@
                                 <td>${limiterConfig.neuralObject.application}</td>
                                 <td>
                                     <button class="btn btn-${limiterConfig.enable?'success':'danger'} btn-circle btn-xs"
-                                            title="${limiterConfig.enable?'打开':'关闭'}" type="button" style="background-color: rgb(26, 179, 148)">
+                                            title="${limiterConfig.enable?'打开':'关闭'}" type="button" style="background-color:#1AB394">
                                         <i class="fa fa-${limiterConfig.enable?'check':'times'}"></i>
                                     </button>
                                 </td>
-                                <td class="center">
+                                <td class="center" style="color: #1AB394">
                                         ${limiterConfig.rate}
                                     次 /
                                     <c:choose>
@@ -126,19 +126,23 @@
                                         <c:otherwise><font color="red">未知策略</font></c:otherwise>
                                     </c:choose>
                                 </td>
-                                <td class="center">${limiterConfig.concurrency}</td>
+                                <td class="center" style="color: #1AB394">${limiterConfig.concurrency}</td>
                                 <td>
-                                    <span style="color: ${('EXCEPTION'==limiterConfig.strategy)?'rgb(237, 85, 101)':('NON'==limiterConfig.strategy?'rgb(250, 215, 51)':'gray')}">
-                                        <c:choose>
-                                            <c:when test="${'EXCEPTION'==limiterConfig.strategy}">抛异常</c:when>
-                                            <c:when test="${'NON'==limiterConfig.strategy}">不处理</c:when>
-                                            <c:otherwise>未知策略</c:otherwise>
-                                        </c:choose>
-                                    </span>
+                                    <c:choose>
+                                        <c:when test="${'EXCEPTION'==limiterConfig.strategy}">
+                                            <a class="btn btn-danger btn-xs btn-rounded">抛异常</a>
+                                        </c:when>
+                                        <c:when test="${'NON'==limiterConfig.strategy}">
+                                            <a class="btn btn-warning btn-xs btn-rounded">不处理</a>
+                                        </c:when>
+                                        <c:otherwise>
+                                            <a class="btn btn-danger btn-xs btn-rounded">未知策略</a>
+                                        </c:otherwise>
+                                    </c:choose>
                                 </td>
                                 <td>${limiterConfig.remarks}</td>
                                 <td>
-                                    <button class="btn btn-success btn-xs" type="button" style="background-color: rgb(26, 179, 148)">
+                                    <button class="btn btn-success btn-xs" type="button" style="background-color: #1AB394">
                                         <i class="fa fa-paste"></i> 编辑
                                     </button>
                                     <a href="${ctx}/limiter/limiter-monitor">
