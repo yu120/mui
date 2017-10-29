@@ -17,16 +17,11 @@ import io.neural.limiter.support.model.LimiterGlobalConfig;
 @RequestMapping("limiter")
 public class LimiterCtrl
 {
-    @RequestMapping(value = "global-config")
-    public String globalConfig(HttpServletRequest request)
-    {
-        request.setAttribute("globalConfig", Limiter.LIMITER.getGlobalConfig());
-        return "limiter-global-config";
-    }
 
     @RequestMapping(value = "limiter-configs")
     public String limiterConfigs(HttpServletRequest request)
     {
+        request.setAttribute("globalConfig", Limiter.LIMITER.getGlobalConfig());
         Set<LimiterConfig> limiterConfigSet = Limiter.LIMITER.getLimiterStore().queryLimiterConfigs();
         request.setAttribute("limiterConfigs", limiterConfigSet);
         return "limiter-configs";

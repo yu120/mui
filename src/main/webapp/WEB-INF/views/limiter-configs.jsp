@@ -18,6 +18,7 @@
     <link href="${ctx}/res/css/plugins/dataTables/dataTables.bootstrap.css" rel="stylesheet">
     <link href="${ctx}/res/css/animate.css" rel="stylesheet">
     <link href="${ctx}/res/css/style.css?v=4.1.0" rel="stylesheet">
+    <link href="${ctx}/res/css/plugins/switchery/switchery.css" rel="stylesheet">
 
 </head>
 
@@ -27,16 +28,68 @@
         <div class="col-sm-12">
             <div class="ibox float-e-margins">
                 <div class="ibox-title">
-                    <h5>限流中心
-                        <small>微治理 > 分布式限流 > 限流中心</small>
+                    <h5>分布式限流
+                        <small>微治理 > 分布式限流</small>
                     </h5>
                 </div>
                 <div class="ibox-content">
+                    <table border="0" class="col-sm-12">
+                        <tr>
+                            <td><h4 style="display:inline">全局配置</h4><small>（集群限流系统参数值配置）</small></td>
+                            <td style="text-align: right">
+                                <button class="btn btn-danger btn-xs" type="button">
+                                    <i class="fa fa-check"></i> 修改配置
+                                </button>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="ibox-content">
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-striped">
+                            <thead>
+                            <tr>
+                                <th rowspan="2">限流总开关</th>
+                                <th rowspan="2">拉取配置周期</th>
+                                <th colspan="3" style="text-align: center">监控统计配置</th>
+                                <th colspan="5" style="text-align: center">打印日志配置开关<small>（高并发会输出大量日志）</small></th>
+                            </tr>
+                            <tr>
+                                <th>监控开关</th>
+                                <th>监控上报周期</th>
+                                <th>数据过期时间</th>
+                                <th>刷新配置</th>
+                                <th>流量溢出</th>
+                                <th>未启动限流</th>
+                                <th>统计任务</th>
+                                <th>统计异常</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <th><input type="checkbox" class="js-switch_1" ${globalConfig.enable?'checked':''}/></th>
+                                <th><input type="text" placeholder="请输入参数……" class="form-control"
+                                           value="${globalConfig.pullCycle}" style="width:75px;display:inline"/> ms</th>
+                                <th><input type="checkbox" class="js-switch_2" ${globalConfig.statisticReportEnable?'checked':''}/></th>
+                                <th><input type="text" placeholder="请输入参数……" class="form-control"
+                                           value="${globalConfig.statisticReportCycle}" style="width:75px;display:inline"/> ms</th>
+                                <th><input type="text" placeholder="请输入参数……" class="form-control"
+                                           value="${globalConfig.statisticDataExpire}" style="width:90px;display:inline"/> ms</th>
+                                <th><input type="checkbox" class="js-switch_3" ${globalConfig.printRefreshLog?'checked':''}/></th>
+                                <th><input type="checkbox" class="js-switch_4" ${globalConfig.printExceedLog?'checked':''}/></th>
+                                <th><input type="checkbox" class="js-switch_5" ${globalConfig.printNoStartedLog?'checked':''}/></th>
+                                <th><input type="checkbox" class="js-switch_6" ${globalConfig.printStatisticsTaskLog?'checked':''}/></th>
+                                <th><input type="checkbox" class="js-switch_7" ${globalConfig.printStatisticsExceptionLog?'checked':''}/></th>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <h4 style="display:inline">限流规则</h4><small>（限流资源集群参数配置）</small>
                     <table class="table table-striped table-bordered table-hover dataTables-example">
                         <thead>
                         <tr>
-                            <th>标题</th>
-                            <th>资源ID</th>
+                            <th>限流标题</th>
+                            <th>限流ID</th>
                             <th>所属组</th>
                             <th>所属应用</th>
                             <th>开关</th>
@@ -54,12 +107,11 @@
                                 <td>${limiterConfig.neuralObject.resource}</td>
                                 <td>${limiterConfig.neuralObject.group}</td>
                                 <td>${limiterConfig.neuralObject.application}</td>
-                                <td
-                                ">
-                                <button class="btn btn-${limiterConfig.enable?'success':'danger'} btn-circle btn-xs"
-                                        title="${limiterConfig.enable?'打开':'关闭'}" type="button">
-                                    <i class="fa fa-${limiterConfig.enable?'check':'times'}"></i>
-                                </button>
+                                <td>
+                                    <button class="btn btn-${limiterConfig.enable?'success':'danger'} btn-circle btn-xs"
+                                            title="${limiterConfig.enable?'打开':'关闭'}" type="button" style="background-color: rgb(26, 179, 148)">
+                                        <i class="fa fa-${limiterConfig.enable?'check':'times'}"></i>
+                                    </button>
                                 </td>
                                 <td class="center">
                                         ${limiterConfig.rate}
@@ -76,7 +128,7 @@
                                 </td>
                                 <td class="center">${limiterConfig.concurrency}</td>
                                 <td>
-                                    <span style="color: ${('EXCEPTION'==limiterConfig.strategy)?'red':('EXCEPTION'==limiterConfig.strategy?'rgb(250, 215, 51)':'gray')}">
+                                    <span style="color: ${('EXCEPTION'==limiterConfig.strategy)?'rgb(237, 85, 101)':('NON'==limiterConfig.strategy?'rgb(250, 215, 51)':'gray')}">
                                         <c:choose>
                                             <c:when test="${'EXCEPTION'==limiterConfig.strategy}">抛异常</c:when>
                                             <c:when test="${'NON'==limiterConfig.strategy}">不处理</c:when>
@@ -86,8 +138,12 @@
                                 </td>
                                 <td>${limiterConfig.remarks}</td>
                                 <td>
-                                    <button class="btn btn-success btn-xs" type="button"><i class="fa fa-paste"></i> 编辑</button>
-                                    <button class="btn btn-info btn-xs" type="button"><i class="fa fa fa-line-chart"></i> 监控</button>
+                                    <button class="btn btn-success btn-xs" type="button" style="background-color: rgb(26, 179, 148)">
+                                        <i class="fa fa-paste"></i> 编辑
+                                    </button>
+                                    <button class="btn btn-info btn-xs" type="button">
+                                        <i class="fa fa-line-chart"></i> 监控
+                                    </button>
                                 </td>
                             </tr>
                         </c:forEach>
@@ -110,10 +166,20 @@
 <script src="${ctx}/res/js/plugins/dataTables/jquery.dataTables.js"></script>
 <script src="${ctx}/res/js/plugins/dataTables/dataTables.bootstrap.js"></script>
 
-
+<script src="${ctx}/res/js/plugins/datapicker/bootstrap-datepicker.js"></script>
+<script src="${ctx}/res/js/plugins/switchery/switchery.js"></script>
+<script src="${ctx}/res/js/plugins/cropper/cropper.min.js"></script>
 <!-- Page-Level Scripts -->
 <script>
     $(document).ready(function () {
+        new Switchery(document.querySelector('.js-switch_1'), {color: '#ED5565'});
+        new Switchery(document.querySelector('.js-switch_2'), {color: '#ED5565'});
+        new Switchery(document.querySelector('.js-switch_3'), {color: '#1AB394'});
+        new Switchery(document.querySelector('.js-switch_4'), {color: '#1AB394'});
+        new Switchery(document.querySelector('.js-switch_5'), {color: '#1AB394'});
+        new Switchery(document.querySelector('.js-switch_6'), {color: '#1AB394'});
+        new Switchery(document.querySelector('.js-switch_7'), {color: '#1AB394'});
+
         $('.dataTables-example').dataTable();
         /* Init DataTables */
         var oTable = $('#editable').dataTable();

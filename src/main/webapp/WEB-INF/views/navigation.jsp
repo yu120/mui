@@ -62,12 +62,12 @@
                     <li class="hidden-folded padder m-t m-b-sm text-muted text-xs">
                         <span class="ng-scope">微视角</span>
                     </li>
-                    <li>
-                        <a class="J_menuItem" href="${ctx}/mreg/applications">
-                        	<i class="fa fa-font"></i>
-                        	<span class="nav-label">微应用 </span>
-                        </a>
-                    </li>
+                    <%--<li>--%>
+                        <%--<a class="J_menuItem" href="${ctx}/mreg/applications">--%>
+                        	<%--<i class="fa fa-font"></i>--%>
+                        	<%--<span class="nav-label">微应用 </span>--%>
+                        <%--</a>--%>
+                    <%--</li>--%>
                     <li>
                         <a class="J_menuItem" href="${ctx}/mreg/services">
                         	<i class="fa fa-strikethrough"></i>
@@ -91,30 +91,16 @@
                         </a>
                     </li>
                     <li>
-                        <a class="J_menuItem" href="${ctx}/mreg/services">
-                        	<i class="fa fa-fire-extinguisher"></i>
-                        	<span class="nav-label">服务降级 </span>
-                        </a>
-                    </li>
-                    <li>
-                        <a class="J_menuItem" href="${ctx}/mreg/services">
-                        	<i class="fa fa-chain-broken"></i>
-                        	<span class="nav-label">熔断隔离 </span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
+                        <a class="J_menuItem" href="${ctx}/limiter/limiter-configs">
                         	<i class="fa fa-bitbucket"></i>
                         	<span class="nav-label">分布式限流</span>
-                            <span class="fa arrow"></span>
                         </a>
-                        <ul class="nav nav-second-level collapse" aria-expanded="false" style="height: 0px;">
-
-                            <li><a class="J_menuItem" href="${ctx}/limiter/global-config">全局配置</a>
-                            </li>
-                            <li><a class="J_menuItem" href="${ctx}/limiter/limiter-configs">限流中心</a>
-                            </li>
-                        </ul>
+                    </li>
+                    <li>
+                        <a class="J_menuItem" href="${ctx}/mreg/services">
+                            <i class="fa fa-fire-extinguisher"></i>
+                            <span class="nav-label">服务降级 </span>
+                        </a>
                     </li>
                 </ul>
             </div>
