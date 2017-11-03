@@ -6,16 +6,16 @@ import java.util.Map;
 import java.util.Set;
 import javax.servlet.http.HttpServletRequest;
 
-import org.springframework.beans.BeanUtils;
+import org.apache.commons.beanutils.BeanUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+
 
 import io.neural.limiter.Limiter;
-import io.neural.limiter.support.model.LimiterConfig;
-import io.neural.limiter.support.model.LimiterGlobalConfig;
-import io.neural.limiter.support.store.ILimiterStore;
+import io.neural.limiter.model.LimiterConfig;
+import io.neural.limiter.model.LimiterConfig.GlobalConfig;
+import io.neural.limiter.store.ILimiterStore;
 
 /**
  * @author lry
@@ -29,7 +29,7 @@ public class LimiterCtrl
     public String limiterConfigs(HttpServletRequest request)
     {
         request.setAttribute("globalConfig", Limiter.LIMITER.getGlobalConfig());
-        Set<LimiterConfig> limiterConfigSet = Limiter.LIMITER.getLimiterStore().queryLimiterConfigs();
+        Set<LimiterConfig> limiterConfigSet = Limiter.LIMITER.getLimiterStore().queryConfigs();
         request.setAttribute("limiterConfigs", limiterConfigSet);
         return "limiter-configs";
     }
@@ -41,7 +41,7 @@ public class LimiterCtrl
     }
 
     @RequestMapping(value = "update-global-config", method = RequestMethod.POST)
-    public String updateGlobalConfig(HttpServletRequest request)
+    public String updateGlobalConfig(HttpServletRequest request) throws Exception
     {
         Map<String, String> map = new HashMap<>();
         Enumeration<String> keys = request.getParameterNames();
@@ -54,9 +54,9 @@ public class LimiterCtrl
         if (!map.isEmpty())
         {
             ILimiterStore limiterStore = Limiter.LIMITER.getLimiterStore();
-            LimiterGlobalConfig globalConfig = limiterStore.getGlobalConfig();
-            BeanUtils.copyProperties(map, globalConfig);
-            limiterStore.addOrUpdateLimiterGlobalConfig(globalConfig);
+            GlobalConfig globalConfig = limiterStore.getGlobalConfig();
+            BeanUtils.copyProperties(globalConfig, map);
+            limiterStore.addOrUpdateGlobalConfig(globalConfig);
         }
 
         return "redirect:limiter-configs";

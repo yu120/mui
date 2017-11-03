@@ -36,7 +36,9 @@
                     <div class="ibox-content">
                         <table border="0" class="col-sm-12">
                             <tr>
-                                <td><h4 style="display:inline">全局配置</h4><small>（集群限流系统参数值配置）</small></td>
+                                <td><h4 style="display:inline">全局配置</h4>
+                                    <small>（集群限流系统参数值配置）</small>
+                                </td>
                                 <td style="text-align: right">
                                     <button class="btn btn-danger btn-xs" type="submit">
                                         <i class="fa fa-check"></i> 修改配置
@@ -53,7 +55,9 @@
                                     <th rowspan="2">限流总开关</th>
                                     <th rowspan="2">拉取配置周期</th>
                                     <th colspan="3" style="text-align: center">监控统计配置</th>
-                                    <th colspan="5" style="text-align: center">打印日志配置开关<small>（高并发会输出大量日志）</small></th>
+                                    <th colspan="5" style="text-align: center">打印日志配置开关
+                                        <small>（高并发会输出大量日志）</small>
+                                    </th>
                                 </tr>
                                 <tr>
                                     <th>监控开关</th>
@@ -68,106 +72,139 @@
                                 </thead>
                                 <tbody>
                                 <tr>
-                                    <th><input type="checkbox" name="enable" class="js-switch_1" ${globalConfig.enable?'checked':''}/></th>
-                                    <th><input type="text" placeholder="请输入参数……" name="pullCycle" class="form-control" onblur="onblus()"
-                                               value="${globalConfig.pullCycle}" style="width:75px;display:inline"/> ms</th>
-                                    <th><input type="checkbox" name="statisticReportEnable"
-                                               class="js-switch_2" ${globalConfig.statisticReportEnable?'checked':''}/></th>
+                                    <th>
+                                        <input type="text" name="enable"
+                                               value="${globalConfig.enable?'true':'false'}" style="display: none"/>
+                                        <input type="checkbox" id="enable"
+                                               class="js-switch_1" ${globalConfig.enable?'checked':''}/>
+                                    </th>
+                                    <th>
+                                        <input type="text" placeholder="请输入参数……" name="pullCycle" class="form-control" onblur="onblus()"
+                                               value="${globalConfig.pullCycle}" style="width:75px;display:inline"/> ms
+                                    </th>
+                                    <th>
+                                        <input type="text" name="statisticReportEnable"
+                                               value="${globalConfig.statisticReportEnable?'true':'false'}" style="display: none"/>
+                                        <input type="checkbox" id="statisticReportEnable"
+                                               class="js-switch_2" ${globalConfig.statisticReportEnable?'checked':''}/>
+                                    </th>
                                     <th><input type="text" placeholder="请输入参数……" name="statisticReportCycle"
-                                               class="form-control" value="${globalConfig.statisticReportCycle}" style="width:75px;display:inline"/> ms</th>
+                                               class="form-control" value="${globalConfig.statisticReportCycle}" style="width:75px;display:inline"/>
+                                        ms
+                                    </th>
                                     <th><input type="text" placeholder="请输入参数……" name="statisticDataExpire"
-                                               class="form-control" value="${globalConfig.statisticDataExpire}" style="width:90px;display:inline"/> ms</th>
-                                    <th><input type="checkbox" name="printRefreshLog"
-                                               class="js-switch_3" ${globalConfig.printRefreshLog?'checked':''}/></th>
-                                    <th><input type="checkbox" name="printExceedLog"
-                                               class="js-switch_4" ${globalConfig.printExceedLog?'checked':''}/></th>
-                                    <th><input type="checkbox" name="printNoStartedLog"
-                                               class="js-switch_5" ${globalConfig.printNoStartedLog?'checked':''}/></th>
-                                    <th><input type="checkbox" name="printStatisticsTaskLog"
-                                               class="js-switch_6" ${globalConfig.printStatisticsTaskLog?'checked':''}/></th>
-                                    <th><input type="checkbox" name="printStatisticsExceptionLog"
-                                               class="js-switch_7" ${globalConfig.printStatisticsExceptionLog?'checked':''}/></th>
+                                               class="form-control" value="${globalConfig.statisticDataExpire}" style="width:90px;display:inline"/>
+                                        ms
+                                    </th>
+                                    <th>
+                                        <input type="text" name="printRefreshLog"
+                                               value="${globalConfig.printRefreshLog?'true':'false'}" style="display: none"/>
+                                        <input type="checkbox" id="printRefreshLog"
+                                               class="js-switch_3" ${globalConfig.printRefreshLog?'checked':''} /></th>
+                                    <th>
+                                        <input type="text" name="printExceedLog"
+                                               value="${globalConfig.printExceedLog?'true':'false'}" style="display: none"/>
+                                        <input type="checkbox" id="printExceedLog"
+                                               class="js-switch_4" ${globalConfig.printExceedLog?'checked':''} /></th>
+                                    <th>
+                                        <input type="text" name="printNoStartedLog"
+                                               value="${globalConfig.printNoStartedLog?'true':'false'}" style="display: none"/>
+                                        <input type="checkbox" id="printNoStartedLog"
+                                               class="js-switch_5" ${globalConfig.printNoStartedLog?'checked':''} /></th>
+                                    <th>
+                                        <input type="text" name="printStatisticsTaskLog"
+                                               value="${globalConfig.printStatisticsTaskLog?'true':'false'}" style="display: none"/>
+                                        <input type="checkbox" id="printStatisticsTaskLog"
+                                               class="js-switch_6" ${globalConfig.printStatisticsTaskLog?'checked':''}/>
+                                    </th>
+                                    <th>
+                                        <input type="text" name="printStatisticsExceptionLog"
+                                               value="${globalConfig.printStatisticsExceptionLog?'true':'false'}" style="display: none"/>
+                                        <input type="checkbox" id="printStatisticsExceptionLog"
+                                               class="js-switch_7" ${globalConfig.printStatisticsExceptionLog?'checked':''} />
+                                    </th>
                                 </tr>
                                 </tbody>
                             </table>
                         </div>
-                    </form>
-                    <h4 style="display:inline">限流规则</h4><small>（限流资源集群参数配置）</small>
-                    <table class="table table-striped table-bordered table-hover dataTables-example">
-                        <thead>
-                        <tr>
-                            <th>限流标题</th>
-                            <th>限流ID</th>
-                            <th>所属组</th>
-                            <th>所属应用</th>
-                            <th>开关</th>
-                            <th>速率阀值</th>
-                            <th>并发量</th>
-                            <th>超额策略</th>
-                            <th>备注信息</th>
-                            <th>操作</th>
+                </form>
+                <h4 style="display:inline">限流规则</h4>
+                <small>（限流资源集群参数配置）</small>
+                <table class="table table-striped table-bordered table-hover dataTables-example">
+                    <thead>
+                    <tr>
+                        <th>限流标题</th>
+                        <th>限流ID</th>
+                        <th>所属组</th>
+                        <th>所属应用</th>
+                        <th>开关</th>
+                        <th>速率阀值</th>
+                        <th>并发量</th>
+                        <th>超额策略</th>
+                        <th>备注信息</th>
+                        <th>操作</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <c:forEach items="${limiterConfigs}" var="limiterConfig">
+                        <tr class="gradeX">
+                            <td>${limiterConfig.config.title}</td>
+                            <td>${limiterConfig.identity.resource}</td>
+                            <td>${limiterConfig.identity.group}</td>
+                            <td>${limiterConfig.identity.application}</td>
+                            <td>
+                                <button class="btn btn-${limiterConfig.config.enable?'success':'danger'} btn-circle btn-xs"
+                                        title="${limiterConfig.config.enable?'打开':'关闭'}" type="button" style="background-color:#1AB394">
+                                    <i class="fa fa-${limiterConfig.config.enable?'check':'times'}"></i>
+                                </button>
+                            </td>
+                            <td class="center" style="color: #1AB394">
+                                    ${limiterConfig.config.rate}
+                                次 /
+                                <c:choose>
+                                    <c:when test="${'YEAR'==limiterConfig.config.granularity}">年</c:when>
+                                    <c:when test="${'MONTH'==limiterConfig.config.granularity}">月</c:when>
+                                    <c:when test="${'DAY'==limiterConfig.config.granularity}">日</c:when>
+                                    <c:when test="${'HOUR'==limiterConfig.config.granularity}">时</c:when>
+                                    <c:when test="${'MINUTE'==limiterConfig.config.granularity}">分</c:when>
+                                    <c:when test="${'SECOND'==limiterConfig.config.granularity}">秒</c:when>
+                                    <c:otherwise><font color="red">未知策略</font></c:otherwise>
+                                </c:choose>
+                            </td>
+                            <td class="center" style="color: #1AB394">${limiterConfig.config.concurrency}</td>
+                            <td>
+                                <c:choose>
+                                    <c:when test="${'EXCEPTION'==limiterConfig.config.strategy}">
+                                        <a class="btn btn-danger btn-xs btn-rounded">抛异常</a>
+                                    </c:when>
+                                    <c:when test="${'NON'==limiterConfig.config.strategy}">
+                                        <a class="btn btn-warning btn-xs btn-rounded">不处理</a>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <a class="btn btn-danger btn-xs btn-rounded">未知策略</a>
+                                    </c:otherwise>
+                                </c:choose>
+                            </td>
+                            <td>${limiterConfig.config.remarks}</td>
+                            <td>
+                                <button class="btn btn-success btn-xs" type="button" style="background-color: #1AB394">
+                                    <i class="fa fa-paste"></i> 编辑
+                                </button>
+                                <a href="${ctx}/limiter/limiter-monitor">
+                                    <button class="btn btn-info btn-xs" type="button">
+                                        <i class="fa fa-line-chart"></i> 监控
+                                    </button>
+                                </a>
+                            </td>
                         </tr>
-                        </thead>
-                        <tbody>
-                        <c:forEach items="${limiterConfigs}" var="limiterConfig">
-                            <tr class="gradeX">
-                                <td>${limiterConfig.title}</td>
-                                <td>${limiterConfig.neuralObject.resource}</td>
-                                <td>${limiterConfig.neuralObject.group}</td>
-                                <td>${limiterConfig.neuralObject.application}</td>
-                                <td>
-                                    <button class="btn btn-${limiterConfig.enable?'success':'danger'} btn-circle btn-xs"
-                                            title="${limiterConfig.enable?'打开':'关闭'}" type="button" style="background-color:#1AB394">
-                                        <i class="fa fa-${limiterConfig.enable?'check':'times'}"></i>
-                                    </button>
-                                </td>
-                                <td class="center" style="color: #1AB394">
-                                        ${limiterConfig.rate}
-                                    次 /
-                                    <c:choose>
-                                        <c:when test="${'YEAR'==limiterConfig.granularity}">年</c:when>
-                                        <c:when test="${'MONTH'==limiterConfig.granularity}">月</c:when>
-                                        <c:when test="${'DAY'==limiterConfig.granularity}">日</c:when>
-                                        <c:when test="${'HOUR'==limiterConfig.granularity}">时</c:when>
-                                        <c:when test="${'MINUTE'==limiterConfig.granularity}">分</c:when>
-                                        <c:when test="${'SECOND'==limiterConfig.granularity}">秒</c:when>
-                                        <c:otherwise><font color="red">未知策略</font></c:otherwise>
-                                    </c:choose>
-                                </td>
-                                <td class="center" style="color: #1AB394">${limiterConfig.concurrency}</td>
-                                <td>
-                                    <c:choose>
-                                        <c:when test="${'EXCEPTION'==limiterConfig.strategy}">
-                                            <a class="btn btn-danger btn-xs btn-rounded">抛异常</a>
-                                        </c:when>
-                                        <c:when test="${'NON'==limiterConfig.strategy}">
-                                            <a class="btn btn-warning btn-xs btn-rounded">不处理</a>
-                                        </c:when>
-                                        <c:otherwise>
-                                            <a class="btn btn-danger btn-xs btn-rounded">未知策略</a>
-                                        </c:otherwise>
-                                    </c:choose>
-                                </td>
-                                <td>${limiterConfig.remarks}</td>
-                                <td>
-                                    <button class="btn btn-success btn-xs" type="button" style="background-color: #1AB394">
-                                        <i class="fa fa-paste"></i> 编辑
-                                    </button>
-                                    <a href="${ctx}/limiter/limiter-monitor">
-                                        <button class="btn btn-info btn-xs" type="button">
-                                            <i class="fa fa-line-chart"></i> 监控
-                                        </button>
-                                    </a>
-                                </td>
-                            </tr>
-                        </c:forEach>
-                        </tbody>
-                    </table>
+                    </c:forEach>
+                    </tbody>
+                </table>
 
-                </div>
             </div>
         </div>
     </div>
+</div>
 </div>
 
 <!-- 全局js -->
@@ -186,33 +223,91 @@
 <!-- Page-Level Scripts -->
 <script>
     $(document).ready(function () {
-        new Switchery(document.querySelector('.js-switch_1'), {color: '#ED5565'});
-        new Switchery(document.querySelector('.js-switch_2'), {color: '#ED5565'});
-        new Switchery(document.querySelector('.js-switch_3'), {color: '#1AB394'});
-        new Switchery(document.querySelector('.js-switch_4'), {color: '#1AB394'});
-        new Switchery(document.querySelector('.js-switch_5'), {color: '#1AB394'});
-        new Switchery(document.querySelector('.js-switch_6'), {color: '#1AB394'});
-        new Switchery(document.querySelector('.js-switch_7'), {color: '#1AB394'});
+            var colorArray = ['#ED5565', '#ED5565', '#1AB394', '#1AB394', '#1AB394', '#1AB394', '#1AB394']
+            for (var i = 1; i < 8; i++) {
+                new Switchery(document.querySelector('.js-switch_' + i), {color: colorArray[i - 1]});
+            }
 
-        $('.dataTables-example').dataTable();
-        /* Init DataTables */
-        var oTable = $('#editable').dataTable();
-        /* Apply the jEditable handlers to the table */
-        oTable.$('td').editable('../example_ajax1.php', {
-            "callback": function (sValue, y) {
-                var aPos = oTable.fnGetPosition(this);
-                oTable.fnUpdate(sValue, aPos[0], aPos[1]);
-            },
-            "submitdata": function (value, settings) {
-                return {
-                    "row_id": this.parentNode.getAttribute('id'),
-                    "column": oTable.fnGetPosition(this)[2]
-                };
-            },
-            "width": "90%",
-            "height": "100%"
-        });
-    });
+            var nameArray = ['enable', 'statisticReportEnable', 'printRefreshLog',
+                'printExceedLog', 'printNoStartedLog', 'printStatisticsTaskLog', 'printStatisticsExceptionLog']
+            $('span[id=enable]').click(function () {
+                var obj = $('input[name=enable]');
+                if (obj.val() == 'true') {
+                    obj.attr('value', false)
+                } else {
+                    obj.attr('value', true)
+                }
+            });
+            $('span[id=statisticReportEnable]').click(function () {
+                var obj = $('input[name=statisticReportEnable]');
+                if (obj.val() == 'true') {
+                    obj.attr('value', false)
+                } else {
+                    obj.attr('value', true)
+                }
+            });
+            $('span[id=printRefreshLog]').click(function () {
+                var obj = $('input[name=printRefreshLog]');
+                if (obj.val() == 'true') {
+                    obj.attr('value', false)
+                } else {
+                    obj.attr('value', true)
+                }
+            });
+            $('span[id=printExceedLog]').click(function () {
+                var obj = $('input[name=printExceedLog]');
+                if (obj.val() == 'true') {
+                    obj.attr('value', false)
+                } else {
+                    obj.attr('value', true)
+                }
+            });
+            $('span[id=printNoStartedLog]').click(function () {
+                var obj = $('input[name=printNoStartedLog]');
+                if (obj.val() == 'true') {
+                    obj.attr('value', false)
+                } else {
+                    obj.attr('value', true)
+                }
+            });
+            $('span[id=printStatisticsTaskLog]').click(function () {
+                var obj = $('input[name=printStatisticsTaskLog]');
+                if (obj.val() == 'true') {
+                    obj.attr('value', false)
+                } else {
+                    obj.attr('value', true)
+                }
+            });
+            $('span[id=printStatisticsExceptionLog]').click(function () {
+                var obj = $('input[name=printStatisticsExceptionLog]');
+                if (obj.val() == 'true') {
+                    obj.attr('value', false)
+                } else {
+                    obj.attr('value', true)
+                }
+            });
+
+
+            $('.dataTables-example').dataTable();
+            /* Init DataTables */
+            var oTable = $('#editable').dataTable();
+            /* Apply the jEditable handlers to the table */
+            oTable.$('td').editable('../example_ajax1.php', {
+                "callback": function (sValue, y) {
+                    var aPos = oTable.fnGetPosition(this);
+                    oTable.fnUpdate(sValue, aPos[0], aPos[1]);
+                },
+                "submitdata": function (value, settings) {
+                    return {
+                        "row_id": this.parentNode.getAttribute('id'),
+                        "column": oTable.fnGetPosition(this)[2]
+                    };
+                },
+                "width": "90%",
+                "height": "100%"
+            });
+        }
+    );
 
     function fnClickAddRow() {
         $('#editable').dataTable().fnAddData([

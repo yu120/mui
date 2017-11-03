@@ -7,7 +7,7 @@ import io.coon.Coon;
 import io.coon.api.Mconf;
 import io.neural.NURL;
 import io.neural.limiter.Limiter;
-import io.neural.limiter.support.LimiterConst;
+import io.neural.limiter.common.LimiterUtils;
 
 /**
  * 应用启动监听器
@@ -23,7 +23,7 @@ public class StartupListener implements ServletContextListener
     @Override
     public void contextInitialized(ServletContextEvent sce)
     {
-        System.setProperty(LimiterConst.APP_NAME_KEY, "gateway");
+        System.setProperty(LimiterUtils.APP_NAME_KEY, "gateway");
         Limiter.LIMITER.start();
     }
 
