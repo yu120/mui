@@ -58,28 +58,28 @@
                             <span class="nav-label">统计分析</span>
                         </a>
 					</li>
-                    <li class="line dk"></li>
-                    <li class="hidden-folded padder m-t m-b-sm text-muted text-xs">
-                        <span class="ng-scope">微视角</span>
-                    </li>
+                    <%--<li class="line dk"></li>--%>
+                    <%--<li class="hidden-folded padder m-t m-b-sm text-muted text-xs">--%>
+                        <%--<span class="ng-scope">微视角</span>--%>
+                    <%--</li>--%>
                     <%--<li>--%>
                         <%--<a class="J_menuItem" href="${ctx}/mreg/applications">--%>
                         	<%--<i class="fa fa-font"></i>--%>
                         	<%--<span class="nav-label">微应用 </span>--%>
                         <%--</a>--%>
                     <%--</li>--%>
-                    <li>
-                        <a class="J_menuItem" href="${ctx}/mreg/services">
-                        	<i class="fa fa-strikethrough"></i>
-                        	<span class="nav-label">微服务</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a class="J_menuItem" href="${ctx}/mconf/confs">
-                        	<i class="fa fa-creative-commons"></i>
-                        	<span class="nav-label">微配置</span>
-                       	</a>
-                    </li>
+                    <%--<li>--%>
+                        <%--<a class="J_menuItem" href="${ctx}/mreg/services">--%>
+                        	<%--<i class="fa fa-strikethrough"></i>--%>
+                        	<%--<span class="nav-label">微服务</span>--%>
+                        <%--</a>--%>
+                    <%--</li>--%>
+                    <%--<li>--%>
+                        <%--<a class="J_menuItem" href="${ctx}/mconf/confs">--%>
+                        	<%--<i class="fa fa-creative-commons"></i>--%>
+                        	<%--<span class="nav-label">微配置</span>--%>
+                       	<%--</a>--%>
+                    <%--</li>--%>
                     <li class="line dk"></li>
                     <li class="hidden-folded padder m-t m-b-sm text-muted text-xs">
                         <span class="ng-scope">微治理</span>
@@ -91,15 +91,15 @@
                         </a>
                     </li>
                     <li>
-                        <a class="J_menuItem" href="${ctx}/limiter/limiter-configs">
-                        	<i class="fa fa-bitbucket"></i>
-                        	<span class="nav-label">分布式限流</span>
-                        </a>
-                    </li>
-                    <li>
                         <a class="J_menuItem" href="${ctx}/mreg/services">
                             <i class="fa fa-fire-extinguisher"></i>
                             <span class="nav-label">服务降级 </span>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="J_menuItem" href="${ctx}/limiter/limiter-configs">
+                        	<i class="fa fa-bitbucket"></i>
+                        	<span class="nav-label">分布式限流</span>
                         </a>
                     </li>
                 </ul>

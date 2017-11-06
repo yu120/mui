@@ -79,47 +79,57 @@
                                                class="js-switch_1" ${globalConfig.enable?'checked':''}/>
                                     </th>
                                     <th>
-                                        <input type="text" placeholder="请输入参数……" name="pullCycle" class="form-control" onblur="onblus()"
-                                               value="${globalConfig.pullCycle}" style="width:75px;display:inline"/> ms
+                                        <input type="text" placeholder="请输入参数……" name="pullCycle" class="form-control"
+                                               onblur="onblus()" value="${globalConfig.pullCycle}"
+                                               style="width:75px;display:inline"/> ms
                                     </th>
                                     <th>
                                         <input type="text" name="statisticReportEnable"
-                                               value="${globalConfig.statisticReportEnable?'true':'false'}" style="display: none"/>
+                                               value="${globalConfig.statisticReportEnable?'true':'false'}"
+                                               style="display: none"/>
                                         <input type="checkbox" id="statisticReportEnable"
                                                class="js-switch_2" ${globalConfig.statisticReportEnable?'checked':''}/>
                                     </th>
                                     <th><input type="text" placeholder="请输入参数……" name="statisticReportCycle"
-                                               class="form-control" value="${globalConfig.statisticReportCycle}" style="width:75px;display:inline"/>
+                                               class="form-control" value="${globalConfig.statisticReportCycle}"
+                                               style="width:75px;display:inline"/>
                                         ms
                                     </th>
                                     <th><input type="text" placeholder="请输入参数……" name="statisticDataExpire"
-                                               class="form-control" value="${globalConfig.statisticDataExpire}" style="width:90px;display:inline"/>
+                                               class="form-control" value="${globalConfig.statisticDataExpire}"
+                                               style="width:90px;display:inline"/>
                                         ms
                                     </th>
                                     <th>
                                         <input type="text" name="printRefreshLog"
-                                               value="${globalConfig.printRefreshLog?'true':'false'}" style="display: none"/>
+                                               value="${globalConfig.printRefreshLog?'true':'false'}"
+                                               style="display: none"/>
                                         <input type="checkbox" id="printRefreshLog"
                                                class="js-switch_3" ${globalConfig.printRefreshLog?'checked':''} /></th>
                                     <th>
                                         <input type="text" name="printExceedLog"
-                                               value="${globalConfig.printExceedLog?'true':'false'}" style="display: none"/>
+                                               value="${globalConfig.printExceedLog?'true':'false'}"
+                                               style="display: none"/>
                                         <input type="checkbox" id="printExceedLog"
                                                class="js-switch_4" ${globalConfig.printExceedLog?'checked':''} /></th>
                                     <th>
                                         <input type="text" name="printNoStartedLog"
-                                               value="${globalConfig.printNoStartedLog?'true':'false'}" style="display: none"/>
+                                               value="${globalConfig.printNoStartedLog?'true':'false'}"
+                                               style="display: none"/>
                                         <input type="checkbox" id="printNoStartedLog"
-                                               class="js-switch_5" ${globalConfig.printNoStartedLog?'checked':''} /></th>
+                                               class="js-switch_5" ${globalConfig.printNoStartedLog?'checked':''} />
+                                    </th>
                                     <th>
                                         <input type="text" name="printStatisticsTaskLog"
-                                               value="${globalConfig.printStatisticsTaskLog?'true':'false'}" style="display: none"/>
+                                               value="${globalConfig.printStatisticsTaskLog?'true':'false'}"
+                                               style="display: none"/>
                                         <input type="checkbox" id="printStatisticsTaskLog"
                                                class="js-switch_6" ${globalConfig.printStatisticsTaskLog?'checked':''}/>
                                     </th>
                                     <th>
                                         <input type="text" name="printStatisticsExceptionLog"
-                                               value="${globalConfig.printStatisticsExceptionLog?'true':'false'}" style="display: none"/>
+                                               value="${globalConfig.printStatisticsExceptionLog?'true':'false'}"
+                                               style="display: none"/>
                                         <input type="checkbox" id="printStatisticsExceptionLog"
                                                class="js-switch_7" ${globalConfig.printStatisticsExceptionLog?'checked':''} />
                                     </th>
@@ -129,81 +139,85 @@
                         </div>
                     </div>
                 </form>
-                <h4 style="display:inline">限流规则</h4>
-                <small>（限流资源集群参数配置）</small>
-                <table class="table table-striped table-bordered table-hover dataTables-example">
-                    <thead>
-                    <tr>
-                        <th>限流标题</th>
-                        <th>限流ID</th>
-                        <th>所属组</th>
-                        <th>所属应用</th>
-                        <th>开关</th>
-                        <th>速率阀值</th>
-                        <th>并发量</th>
-                        <th>超额策略</th>
-                        <th>备注信息</th>
-                        <th>操作</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <c:forEach items="${limiterConfigs}" var="limiterConfig">
-                        <tr class="gradeX">
-                            <td>${limiterConfig.config.title}</td>
-                            <td>${limiterConfig.identity.resource}</td>
-                            <td>${limiterConfig.identity.group}</td>
-                            <td>${limiterConfig.identity.application}</td>
-                            <td>
-                                <button class="btn btn-${limiterConfig.config.enable?'success':'danger'} btn-circle btn-xs"
-                                        title="${limiterConfig.config.enable?'打开':'关闭'}" type="button" style="background-color:#1AB394">
-                                    <i class="fa fa-${limiterConfig.config.enable?'check':'times'}"></i>
-                                </button>
-                            </td>
-                            <td class="center" style="color: #1AB394">
-                                    ${limiterConfig.config.rate}
-                                次 /
-                                <c:choose>
-                                    <c:when test="${'DAY'==limiterConfig.config.granularity}">日</c:when>
-                                    <c:when test="${'HOUR'==limiterConfig.config.granularity}">时</c:when>
-                                    <c:when test="${'MINUTE'==limiterConfig.config.granularity}">分</c:when>
-                                    <c:when test="${'SECOND'==limiterConfig.config.granularity}">秒</c:when>
-                                    <c:when test="${'MILLISECOND'==limiterConfig.config.granularity}">毫秒</c:when>
-                                    <c:otherwise><font color="red">未知策略</font></c:otherwise>
-                                </c:choose>
-                            </td>
-                            <td class="center" style="color: #1AB394">${limiterConfig.config.concurrency}</td>
-                            <td>
-                                <c:choose>
-                                    <c:when test="${'EXCEPTION'==limiterConfig.config.strategy}">
-                                        <a class="btn btn-danger btn-xs btn-rounded">抛异常</a>
-                                    </c:when>
-                                    <c:when test="${'NON'==limiterConfig.config.strategy}">
-                                        <a class="btn btn-warning btn-xs btn-rounded">不处理</a>
-                                    </c:when>
-                                    <c:otherwise>
-                                        <a class="btn btn-danger btn-xs btn-rounded">未知策略</a>
-                                    </c:otherwise>
-                                </c:choose>
-                            </td>
-                            <td>${limiterConfig.config.remarks}</td>
-                            <td>
-                                <button class="btn btn-success btn-xs" type="button" style="background-color: #1AB394">
-                                    <i class="fa fa-paste"></i> 编辑
-                                </button>
-                                <a href="${ctx}/limiter/limiter-monitor">
-                                    <button class="btn btn-info btn-xs" type="button">
-                                        <i class="fa fa-line-chart"></i> 监控
-                                    </button>
-                                </a>
-                            </td>
+                <div class="ibox-content">
+                    <h4 style="display:inline">限流规则</h4>
+                    <small>（限流资源集群参数配置）</small>
+                    <table class="table table-striped table-bordered table-hover dataTables-example">
+                        <thead>
+                        <tr>
+                            <th>限流标题</th>
+                            <th>限流ID</th>
+                            <th>所属组</th>
+                            <th>所属应用</th>
+                            <th>开关</th>
+                            <th>速率阀值</th>
+                            <th>并发量</th>
+                            <th>超额策略</th>
+                            <th>备注信息</th>
+                            <th>操作</th>
                         </tr>
-                    </c:forEach>
-                    </tbody>
-                </table>
-
+                        </thead>
+                        <tbody>
+                        <c:forEach items="${limiterConfigs}" var="limiterConfig">
+                            <tr class="gradeX">
+                                <td>${limiterConfig.config.title}</td>
+                                <td>${limiterConfig.identity.resource}</td>
+                                <td>${limiterConfig.identity.group}</td>
+                                <td>${limiterConfig.identity.application}</td>
+                                <td>
+                                    <button class="btn btn-${limiterConfig.config.enable?'success':'danger'} btn-circle btn-xs"
+                                            title="${limiterConfig.config.enable?'打开':'关闭'}" type="button"
+                                            style="background-color:#1AB394">
+                                        <i class="fa fa-${limiterConfig.config.enable?'check':'times'}"></i>
+                                    </button>
+                                </td>
+                                <td class="center" style="color: #1AB394">
+                                        ${limiterConfig.config.rate}
+                                    times /
+                                    <c:choose>
+                                        <c:when test="${'DAY'==limiterConfig.config.granularity}">d</c:when>
+                                        <c:when test="${'HOUR'==limiterConfig.config.granularity}">h</c:when>
+                                        <c:when test="${'MINUTE'==limiterConfig.config.granularity}">m</c:when>
+                                        <c:when test="${'SECOND'==limiterConfig.config.granularity}">s</c:when>
+                                        <c:when test="${'MILLISECOND'==limiterConfig.config.granularity}">ms</c:when>
+                                        <c:otherwise><font color="red">未知策略</font></c:otherwise>
+                                    </c:choose>
+                                </td>
+                                <td class="center" style="color: #1AB394">${limiterConfig.config.concurrency}</td>
+                                <td>
+                                    <c:choose>
+                                        <c:when test="${'EXCEPTION'==limiterConfig.config.strategy}">
+                                            <a class="btn btn-danger btn-xs btn-rounded">抛异常</a>
+                                        </c:when>
+                                        <c:when test="${'NON'==limiterConfig.config.strategy}">
+                                            <a class="btn btn-warning btn-xs btn-rounded">不处理</a>
+                                        </c:when>
+                                        <c:otherwise>
+                                            <a class="btn btn-danger btn-xs btn-rounded">未知策略</a>
+                                        </c:otherwise>
+                                    </c:choose>
+                                </td>
+                                <td>${limiterConfig.config.remarks}</td>
+                                <td>
+                                    <button class="btn btn-success btn-xs" type="button"
+                                            style="background-color: #1AB394">
+                                        <i class="fa fa-paste"></i> 编辑
+                                    </button>
+                                    <a href="${ctx}/limiter/limiter-monitor">
+                                        <button class="btn btn-info btn-xs" type="button">
+                                            <i class="fa fa-line-chart"></i> 监控
+                                        </button>
+                                    </a>
+                                </td>
+                            </tr>
+                        </c:forEach>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>
+</div>
 </div>
 </div>
 
