@@ -127,6 +127,7 @@
                                 </tbody>
                             </table>
                         </div>
+                    </div>
                 </form>
                 <h4 style="display:inline">限流规则</h4>
                 <small>（限流资源集群参数配置）</small>
@@ -162,12 +163,11 @@
                                     ${limiterConfig.config.rate}
                                 次 /
                                 <c:choose>
-                                    <c:when test="${'YEAR'==limiterConfig.config.granularity}">年</c:when>
-                                    <c:when test="${'MONTH'==limiterConfig.config.granularity}">月</c:when>
                                     <c:when test="${'DAY'==limiterConfig.config.granularity}">日</c:when>
                                     <c:when test="${'HOUR'==limiterConfig.config.granularity}">时</c:when>
                                     <c:when test="${'MINUTE'==limiterConfig.config.granularity}">分</c:when>
                                     <c:when test="${'SECOND'==limiterConfig.config.granularity}">秒</c:when>
+                                    <c:when test="${'MILLISECOND'==limiterConfig.config.granularity}">毫秒</c:when>
                                     <c:otherwise><font color="red">未知策略</font></c:otherwise>
                                 </c:choose>
                             </td>
