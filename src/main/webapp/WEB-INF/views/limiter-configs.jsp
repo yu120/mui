@@ -104,7 +104,8 @@
                                         ms
                                     </th>
                                     <th>
-                                        <input type="text" placeholder="请输入参数……" name="pullConfigCycle" class="form-control"
+                                        <input type="text" placeholder="请输入参数……" name="pullConfigCycle"
+                                               class="form-control"
                                                onblur="onblus()" value="${globalConfig.pullConfigCycle}"
                                                style="width:75px;display:inline"/> ms
                                     </th>
@@ -174,10 +175,12 @@
                                 </td>
                                 <td>${limiterConfig.config.remarks}</td>
                                 <td>
-                                    <button class="btn btn-success btn-xs" type="button"
-                                            style="background-color: #1AB394">
-                                        <i class="fa fa-paste"></i> 编辑
-                                    </button>
+                                    <a href="${ctx}/limiter/limiter-config/${limiterConfig.identity.application}/${limiterConfig.identity.group}/${limiterConfig.identity.resource}">
+                                        <button class="btn btn-success btn-xs" type="button"
+                                                style="background-color: #1AB394">
+                                            <i class="fa fa-paste"></i> 编辑
+                                        </button>
+                                    </a>
                                     <a href="${ctx}/limiter/limiter-monitor">
                                         <button class="btn btn-info btn-xs" type="button">
                                             <i class="fa fa-line-chart"></i> 监控
@@ -213,7 +216,7 @@
 <script>
     $(document).ready(function () {
             var colorArray = ['#ED5565', '#1AB394', '#1AB394', '#1AB394']
-            for (var i = 1; i <=4 ; i++) {
+            for (var i = 1; i <= 4; i++) {
                 new Switchery(document.querySelector('.js-switch_' + i), {color: colorArray[i - 1]});
             }
 

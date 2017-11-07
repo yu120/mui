@@ -7,6 +7,7 @@ import io.neural.common.Identity;
 import io.neural.limiter.support.LimiterConfigCenter;
 import org.apache.commons.beanutils.BeanUtils;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -37,6 +38,17 @@ public class LimiterCtrl {
     @RequestMapping(value = "limiter-monitor")
     public String limiterMonitor(HttpServletRequest request) {
         return "limiter-monitor";
+    }
+
+    @RequestMapping(value = "limiter-config/{application}/{group}/{resource}")
+    public String limiterConfig(HttpServletRequest request,
+                                @PathVariable("application") String application,
+                                @PathVariable("group") String group,
+                                @PathVariable("resource") String resource) {
+        Identity identity = new Identity(application, group, resource);
+        LimiterConfig.Config config = Limiter.LIMITER.getConfigCenter().queryConfig(identity);
+        request.setAttribute("limiterConfig", new LimiterConfig(identity, config));
+        return "limiter-config";
     }
 
     @RequestMapping(value = "update-global-config", method = RequestMethod.POST)
