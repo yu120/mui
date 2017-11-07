@@ -127,6 +127,7 @@
                             <th>所属应用</th>
                             <th>开关</th>
                             <th>速率阀值</th>
+                            <th>速率时间窗</th>
                             <th>并发量</th>
                             <th>超额策略</th>
                             <th>备注信息</th>
@@ -141,22 +142,28 @@
                                 <td>${limiterConfig.identity.group}</td>
                                 <td>${limiterConfig.identity.application}</td>
                                 <td>
-                                    <button class="btn btn-${limiterConfig.config.enable?'success':'danger'} btn-circle btn-xs"
-                                            title="${limiterConfig.config.enable?'打开':'关闭'}" type="button"
-                                            style="background-color:#1AB394">
-                                        <i class="fa fa-${limiterConfig.config.enable?'check':'times'}"></i>
-                                    </button>
-                                </td>
-                                <td class="center" style="color: #1AB394">
-                                        ${limiterConfig.config.rate}
-                                    times /
                                     <c:choose>
-                                        <c:when test="${'DAY'==limiterConfig.config.granularity}">d</c:when>
-                                        <c:when test="${'HOUR'==limiterConfig.config.granularity}">h</c:when>
-                                        <c:when test="${'MINUTE'==limiterConfig.config.granularity}">m</c:when>
-                                        <c:when test="${'SECOND'==limiterConfig.config.granularity}">s</c:when>
-                                        <c:when test="${'MILLISECOND'==limiterConfig.config.granularity}">ms</c:when>
-                                        <c:otherwise><font color="red">未知策略</font></c:otherwise>
+                                        <c:when test="${limiterConfig.config.enable}">
+                                            <button class="btn btn-info btn-circle" type="button">
+                                                <i class="fa fa-check"></i></button>
+                                        </c:when>
+                                        <c:when test="${!limiterConfig.config.enable}">
+                                            <button class="btn btn-danger btn-circle" type="button">
+                                                <i class="fa fa-times"></i>
+                                            </button>
+                                        </c:when>
+                                        <c:otherwise><font color="red">非法状态</font></c:otherwise>
+                                    </c:choose>
+                                </td>
+                                <td class="center" style="color: #1AB394">${limiterConfig.config.rate}</td>
+                                <td class="center" style="color: #1AB394">
+                                    <c:choose>
+                                        <c:when test="${'DAY'==limiterConfig.config.granularity}">天</c:when>
+                                        <c:when test="${'HOUR'==limiterConfig.config.granularity}">小时</c:when>
+                                        <c:when test="${'MINUTE'==limiterConfig.config.granularity}">分钟</c:when>
+                                        <c:when test="${'SECOND'==limiterConfig.config.granularity}">秒</c:when>
+                                        <c:when test="${'MILLISECOND'==limiterConfig.config.granularity}">毫秒</c:when>
+                                        <c:otherwise><font color="red">非法时间窗</font></c:otherwise>
                                     </c:choose>
                                 </td>
                                 <td class="center" style="color: #1AB394">${limiterConfig.config.concurrency}</td>
@@ -166,7 +173,7 @@
                                             <a class="btn btn-danger btn-xs btn-rounded">抛异常</a>
                                         </c:when>
                                         <c:when test="${'NON'==limiterConfig.config.strategy}">
-                                            <a class="btn btn-warning btn-xs btn-rounded">不处理</a>
+                                            <a class="btn btn-info btn-xs btn-rounded">不处理</a>
                                         </c:when>
                                         <c:otherwise>
                                             <a class="btn btn-danger btn-xs btn-rounded">未知策略</a>

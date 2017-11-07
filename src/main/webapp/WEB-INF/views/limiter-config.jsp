@@ -39,11 +39,11 @@
                 </h5>
             </div>
             <div class="ibox-content">
-                <form method="get" class="form-horizontal">
+                <form method="post" action="${ctx}/limiter/update-config" class="form-horizontal">
                     <div class="form-group has-success">
                         <label class="col-sm-2 control-label">限流标题</label>
                         <div class="col-sm-10">
-                            <input type="text" placeholder="请输入限流标题" class="form-control"
+                            <input type="text" placeholder="请输入限流标题" class="form-control" name="title" required="" aria-required="true"
                                    value="${limiterConfig.config.title}">
                         </div>
                     </div>
@@ -51,22 +51,23 @@
                     <div class="form-group">
                         <label class="col-sm-2 control-label">限流ID</label>
                         <div class="col-sm-10">
-                            <input type="text" disabled="" value="${limiterConfig.identity.resource}"
-                                   class="form-control">
+                            <input type="text" readonly name="resource" value="${limiterConfig.identity.resource}"
+                                   class="form-control"/>
                         </div>
                     </div>
                     <div class="hr-line-dashed"></div>
                     <div class="form-group">
                         <label class="col-sm-2 control-label">所属组</label>
                         <div class="col-sm-10">
-                            <input type="text" disabled="" value="${limiterConfig.identity.group}" class="form-control">
+                            <input type="text" readonly name="group" value="${limiterConfig.identity.group}"
+                                   class="form-control"/>
                         </div>
                     </div>
                     <div class="hr-line-dashed"></div>
                     <div class="form-group">
                         <label class="col-sm-2 control-label">所属应用</label>
                         <div class="col-sm-10">
-                            <input type="text" disabled="" value="${limiterConfig.identity.application}"
+                            <input type="text" readonly name="application" value="${limiterConfig.identity.application}"
                                    class="form-control">
                         </div>
                     </div>
@@ -74,41 +75,78 @@
                     <div class="form-group">
                         <label class="col-sm-2 control-label">限流开关</label>
                         <div class="col-sm-10">
-                            <input type="text" name="enable" value="${limiterConfig.config.enable?'true':'false'}" style="display: none"/>
-                            <input type="checkbox" id="enable" class="js-switch_1" ${limiterConfig.config.enable?'checked':''}/>
+                            <div class="radio i-checks">
+                                <label><input type="radio" ${limiterConfig.config.enable?'checked':''} value="true"
+                                              name="enableRadio"> <i></i> 启用</label>
+                                <label><input type="radio" ${limiterConfig.config.enable?'':'checked'} value="false"
+                                              name="enableRadio"> <i></i> 禁用</label>
+                            </div>
+                            <input type="text" value="${limiterConfig.config.enable}" style="display: none"
+                                   name="enable">
                         </div>
                     </div>
                     <div class="hr-line-dashed"></div>
                     <div class="form-group has-error">
                         <label class="col-sm-2 control-label">并发量</label>
                         <div class="col-sm-10">
-                            <input type="text" id="concurrency" value="" name="concurrency"/>
+                            <input type="text" id="concurrency" value="${limiterConfig.config.concurrency}"
+                                   name="concurrency"/>
                         </div>
                     </div>
-
                     <div class="hr-line-dashed"></div>
                     <div class="form-group has-error">
                         <label class="col-sm-2 control-label">速率阀值</label>
                         <div class="col-sm-10">
-                            <input type="text" id="qps" value="" name="qps"/>
+                            <input type="text" id="rate" value="${limiterConfig.config.rate}" name="rate"/>
                         </div>
                     </div>
-
+                    <div class="hr-line-dashed"></div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">速率时间窗</label>
+                        <div class="col-sm-10">
+                            <div class="radio i-checks">
+                                <label><input
+                                        type="radio" ${limiterConfig.config.granularity=='MILLISECOND'?'checked':''}
+                                        value="MILLISECOND" name="granularityRadio"> <i></i> MILLISECOND</label>
+                                <label><input type="radio" ${limiterConfig.config.granularity=='SECOND'?'checked':''}
+                                              value="SECOND" name="granularityRadio"> <i></i> SECOND</label>
+                                <label><input type="radio" ${limiterConfig.config.granularity=='MINUTE'?'checked':''}
+                                              value="MINUTE" name="granularityRadio"> <i></i> MINUTE</label>
+                                <label><input type="radio" ${limiterConfig.config.granularity=='HOUR'?'checked':''}
+                                              value="HOUR" name="granularityRadio"> <i></i> HOUR</label>
+                                <label><input type="radio" ${limiterConfig.config.granularity=='DAY'?'checked':''}
+                                              value="DAY" name="granularityRadio"> <i></i> DAY</label>
+                            </div>
+                            <input type="text" value="${limiterConfig.config.granularity}" style="display: none"
+                                   name="granularity">
+                        </div>
+                    </div>
+                    <div class="hr-line-dashed"></div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">超额策略</label>
+                        <div class="col-sm-10">
+                            <div class="radio i-checks">
+                                <label><input type="radio" ${limiterConfig.config.strategy=='NON'?'checked':''}
+                                              value="NON" name="strategyRadio"> <i></i> NON</label>
+                                <label><input type="radio" ${limiterConfig.config.strategy=='EXCEPTION'?'checked':''}
+                                              value="EXCEPTION" name="strategyRadio"> <i></i> EXCEPTION</label>
+                            </div>
+                            <input type="text" value="${limiterConfig.config.strategy}" style="display: none"
+                                   name="strategy">
+                        </div>
+                    </div>
                     <div class="hr-line-dashed"></div>
                     <div class="form-group has-warning">
                         <label class="col-sm-2 control-label">备注信息</label>
                         <div class="col-sm-10">
-                            <textarea id="ccomment" name="comment" class="form-control" required=""
-                                      aria-required="true">
-                                ${limiterConfig.config.remarks}
-                            </textarea>
+                            <textarea id="ccomment" name="remarks" class="form-control">${limiterConfig.config.remarks}</textarea>
                         </div>
                     </div>
                     <div class="hr-line-dashed"></div>
                     <div class="form-group">
                         <div class="col-sm-4 col-sm-offset-2">
-                            <button class="btn btn-primary" type="submit">保存内容</button>
-                            <button class="btn btn-white" type="submit">取消</button>
+                            <button class="btn btn-info" type="submit">确认更新</button>
+                            <button class="btn btn-white reset-data" type="reset">重置</button>
                         </div>
                     </div>
                 </form>
@@ -132,19 +170,47 @@
             type: "single",
             min: 0,
             max: 50000,
-            from: 1000,
+            from: ${limiterConfig.config.concurrency},
             step: 1,
             grid: true,
-            grid_snap: true
+            grid_snap: true,
+            onFinish: function (data) {
+                $('#concurrency').val(data.from);
+            }
         });
-        $("#qps").ionRangeSlider({
+
+        $("#rate").ionRangeSlider({
             type: "single",
             min: 0,
             max: 50000,
-            from: 8000,
+            from: ${limiterConfig.config.rate},
             step: 1,
+            keyboard: true,
             grid: true,
-            grid_snap: true
+            grid_snap: true,
+            onFinish: function (data) {
+                $('#rate').val(data.from);
+            }
+        });
+
+        $("input[name=enableRadio]").on("click", function () {
+            var enable = $('input:radio[name=enableRadio]:checked').val();
+            $('input[name=enable]').val(enable);
+        });
+
+        $("input[name=granularityRadio]").on("click", function () {
+            var enable = $('input:radio[name=granularityRadio]:checked').val();
+            $('input[name=granularity]').val(enable);
+        });
+
+        $("input[name=strategyRadio]").on("click", function () {
+            var enable = $('input:radio[name=strategyRadio]:checked').val();
+            $('input[name=strategy]').val(enable);
+        });
+
+        $(".reset-data").on("click", function () {
+            $("#concurrency").data("ionRangeSlider").reset();
+            $("#rate").data("ionRangeSlider").reset();
         });
     });
 </script>
