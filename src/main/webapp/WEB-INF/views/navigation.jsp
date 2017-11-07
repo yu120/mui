@@ -36,12 +36,12 @@
                                 <span class="clear">
                                     <span class="block m-t-xs" style="font-size:20px;">
                                         <i class="fa fa-map-signs"></i>
-                                        <strong class="font-bold">微服务协调</strong>
+                                        <strong class="font-bold">Neural</strong>
                                     </span>
                                 </span>
                             </a>
                         </div>
-                        <div class="logo-element">Mui</div>
+                        <div class="logo-element">Neural</div>
                     </li>
                     <li class="hidden-folded padder m-t m-b-sm text-muted text-xs">
                         <span class="ng-scope">监控统计</span>

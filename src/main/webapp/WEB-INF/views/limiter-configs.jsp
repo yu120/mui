@@ -53,21 +53,15 @@
                                 <thead>
                                 <tr>
                                     <th rowspan="2">限流总开关</th>
-                                    <th rowspan="2">拉取配置周期</th>
+                                    <th rowspan="2">打印限流日志</th>
+                                    <th rowspan="2">推送限流事件</th>
                                     <th colspan="3" style="text-align: center">监控统计配置</th>
-                                    <th colspan="5" style="text-align: center">打印日志配置开关
-                                        <small>（高并发会输出大量日志）</small>
-                                    </th>
+                                    <th rowspan="2">配置拉取周期</th>
                                 </tr>
                                 <tr>
-                                    <th>监控开关</th>
-                                    <th>监控上报周期</th>
-                                    <th>数据过期时间</th>
-                                    <th>刷新配置</th>
-                                    <th>流量溢出</th>
-                                    <th>未启动限流</th>
-                                    <th>统计任务</th>
-                                    <th>统计异常</th>
+                                    <th>统计上报</th>
+                                    <th>上报周期</th>
+                                    <th>数据过期周期</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -79,19 +73,28 @@
                                                class="js-switch_1" ${globalConfig.enable?'checked':''}/>
                                     </th>
                                     <th>
-                                        <input type="text" placeholder="请输入参数……" name="pullCycle" class="form-control"
-                                               onblur="onblus()" value="${globalConfig.pullCycle}"
-                                               style="width:75px;display:inline"/> ms
+                                        <input type="text" name="printExceedLog"
+                                               value="${globalConfig.printExceedLog?'true':'false'}"
+                                               style="display: none"/>
+                                        <input type="checkbox" id="printExceedLog"
+                                               class="js-switch_2" ${globalConfig.printExceedLog?'checked':''} />
+                                    </th>
+                                    <th>
+                                        <input type="text" name="broadcastEvent"
+                                               value="${globalConfig.broadcastEvent?'true':'false'}"
+                                               style="display: none"/>
+                                        <input type="checkbox" id="broadcastEvent"
+                                               class="js-switch_3" ${globalConfig.broadcastEvent?'checked':''} />
                                     </th>
                                     <th>
                                         <input type="text" name="statisticReportEnable"
                                                value="${globalConfig.statisticReportEnable?'true':'false'}"
                                                style="display: none"/>
                                         <input type="checkbox" id="statisticReportEnable"
-                                               class="js-switch_2" ${globalConfig.statisticReportEnable?'checked':''}/>
+                                               class="js-switch_4" ${globalConfig.statisticReportEnable?'checked':''}/>
                                     </th>
-                                    <th><input type="text" placeholder="请输入参数……" name="statisticReportCycle"
-                                               class="form-control" value="${globalConfig.statisticReportCycle}"
+                                    <th><input type="text" placeholder="请输入参数……" name="pushStatisticCycle"
+                                               class="form-control" value="${globalConfig.pushStatisticCycle}"
                                                style="width:75px;display:inline"/>
                                         ms
                                     </th>
@@ -101,37 +104,9 @@
                                         ms
                                     </th>
                                     <th>
-                                        <input type="text" name="printRefreshLog"
-                                               value="${globalConfig.printRefreshLog?'true':'false'}"
-                                               style="display: none"/>
-                                        <input type="checkbox" id="printRefreshLog"
-                                               class="js-switch_3" ${globalConfig.printRefreshLog?'checked':''} /></th>
-                                    <th>
-                                        <input type="text" name="printExceedLog"
-                                               value="${globalConfig.printExceedLog?'true':'false'}"
-                                               style="display: none"/>
-                                        <input type="checkbox" id="printExceedLog"
-                                               class="js-switch_4" ${globalConfig.printExceedLog?'checked':''} /></th>
-                                    <th>
-                                        <input type="text" name="printNoStartedLog"
-                                               value="${globalConfig.printNoStartedLog?'true':'false'}"
-                                               style="display: none"/>
-                                        <input type="checkbox" id="printNoStartedLog"
-                                               class="js-switch_5" ${globalConfig.printNoStartedLog?'checked':''} />
-                                    </th>
-                                    <th>
-                                        <input type="text" name="printStatisticsTaskLog"
-                                               value="${globalConfig.printStatisticsTaskLog?'true':'false'}"
-                                               style="display: none"/>
-                                        <input type="checkbox" id="printStatisticsTaskLog"
-                                               class="js-switch_6" ${globalConfig.printStatisticsTaskLog?'checked':''}/>
-                                    </th>
-                                    <th>
-                                        <input type="text" name="printStatisticsExceptionLog"
-                                               value="${globalConfig.printStatisticsExceptionLog?'true':'false'}"
-                                               style="display: none"/>
-                                        <input type="checkbox" id="printStatisticsExceptionLog"
-                                               class="js-switch_7" ${globalConfig.printStatisticsExceptionLog?'checked':''} />
+                                        <input type="text" placeholder="请输入参数……" name="pullConfigCycle" class="form-control"
+                                               onblur="onblus()" value="${globalConfig.pullConfigCycle}"
+                                               style="width:75px;display:inline"/> ms
                                     </th>
                                 </tr>
                                 </tbody>
@@ -237,31 +212,14 @@
 <!-- Page-Level Scripts -->
 <script>
     $(document).ready(function () {
-            var colorArray = ['#ED5565', '#ED5565', '#1AB394', '#1AB394', '#1AB394', '#1AB394', '#1AB394']
-            for (var i = 1; i < 8; i++) {
+            var colorArray = ['#ED5565', '#1AB394', '#1AB394', '#1AB394']
+            for (var i = 1; i <=4 ; i++) {
                 new Switchery(document.querySelector('.js-switch_' + i), {color: colorArray[i - 1]});
             }
 
-            var nameArray = ['enable', 'statisticReportEnable', 'printRefreshLog',
-                'printExceedLog', 'printNoStartedLog', 'printStatisticsTaskLog', 'printStatisticsExceptionLog']
+            var nameArray = ['enable', 'printExceedLog', 'broadcastEvent', 'statisticReportEnable']
             $('span[id=enable]').click(function () {
                 var obj = $('input[name=enable]');
-                if (obj.val() == 'true') {
-                    obj.attr('value', false)
-                } else {
-                    obj.attr('value', true)
-                }
-            });
-            $('span[id=statisticReportEnable]').click(function () {
-                var obj = $('input[name=statisticReportEnable]');
-                if (obj.val() == 'true') {
-                    obj.attr('value', false)
-                } else {
-                    obj.attr('value', true)
-                }
-            });
-            $('span[id=printRefreshLog]').click(function () {
-                var obj = $('input[name=printRefreshLog]');
                 if (obj.val() == 'true') {
                     obj.attr('value', false)
                 } else {
@@ -276,24 +234,16 @@
                     obj.attr('value', true)
                 }
             });
-            $('span[id=printNoStartedLog]').click(function () {
-                var obj = $('input[name=printNoStartedLog]');
+            $('span[id=broadcastEvent]').click(function () {
+                var obj = $('input[name=broadcastEvent]');
                 if (obj.val() == 'true') {
                     obj.attr('value', false)
                 } else {
                     obj.attr('value', true)
                 }
             });
-            $('span[id=printStatisticsTaskLog]').click(function () {
-                var obj = $('input[name=printStatisticsTaskLog]');
-                if (obj.val() == 'true') {
-                    obj.attr('value', false)
-                } else {
-                    obj.attr('value', true)
-                }
-            });
-            $('span[id=printStatisticsExceptionLog]').click(function () {
-                var obj = $('input[name=printStatisticsExceptionLog]');
+            $('span[id=statisticReportEnable]').click(function () {
+                var obj = $('input[name=statisticReportEnable]');
                 if (obj.val() == 'true') {
                     obj.attr('value', false)
                 } else {

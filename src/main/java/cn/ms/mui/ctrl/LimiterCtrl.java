@@ -12,8 +12,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 
 import io.neural.limiter.Limiter;
-import io.neural.limiter.model.LimiterConfig;
-import io.neural.limiter.model.LimiterConfig.GlobalConfig;
+import io.neural.limiter.support.LimiterConfig;
+import io.neural.limiter.support.LimiterConfig.GlobalConfig;
 
 /**
  * @author lry
