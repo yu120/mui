@@ -188,7 +188,7 @@
                                             <i class="fa fa-paste"></i> 编辑
                                         </button>
                                     </a>
-                                    <a href="${ctx}/limiter/limiter-monitor">
+                                    <a href="${ctx}/limiter/limiter-monitor/${limiterConfig.identity.application}/${limiterConfig.identity.group}/${limiterConfig.identity.resource}">
                                         <button class="btn btn-info btn-xs" type="button">
                                             <i class="fa fa-line-chart"></i> 监控
                                         </button>

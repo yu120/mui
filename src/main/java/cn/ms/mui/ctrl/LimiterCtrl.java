@@ -36,8 +36,14 @@ public class LimiterCtrl {
         return "limiter-configs";
     }
 
-    @RequestMapping(value = "limiter-monitor")
-    public String limiterMonitor(HttpServletRequest request) {
+    @RequestMapping(value = "limiter-monitor/{application}/{group}/{resource}")
+    public String limiterMonitor(HttpServletRequest request,
+                                 @PathVariable("application") String application,
+                                 @PathVariable("group") String group,
+                                 @PathVariable("resource") String resource) {
+        Identity identity = new Identity(application, group, resource);
+        LimiterConfig.Config config = Limiter.LIMITER.getConfigCenter().queryConfig(identity);
+        request.setAttribute("limiterConfig", new LimiterConfig(identity, config));
         return "limiter-monitor";
     }
 
