@@ -94,12 +94,14 @@
                         <a class="J_menuItem" href="${ctx}/mreg/services">
                             <i class="fa fa-fire-extinguisher"></i>
                             <span class="nav-label">服务降级 </span>
+                            <span class="label label-primary pull-right">new</span>
                         </a>
                     </li>
                     <li>
                         <a class="J_menuItem" href="${ctx}/limiter/limiter-configs">
                         	<i class="fa fa-bitbucket"></i>
                         	<span class="nav-label">分布式限流</span>
+                            <span class="label label-danger pull-right">hot</span>
                         </a>
                     </li>
                 </ul>
