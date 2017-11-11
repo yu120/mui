@@ -7948,3 +7948,68 @@ body.skin-3 {
     font-size: 0;
     background-color: #131e26;
 }
+
+
+.text-red {
+    color: #e74c3c !important;
+}
+
+.text-yellow {
+    color: #f39c12 !important;
+}
+
+.text-aqua {
+    color: #3498db !important;
+}
+
+.text-blue {
+    color: #0073b7 !important;
+}
+
+.text-black {
+    color: #111 !important;
+}
+
+.text-light-blue {
+    color: #3c8dbc !important;
+}
+
+.text-green {
+    color: #18bc9c !important;
+}
+
+.text-gray {
+    color: #d2d6de !important;
+}
+
+.text-navy {
+    color: #001F3F !important;
+}
+
+.text-teal {
+    color: #39CCCC !important;
+}
+
+.text-olive {
+    color: #3D9970 !important;
+}
+
+.text-lime {
+    color: #01FF70 !important;
+}
+
+.text-orange {
+    color: #FF851B !important;
+}
+
+.text-fuchsia {
+    color: #F012BE !important;
+}
+
+.text-purple {
+    color: #605ca8 !important;
+}
+
+.text-maroon {
+    color: #D81B60 !important;
+}

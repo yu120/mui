@@ -31,9 +31,8 @@
     <div class="col-sm-12">
         <div class="ibox float-e-margins">
             <div class="ibox-title">
-                <h5>交易监控
-                    <small>（${limiterConfig.identity.application} / ${limiterConfig.identity.group}
-                        / ${limiterConfig.identity.resource}）
+                <h5>交易量监控
+                    <small>（所属应用：${limiterConfig.identity.application} ，所属组：${limiterConfig.identity.group}，资源ID：${limiterConfig.identity.resource}）
                     </small>
                 </h5>
             </div>
@@ -41,22 +40,22 @@
                 <div id="trade" style="height:300px;width:100%;"></div>
             </div>
             <div class="ibox-title">
-                <h5>并发监控
-                    <small>（最大允许并发：${limiterConfig.config.concurrency}）</small>
+                <h5>并发量
+                    <small>（最大允许并发量：${limiterConfig.config.concurrency}）</small>
                 </h5>
             </div>
             <div class="ibox-content">
                 <div id="concurrency" style="height:200px;width:100%;"></div>
             </div>
             <div class="ibox-title">
-                <h5>QPS监控
-                    <small>（最大允许速率：${limiterConfig.config.rate}）</small>
+                <h5>请求速率
+                    <small>（即QPS，最大允许速率：${limiterConfig.config.rate}，单位：次/${limiterConfig.config.granularity}）</small>
                 </h5>
             </div>
             <div class="ibox-content">
-                <div id="qps" style="height:200px;width:100%;"></div>
+                <div id="rate" style="height:200px;width:100%;"></div>
             </div>
-            <div class="ibox-title"><h5>耗时监控</h5></div>
+            <div class="ibox-title"><h5>交易耗时</h5> <small>（单位：ms）</small></div>
             <div class="ibox-content">
                 <div id="elapsed" style="height:200px;width:100%;"></div>
             </div>
@@ -76,33 +75,9 @@
 <script src="${ctx}/res/echarts-theme/echarts-theme-macarons.js"></script>
 <script src="${ctx}/res/echarts-theme/echarts-theme-essos.js"></script>
 
-<script>
-    $(document).ready(function () {
-        //初始化切换
-        $(".animsition").animsition({
-            inClass: 'fade-in-right',
-            outClass: 'fade-out',
-            inDuration: 1500,
-            outDuration: 800,
-            linkElement: '.animsition-link',
-            // e.g. linkElement   :   'a:not([target="_blank"]):not([href^=#])'
-            loading: true,
-            loadingParentElement: 'body', //animsition wrapper element
-            loadingClass: 'animsition-loading',
-            unSupportCss: ['animation-duration',
-                '-webkit-animation-duration',
-                '-o-animation-duration'
-            ],
-
-            overlay: false,
-            overlayClass: 'animsition-overlay-slide',
-            overlayParentElement: 'body'
-        });
-    });
-</script>
 <script src="${ctx}/res/monitor/trade.js"></script>
 <script src="${ctx}/res/monitor/concurrency.js"></script>
-<script src="${ctx}/res/monitor/qps.js"></script>
+<script src="${ctx}/res/monitor/rate.js"></script>
 <script src="${ctx}/res/monitor/elapsed.js"></script>
 </body>
 </html>

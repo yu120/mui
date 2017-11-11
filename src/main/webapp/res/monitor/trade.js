@@ -31,13 +31,9 @@ var TRADEOption = {
         boundaryGap: false,
         data: TRADEData.time
     },
-    yAxis: {},
-    grid: [{
-        left: 'left',
-        top: 'top',
-        right: '10',
-        bottom: 30
-    }],
+    yAxis: {
+        name: '交易量/笔'
+    },
     series: [
         {
             name: '成功交易量',
@@ -95,7 +91,13 @@ var TRADEOption = {
             },
             data: TRADEData.REJECTION
         }
-    ]
+    ],
+    grid: [{
+        left: 30,
+        top: 30,
+        right: 30,
+        bottom: 30
+    }]
 };
 
 // 使用刚指定的配置项和数据显示图表。

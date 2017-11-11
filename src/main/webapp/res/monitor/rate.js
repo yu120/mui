@@ -1,12 +1,12 @@
 // 基于准备好的dom，初始化实例
-var QPSChart = echarts.init(document.getElementById('qps'), 'macarons');
-var QPSData = {
+var RATEChart = echarts.init(document.getElementById('rate'), 'macarons');
+var RATEData = {
     time: ["2017-07-12", "2017-07-13", "2017-07-14", "2017-07-15", "2017-07-16", "2017-07-17", "2017-07-18"],
-    maxQPS: [16, 28, 60, 70, 56, 4, 25],
-    avgQPS: [48, 130, 192, 151, 72, 56, 191],
+    maxRATE: [16, 28, 60, 70, 56, 4, 25],
+    avgRATE: [48, 130, 192, 151, 72, 56, 191],
 };
 // 指定图表的配置项和数据
-var QPSOption = {
+var RATEOption = {
     title: {
         text: '',
         subtext: ''
@@ -15,7 +15,7 @@ var QPSOption = {
         trigger: 'axis'
     },
     legend: {
-        data: ['最大QPS', '平均QPS']
+        data: ['最大访问速率', '平均访问速率']
     },
     toolbox: {
         show: false,
@@ -27,9 +27,11 @@ var QPSOption = {
     xAxis: {
         type: 'category',
         boundaryGap: false,
-        data: QPSData.time
+        data: RATEData.time
     },
-    yAxis: {},
+    yAxis: {
+        name: '访问速率'
+    },
     grid: [{
         left: 'left',
         top: 'top',
@@ -38,7 +40,7 @@ var QPSOption = {
     }],
     series: [
         {
-            name: '最大QPS',
+            name: '最大访问速率',
             type: 'line',
             smooth: true,
             areaStyle: {
@@ -49,10 +51,10 @@ var QPSOption = {
                     width: 1.5
                 }
             },
-            data: QPSData.maxQPS
+            data: RATEData.maxRATE
         },
         {
-            name: '平均QPS',
+            name: '平均访问速率',
             type: 'line',
             smooth: true,
             areaStyle: {
@@ -63,43 +65,49 @@ var QPSOption = {
                     width: 1.5
                 }
             },
-            data: QPSData.avgQPS
+            data: RATEData.avgRATE
         }
-    ]
+    ],
+    grid: [{
+        left: 30,
+        top: 30,
+        right: 30,
+        bottom: 30
+    }]
 };
 
 // 使用刚指定的配置项和数据显示图表。
-QPSChart.setOption(QPSOption);
+RATEChart.setOption(RATEOption);
 
 //动态添加数据，可以通过Ajax获取数据然后填充
 setInterval(function () {
-    QPSData.time.push((new Date()).toLocaleTimeString().replace(/^\D*/, ''));
-    QPSData.maxQPS.push(Math.floor(Math.random() * 200) + 20);
-    QPSData.avgQPS.push(Math.floor(Math.random() * 100) + 20);
+    RATEData.time.push((new Date()).toLocaleTimeString().replace(/^\D*/, ''));
+    RATEData.maxRATE.push(Math.floor(Math.random() * 200) + 20);
+    RATEData.avgRATE.push(Math.floor(Math.random() * 100) + 20);
 
     //按自己需求可以取消这个限制
-    if (QPSData.time.length >= 20) {
+    if (RATEData.time.length >= 20) {
         //移除最开始的一条数据
-        QPSData.time.shift();
-        QPSData.maxQPS.shift();
-        QPSData.avgQPS.shift();
+        RATEData.time.shift();
+        RATEData.maxRATE.shift();
+        RATEData.avgRATE.shift();
     }
-    QPSChart.setOption({
+    RATEChart.setOption({
         xAxis: {
-            data: QPSData.time
+            data: RATEData.time
         },
         series: [
             {
-                name: '最大QPS',
-                data: QPSData.maxQPS
+                name: '最大访问速率',
+                data: RATEData.maxRATE
             },
             {
-                name: '平均QPS',
-                data: QPSData.avgQPS
+                name: '平均访问速率',
+                data: RATEData.avgRATE
             }
         ]
     });
 }, 1000);
 $(window).resize(function () {
-    QPSChart.resize();
+    RATEChart.resize();
 });

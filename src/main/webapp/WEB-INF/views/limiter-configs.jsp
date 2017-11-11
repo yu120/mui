@@ -121,17 +121,20 @@
                     <table class="table table-striped table-bordered table-hover dataTables-example">
                         <thead>
                         <tr>
-                            <th>限流标题</th>
-                            <th>限流ID</th>
-                            <th>所属组</th>
-                            <th>所属应用</th>
-                            <th>开关</th>
+                            <th rowspan="2">限流标题</th>
+                            <th rowspan="2">限流ID</th>
+                            <th rowspan="2">所属组</th>
+                            <th rowspan="2">所属应用</th>
+                            <th rowspan="2">开关</th>
+                            <th colspan="2" style="text-align: center">速率控制</th>
+                            <th rowspan="2">并发量</th>
+                            <th rowspan="2">超额策略</th>
+                            <th rowspan="2">备注信息</th>
+                            <th rowspan="2">操作</th>
+                        </tr>
+                        <tr>
                             <th>速率阀值</th>
-                            <th>速率时间窗</th>
-                            <th>并发量</th>
-                            <th>超额策略</th>
-                            <th>备注信息</th>
-                            <th>操作</th>
+                            <th>时间窗</th>
                         </tr>
                         </thead>
                         <tbody>

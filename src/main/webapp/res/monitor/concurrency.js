@@ -29,7 +29,9 @@ var CONCURRENCYOption = {
         boundaryGap: false,
         data: CONCURRENCYData.time
     },
-    yAxis: {},
+    yAxis: {
+        name: '并发量'
+    },
     grid: [{
         left: 'left',
         top: 'top',
@@ -65,7 +67,13 @@ var CONCURRENCYOption = {
             },
             data: CONCURRENCYData.avgCONCURRENCY
         }
-    ]
+    ],
+    grid: [{
+        left: 30,
+        top: 30,
+        right: 30,
+        bottom: 30
+    }]
 };
 
 // 使用刚指定的配置项和数据显示图表。

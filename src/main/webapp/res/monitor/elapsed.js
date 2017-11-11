@@ -29,7 +29,9 @@ var ELAPSEDOption = {
         boundaryGap: false,
         data: ELAPSEDData.time
     },
-    yAxis: {},
+    yAxis: {
+        name: '耗时/ms'
+    },
     grid: [{
         left: 'left',
         top: 'top',
@@ -65,7 +67,13 @@ var ELAPSEDOption = {
             },
             data: ELAPSEDData.avgELAPSED
         }
-    ]
+    ],
+    grid: [{
+        left: 30,
+        top: 30,
+        right: 30,
+        bottom: 30
+    }]
 };
 
 // 使用刚指定的配置项和数据显示图表。
