@@ -32,7 +32,8 @@
         <div class="ibox float-e-margins">
             <div class="ibox-title">
                 <h5>交易量监控
-                    <small>（所属应用：${limiterConfig.identity.application} ，所属组：${limiterConfig.identity.group}，资源ID：${limiterConfig.identity.resource}）
+                    <small>（所属应用：${limiterConfig.identity.application}
+                        ，所属组：${limiterConfig.identity.group}，资源ID：${limiterConfig.identity.resource}）
                     </small>
                 </h5>
             </div>
@@ -49,13 +50,17 @@
             </div>
             <div class="ibox-title">
                 <h5>请求速率
-                    <small>（即QPS，最大允许速率：${limiterConfig.config.rate}，单位：次/${limiterConfig.config.granularity}）</small>
+                    <small>（即QPS，最大允许速率：${limiterConfig.config.rate} 次/${limiterConfig.config.granularity}）</small>
                 </h5>
             </div>
             <div class="ibox-content">
                 <div id="rate" style="height:200px;width:100%;"></div>
             </div>
-            <div class="ibox-title"><h5>交易耗时</h5> <small>（单位：ms）</small></div>
+            <div class="ibox-title">
+                <h5>交易耗时
+                    <small>（单位：ms）</small>
+                </h5>
+            </div>
             <div class="ibox-content">
                 <div id="elapsed" style="height:200px;width:100%;"></div>
             </div>

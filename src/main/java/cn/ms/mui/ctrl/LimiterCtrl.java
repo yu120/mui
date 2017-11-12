@@ -17,9 +17,6 @@ import io.neural.limiter.Limiter;
 import io.neural.limiter.support.LimiterConfig;
 import io.neural.limiter.support.LimiterConfig.GlobalConfig;
 
-/**
- * @author lry
- **/
 @Controller
 @RequestMapping("limiter")
 public class LimiterCtrl {

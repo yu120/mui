@@ -143,7 +143,7 @@ setInterval(function () {
             }
         ]
     });
-}, 1000);
+}, 2000);
 $(window).resize(function () {
     TRADEChart.resize();
 });
