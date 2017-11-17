@@ -40,9 +40,9 @@
             </div>
             <div class="ibox-content">
                 <form method="post" action="${ctx}/limiter/update-config" class="form-horizontal">
-                    <div class="form-group has-success">
+                    <div class="form-group">
                         <label class="col-sm-2 control-label">限流标题</label>
-                        <div class="col-sm-10">
+                        <div class="col-sm-10 has-success">
                             <input type="text" placeholder="请输入限流标题" class="form-control" name="title" required="" aria-required="true"
                                    value="${limiterConfig.config.title}">
                         </div>
@@ -94,6 +94,15 @@
                         </div>
                     </div>
                     <div class="hr-line-dashed"></div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">并发校验超时时间</label>
+                        <div class="col-sm-2 has-success">
+                            <input type="text" placeholder="请输入并发获取超时时间" class="form-control" name="concurrencyTimeout" required="" aria-required="true"
+                                   value="${limiterConfig.config.concurrencyTimeout}">
+                        </div>
+                        <div class="col-sm-1 has-success">ms</div>
+                    </div>
+                    <div class="hr-line-dashed"></div>
                     <div class="form-group has-error">
                         <label class="col-sm-2 control-label">速率阀值</label>
                         <div class="col-sm-10">
@@ -102,23 +111,26 @@
                     </div>
                     <div class="hr-line-dashed"></div>
                     <div class="form-group">
+                        <label class="col-sm-2 control-label">速率校验超时时间</label>
+                        <div class="col-sm-2 has-success">
+                            <input type="text" placeholder="请输入速率获取超时时间" class="form-control" name="rateTimeout" required="" aria-required="true"
+                                   value="${limiterConfig.config.rateTimeout}">
+                        </div>
+                        <div class="col-sm-1 has-success">ms</div>
+                    </div>
+                    <div class="hr-line-dashed"></div>
+                    <div class="form-group">
                         <label class="col-sm-2 control-label">速率时间窗</label>
-                        <div class="col-sm-10">
-                            <div class="radio i-checks">
-                                <label><input
-                                        type="radio" ${limiterConfig.config.granularity=='MILLISECOND'?'checked':''}
-                                        value="MILLISECOND" name="granularityRadio"> <i></i> MILLISECOND</label>
-                                <label><input type="radio" ${limiterConfig.config.granularity=='SECOND'?'checked':''}
-                                              value="SECOND" name="granularityRadio"> <i></i> SECOND</label>
-                                <label><input type="radio" ${limiterConfig.config.granularity=='MINUTE'?'checked':''}
-                                              value="MINUTE" name="granularityRadio"> <i></i> MINUTE</label>
-                                <label><input type="radio" ${limiterConfig.config.granularity=='HOUR'?'checked':''}
-                                              value="HOUR" name="granularityRadio"> <i></i> HOUR</label>
-                                <label><input type="radio" ${limiterConfig.config.granularity=='DAY'?'checked':''}
-                                              value="DAY" name="granularityRadio"> <i></i> DAY</label>
-                            </div>
-                            <input type="text" value="${limiterConfig.config.granularity}" style="display: none"
-                                   name="granularity">
+                        <div class="col-sm-2">
+                            <input type="text" placeholder="请输入" class="form-control" required="" aria-required="true" value="0">
+                        </div>
+                        <div class="col-sm-2">
+                            <select class="form-control m-b" name="granularity" value="${limiterConfig.config.granularity}">
+                                <option value="1s">秒</option>
+                                <option value="1m">分</option>
+                                <option value="1h">小时</option>
+                                <option value="1d">天</option>
+                            </select>
                         </div>
                     </div>
                     <div class="hr-line-dashed"></div>
@@ -127,18 +139,18 @@
                         <div class="col-sm-10">
                             <div class="radio i-checks">
                                 <label><input type="radio" ${limiterConfig.config.strategy=='NON'?'checked':''}
-                                              value="NON" name="strategyRadio"> <i></i> NON</label>
+                                              value="NON" name="strategyRadio"> <i></i> 不处理</label>
                                 <label><input type="radio" ${limiterConfig.config.strategy=='EXCEPTION'?'checked':''}
-                                              value="EXCEPTION" name="strategyRadio"> <i></i> EXCEPTION</label>
+                                              value="EXCEPTION" name="strategyRadio"> <i></i> 抛异常</label>
                             </div>
                             <input type="text" value="${limiterConfig.config.strategy}" style="display: none"
                                    name="strategy">
                         </div>
                     </div>
                     <div class="hr-line-dashed"></div>
-                    <div class="form-group has-warning">
+                    <div class="form-group">
                         <label class="col-sm-2 control-label">备注信息</label>
-                        <div class="col-sm-10">
+                        <div class="col-sm-10 has-warning">
                             <textarea id="ccomment" name="remarks" class="form-control">${limiterConfig.config.remarks}</textarea>
                         </div>
                     </div>
@@ -196,11 +208,6 @@
         $("input[name=enableRadio]").on("click", function () {
             var enable = $('input:radio[name=enableRadio]:checked').val();
             $('input[name=enable]').val(enable);
-        });
-
-        $("input[name=granularityRadio]").on("click", function () {
-            var enable = $('input:radio[name=granularityRadio]:checked').val();
-            $('input[name=granularity]').val(enable);
         });
 
         $("input[name=strategyRadio]").on("click", function () {

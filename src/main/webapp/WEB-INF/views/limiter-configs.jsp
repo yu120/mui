@@ -126,8 +126,9 @@
                             <th>所属应用</th>
                             <th>开关</th>
                             <th>速率阀值</th>
-                            <th>时间窗</th>
+                            <th>速率超时</th>
                             <th>并发量</th>
+                            <th>并发超时</th>
                             <th>超额策略</th>
                             <th>备注信息</th>
                             <th>操作</th>
@@ -154,18 +155,10 @@
                                         <c:otherwise><font color="red">非法状态</font></c:otherwise>
                                     </c:choose>
                                 </td>
-                                <td class="center" style="color: #1AB394">${limiterConfig.config.rate}</td>
-                                <td class="center" style="color: #1AB394">
-                                    <c:choose>
-                                        <c:when test="${'DAY'==limiterConfig.config.granularity}">天</c:when>
-                                        <c:when test="${'HOUR'==limiterConfig.config.granularity}">小时</c:when>
-                                        <c:when test="${'MINUTE'==limiterConfig.config.granularity}">分钟</c:when>
-                                        <c:when test="${'SECOND'==limiterConfig.config.granularity}">秒</c:when>
-                                        <c:when test="${'MILLISECOND'==limiterConfig.config.granularity}">毫秒</c:when>
-                                        <c:otherwise><font color="red">非法时间窗</font></c:otherwise>
-                                    </c:choose>
-                                </td>
-                                <td class="center" style="color: #1AB394">${limiterConfig.config.concurrency}</td>
+                                <td class="center" style="color: #1AB394">${limiterConfig.config.rate}t/${limiterConfig.config.granularity}</td>
+                                <td class="center" style="color: #1AB394">${limiterConfig.config.rateTimeout}ms</td>
+                                <td class="center" style="color: #1AB394">${limiterConfig.config.concurrency}c</td>
+                                <td class="center" style="color: #1AB394">${limiterConfig.config.concurrencyTimeout}ms</td>
                                 <td>
                                     <c:choose>
                                         <c:when test="${'EXCEPTION'==limiterConfig.config.strategy}">
