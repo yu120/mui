@@ -121,7 +121,7 @@ setInterval(function () {
             }
         ]
     });
-}, 3000);
+}, 2000);
 $(window).resize(function () {
     RATEChart.resize();
 });

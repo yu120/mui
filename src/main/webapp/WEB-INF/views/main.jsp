@@ -70,7 +70,7 @@
                     <h5>实时交易量监控</h5>
                 </div>
                 <div class="ibox-content">
-                    <div id="trade" style="height:350px;width:100%;"></div>
+                    <div id="trade" style="height:300px;width:100%;"></div>
                 </div>
             </div>
         </div>

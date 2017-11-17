@@ -53,7 +53,7 @@
                         </a>
                     </li>
                     <li>
-                        <a class="J_menuItem" href="${ctx}/mreg/services">
+                        <a class="J_menuItem" href="#">
                             <i class="fa fa fa-line-chart"></i>
                             <span class="nav-label">统计分析</span>
                         </a>
@@ -85,7 +85,7 @@
                         <span class="ng-scope">微治理</span>
                     </li>
                     <li>
-                        <a class="J_menuItem" href="${ctx}/mreg/services">
+                        <a class="J_menuItem" href="#">
                         	<i class="fa fa-forumbee text-green"></i>
                         	<span class="nav-label">OAuth </span>
                         </a>

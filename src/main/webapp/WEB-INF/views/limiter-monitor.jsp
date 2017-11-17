@@ -27,46 +27,95 @@
 </head>
 
 <body class="gray-bg">
-<div class="wrapper wrapper-content animated fadeInRight">
-    <div class="col-sm-12">
-        <div class="ibox float-e-margins">
-            <div class="ibox-title">
-                <h5>交易量监控
-                    <small>（所属应用：${limiterConfig.identity.application}
-                        ，所属组：${limiterConfig.identity.group}，资源ID：${limiterConfig.identity.resource}）
-                    </small>
-                </h5>
-            </div>
-            <div class="ibox-content">
-                <div id="trade" style="height:350px;width:100%;"></div>
-            </div>
-            <div class="ibox-title">
-                <h5>并发量
-                    <small>（最大允许并发量：${limiterConfig.config.concurrency} c）</small>
-                </h5>
-            </div>
-            <div class="ibox-content">
-                <div id="concurrency" style="height:250px;width:100%;"></div>
-            </div>
-            <div class="ibox-title">
-                <h5>请求速率
-                    <small>（即QPS，最大允许速率：${limiterConfig.config.rate} 次/${limiterConfig.config.granularity}）</small>
-                </h5>
-            </div>
-            <div class="ibox-content">
-                <div id="rate" style="height:250px;width:100%;"></div>
-            </div>
-            <div class="ibox-title">
-                <h5>交易耗时
-                    <small>（单位：ms）</small>
-                </h5>
-            </div>
-            <div class="ibox-content">
-                <div id="elapsed" style="height:250px;width:100%;"></div>
+<div class="wrapper wrapper-content animated fadeIn">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="tabs-container">
+                <ul class="nav nav-tabs">
+                    <li class="active"><a data-toggle="tab" href="#tab-1" aria-expanded="true">交易量监控</a></li>
+                    <li class=""><a data-toggle="tab" href="#tab-2" aria-expanded="false">并发量监控</a></li>
+                    <li class=""><a data-toggle="tab" href="#tab-3" aria-expanded="false">请求速率监控</a></li>
+                    <li class=""><a data-toggle="tab" href="#tab-4" aria-expanded="false">交易耗时监控</a></li>
+                </ul>
+                <div class="tab-content">
+                    <div id="tab-1" class="tab-pane active">
+                        <div class="panel-body">
+                            <div class="ibox-title">
+                                <h5>
+                                    <small>
+                                        所属应用：${limiterConfig.identity.application}，
+                                        所属组：${limiterConfig.identity.group}，
+                                        资源ID：${limiterConfig.identity.resource}，
+                                        交易单位：笔
+                                    </small>
+                                </h5>
+                            </div>
+                            <div class="ibox-content">
+                                <div id="trade" style="height:370px;width:100%;"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="tab-2" class="tab-pane">
+                        <div class="panel-body">
+                            <div class="ibox-title">
+                                <h5>
+                                    <small>
+                                        所属应用：${limiterConfig.identity.application}，
+                                        所属组：${limiterConfig.identity.group}，
+                                        资源ID：${limiterConfig.identity.resource}，
+                                        最大允许并发量：${limiterConfig.config.concurrency} c
+                                    </small>
+                                </h5>
+                            </div>
+                            <div class="ibox-content">
+                                <div id="concurrency" style="height:370px;width:100%;"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="tab-3" class="tab-pane">
+                        <div class="panel-body">
+                            <div class="ibox-title">
+                                <h5>
+                                    <small>
+                                        所属应用：${limiterConfig.identity.application}，
+                                        所属组：${limiterConfig.identity.group}，
+                                        资源ID：${limiterConfig.identity.resource}，
+                                        最大允许速率：${limiterConfig.config.rate}次/${limiterConfig.config.granularity}
+                                    </small>
+                                </h5>
+                            </div>
+                            <div class="ibox-content">
+                                <div id="rate" style="height:370px;width:100%;"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="tab-4" class="tab-pane">
+                        <div class="panel-body">
+                            <div class="ibox-title">
+                                <h5>
+                                    <small>
+                                        所属应用：${limiterConfig.identity.application}，
+                                        所属组：${limiterConfig.identity.group}，
+                                        资源ID：${limiterConfig.identity.resource}，
+                                        耗时单位：ms
+                                    </small>
+                                </h5>
+                            </div>
+                            <div class="ibox-content">
+                                <div id="elapsed" style="height:370px;width:100%;"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 </div>
+<!-- 全局js -->
+<script src="${ctx}/res/js/jquery.min.js?v=2.1.4"></script>
+<script src="${ctx}/res/js/bootstrap.min.js?v=3.3.6"></script>
+<!-- 自定义js -->
+<script src="${ctx}/res/js/content.js?v=1.0.0"></script>
 
 <script src="${ctx}/res/chart/js/jquery.min.js"></script>
 <script src="${ctx}/res/chart/js/jquery-ui.min.js"></script>
@@ -79,6 +128,13 @@
 <script src="${ctx}/res/echarts-theme/echarts-theme-wonderland.js"></script>
 <script src="${ctx}/res/echarts-theme/echarts-theme-macarons.js"></script>
 <script src="${ctx}/res/echarts-theme/echarts-theme-essos.js"></script>
+
+<script>
+    var width = $("#trade").width();
+    $("#concurrency").css("width", width);
+    $("#rate").css("width", width);
+    $("#elapsed").css("width", width);
+</script>
 
 <script src="${ctx}/res/monitor/limiter/trade.js"></script>
 <script src="${ctx}/res/monitor/limiter/concurrency.js"></script>

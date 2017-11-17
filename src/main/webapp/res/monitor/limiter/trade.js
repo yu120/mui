@@ -171,7 +171,7 @@ setInterval(function () {
             }
         ]
     });
-}, 3000);
+}, 2000);
 $(window).resize(function () {
     TRADEChart.resize();
 });
