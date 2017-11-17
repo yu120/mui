@@ -121,7 +121,7 @@ setInterval(function () {
             }
         ]
     });
-}, 2000);
+}, 3000);
 $(window).resize(function () {
     CONCURRENCYChart.resize();
 });
