@@ -39,6 +39,13 @@ var TRADEOption = {
             name: '成功交易量',
             type: 'line',
             smooth: true,
+            markPoint : {
+                data : [ {
+                    type : 'max'
+                }, {
+                    type : 'min'
+                } ]
+            },
             areaStyle: {
                 normal: {}
             },
@@ -53,6 +60,13 @@ var TRADEOption = {
             name: '失败交易量',
             type: 'line',
             smooth: true,
+            markPoint : {
+                data : [ {
+                    type : 'max'
+                }, {
+                    type : 'min'
+                } ]
+            },
             areaStyle: {
                 normal: {}
             },
@@ -67,6 +81,13 @@ var TRADEOption = {
             name: '超时交易量',
             type: 'line',
             smooth: true,
+            markPoint : {
+                data : [ {
+                    type : 'max'
+                }, {
+                    type : 'min'
+                } ]
+            },
             areaStyle: {
                 normal: {}
             },
@@ -81,6 +102,13 @@ var TRADEOption = {
             name: '拒绝交易量',
             type: 'line',
             smooth: true,
+            markPoint : {
+                data : [ {
+                    type : 'max'
+                }, {
+                    type : 'min'
+                } ]
+            },
             areaStyle: {
                 normal: {}
             },
@@ -94,7 +122,7 @@ var TRADEOption = {
     ],
     grid: [{
         left: 30,
-        top: 30,
+        top: 60,
         right: 30,
         bottom: 30
     }]

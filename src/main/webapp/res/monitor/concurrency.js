@@ -43,6 +43,13 @@ var CONCURRENCYOption = {
             name: '最大并发',
             type: 'line',
             smooth: true,
+            markPoint : {
+                data : [ {
+                    type : 'max'
+                }, {
+                    type : 'min'
+                } ]
+            },
             areaStyle: {
                 normal: {}
             },
@@ -57,6 +64,13 @@ var CONCURRENCYOption = {
             name: '平均并发',
             type: 'line',
             smooth: true,
+            markPoint : {
+                data : [ {
+                    type : 'max'
+                }, {
+                    type : 'min'
+                } ]
+            },
             areaStyle: {
                 normal: {}
             },
@@ -70,7 +84,7 @@ var CONCURRENCYOption = {
     ],
     grid: [{
         left: 30,
-        top: 30,
+        top: 60,
         right: 30,
         bottom: 30
     }]

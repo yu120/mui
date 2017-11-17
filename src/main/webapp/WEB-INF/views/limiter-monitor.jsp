@@ -38,15 +38,15 @@
                 </h5>
             </div>
             <div class="ibox-content">
-                <div id="trade" style="height:300px;width:100%;"></div>
+                <div id="trade" style="height:350px;width:100%;"></div>
             </div>
             <div class="ibox-title">
                 <h5>并发量
-                    <small>（最大允许并发量：${limiterConfig.config.concurrency}）</small>
+                    <small>（最大允许并发量：${limiterConfig.config.concurrency} c）</small>
                 </h5>
             </div>
             <div class="ibox-content">
-                <div id="concurrency" style="height:200px;width:100%;"></div>
+                <div id="concurrency" style="height:250px;width:100%;"></div>
             </div>
             <div class="ibox-title">
                 <h5>请求速率
@@ -54,7 +54,7 @@
                 </h5>
             </div>
             <div class="ibox-content">
-                <div id="rate" style="height:200px;width:100%;"></div>
+                <div id="rate" style="height:250px;width:100%;"></div>
             </div>
             <div class="ibox-title">
                 <h5>交易耗时
@@ -62,7 +62,7 @@
                 </h5>
             </div>
             <div class="ibox-content">
-                <div id="elapsed" style="height:200px;width:100%;"></div>
+                <div id="elapsed" style="height:250px;width:100%;"></div>
             </div>
         </div>
     </div>

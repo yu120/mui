@@ -43,6 +43,13 @@ var RATEOption = {
             name: '最大访问速率',
             type: 'line',
             smooth: true,
+            markPoint : {
+                data : [ {
+                    type : 'max'
+                }, {
+                    type : 'min'
+                } ]
+            },
             areaStyle: {
                 normal: {}
             },
@@ -57,6 +64,13 @@ var RATEOption = {
             name: '平均访问速率',
             type: 'line',
             smooth: true,
+            markPoint : {
+                data : [ {
+                    type : 'max'
+                }, {
+                    type : 'min'
+                } ]
+            },
             areaStyle: {
                 normal: {}
             },
@@ -70,7 +84,7 @@ var RATEOption = {
     ],
     grid: [{
         left: 30,
-        top: 30,
+        top: 60,
         right: 30,
         bottom: 30
     }]
