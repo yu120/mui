@@ -80,9 +80,9 @@
 <script src="${ctx}/res/echarts-theme/echarts-theme-macarons.js"></script>
 <script src="${ctx}/res/echarts-theme/echarts-theme-essos.js"></script>
 
-<script src="${ctx}/res/monitor/trade.js"></script>
-<script src="${ctx}/res/monitor/concurrency.js"></script>
-<script src="${ctx}/res/monitor/rate.js"></script>
-<script src="${ctx}/res/monitor/elapsed.js"></script>
+<script src="${ctx}/res/monitor/limiter/trade.js"></script>
+<script src="${ctx}/res/monitor/limiter/concurrency.js"></script>
+<script src="${ctx}/res/monitor/limiter/rate.js"></script>
+<script src="${ctx}/res/monitor/limiter/elapsed.js"></script>
 </body>
 </html>

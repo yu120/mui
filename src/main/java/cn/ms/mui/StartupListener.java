@@ -4,6 +4,7 @@ import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 
 import io.neural.common.AbstractConfigCenter;
+import io.neural.degrade.Degrade;
 import io.neural.limiter.Limiter;
 
 /**
@@ -22,6 +23,7 @@ public class StartupListener implements ServletContextListener
     {
         System.setProperty(AbstractConfigCenter.APP_NAME_KEY, "gateway");
         Limiter.LIMITER.start();
+        Degrade.DEGRADE.start();
     }
 
     /**
@@ -31,6 +33,7 @@ public class StartupListener implements ServletContextListener
     public void contextDestroyed(ServletContextEvent sce)
     {
         Limiter.LIMITER.destroy();
+        Degrade.DEGRADE.destroy();
     }
 
 }

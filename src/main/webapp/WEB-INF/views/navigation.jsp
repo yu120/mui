@@ -91,7 +91,7 @@
                         </a>
                     </li>
                     <li>
-                        <a class="J_menuItem" href="${ctx}/mreg/services">
+                        <a class="J_menuItem" href="${ctx}/degrade/degrade-configs">
                             <i class="fa fa-fire-extinguisher text-aqua"></i>
                             <span class="nav-label">服务降级 </span>
                             <span class="label label-primary pull-right"><small>new</small></span>
