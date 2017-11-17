@@ -54,7 +54,7 @@
                     </li>
                     <li>
                         <a class="J_menuItem" href="#">
-                            <i class="fa fa fa-line-chart"></i>
+                            <i class="fa fa fa-line-chart text-green"></i>
                             <span class="nav-label">统计分析</span>
                         </a>
 					</li>
@@ -84,12 +84,12 @@
                     <li class="hidden-folded padder m-t m-b-sm text-muted text-xs">
                         <span class="ng-scope">微治理</span>
                     </li>
-                    <li>
-                        <a class="J_menuItem" href="#">
-                        	<i class="fa fa-forumbee text-green"></i>
-                        	<span class="nav-label">OAuth </span>
-                        </a>
-                    </li>
+                    <%--<li>--%>
+                        <%--<a class="J_menuItem" href="#">--%>
+                        	<%--<i class="fa fa-forumbee text-green"></i>--%>
+                        	<%--<span class="nav-label">OAuth </span>--%>
+                        <%--</a>--%>
+                    <%--</li>--%>
                     <li>
                         <a class="J_menuItem" href="${ctx}/degrade/degrade-configs">
                             <i class="fa fa-fire-extinguisher text-aqua"></i>
