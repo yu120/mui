@@ -56,49 +56,53 @@
                                 <tr>
                                     <th>降级总开关</th>
                                     <th>推送降级事件</th>
-                                    <th>当前降级等级</th>
-                                    <th>监控统计配置</th>
-                                    <th>监控统计配置</th>
+                                    <th>全局降级模式</th>
                                     <th>配置拉取周期</th>
+                                    <th>监控上报周期</th>
+                                    <th>数据过期周期</th>
                                 </tr>
                                 </thead>
                                 <tbody>
                                 <tr>
                                     <th>
                                         <input type="text" name="enable"
-                                               value="${globalConfig.enable?'true':'false'}" style="display: none"/>
+                                               value="${globalConfig.enable}" style="display: none"/>
                                         <input type="checkbox" id="enable"
-                                               class="js-switch_1" ${globalConfig.enable?'checked':''}/>
+                                               class="js-switch_1" ${globalConfig.enable=='ON'?'checked':''}/>
                                     </th>
                                     <th>
                                         <input type="text" name="broadcastEvent"
-                                               value="${globalConfig.broadcastEvent?'true':'false'}"
-                                               style="display: none"/>
+                                               value="${globalConfig.broadcastEvent}" style="display: none"/>
                                         <input type="checkbox" id="broadcastEvent"
-                                               class="js-switch_3" ${globalConfig.broadcastEvent?'checked':''} />
+                                               class="js-switch_3" ${globalConfig.broadcastEvent=='ON'?'checked':''} />
                                     </th>
                                     <th>
-                                        <input type="text" name="statisticReportEnable"
-                                               value="${globalConfig.level?'true':'false'}"
-                                               style="display: none"/>
-                                        <input type="checkbox" id="statisticReportEnable"
-                                               class="js-switch_4" ${globalConfig.level?'checked':''}/>
-                                    </th>
-                                    <th><input type="text" placeholder="请输入参数……" name="pushStatisticCycle"
-                                               class="form-control" value="${globalConfig.pushStatisticCycle}"
-                                               style="width:75px;display:inline"/>
-                                        ms
-                                    </th>
-                                    <th><input type="text" placeholder="请输入参数……" name="statisticDataExpire"
-                                               class="form-control" value="${globalConfig.statisticDataExpire}"
-                                               style="width:90px;display:inline"/>
-                                        ms
+                                        <select class="form-control m-b" name="level" value="${globalConfig.level}">
+                                            <option value="NON">关闭</option>
+                                            <option value="HINT">提示</option>
+                                            <option value="RECOMMEND">推荐</option>
+                                            <option value="NEED">需要</option>
+                                            <option value="WARN">警告</option>
+                                            <option value="SERIOUS">必须</option>
+                                        </select>
                                     </th>
                                     <th>
                                         <input type="text" placeholder="请输入参数……" name="pullConfigCycle"
                                                class="form-control"
                                                onblur="onblus()" value="${globalConfig.pullConfigCycle}"
                                                style="width:75px;display:inline"/> ms
+                                    </th>
+                                    <th>
+                                        <input type="text" placeholder="请输入参数……" name="reportStatisticCycle"
+                                               class="form-control" value="${globalConfig.reportStatisticCycle}"
+                                               style="width:90px;display:inline"/>
+                                        ms
+                                    </th>
+                                    <th>
+                                        <input type="text" placeholder="请输入参数……" name="statisticDataExpire"
+                                               class="form-control" value="${globalConfig.statisticDataExpire}"
+                                               style="width:90px;display:inline"/>
+                                        ms
                                     </th>
                                 </tr>
                                 </tbody>
@@ -136,11 +140,11 @@
                                 <td>${degradeConfig.identity.application}</td>
                                 <td>
                                     <c:choose>
-                                        <c:when test="${degradeConfig.config.enable}">
+                                        <c:when test="${degradeConfig.config.enable=='ON'}">
                                             <button class="btn btn-info btn-circle" type="button">
                                                 <i class="fa fa-check"></i></button>
                                         </c:when>
-                                        <c:when test="${!degradeConfig.config.enable}">
+                                        <c:when test="${degradeConfig.config.enable=='OFF'}">
                                             <button class="btn btn-danger btn-circle" type="button">
                                                 <i class="fa fa-times"></i>
                                             </button>
@@ -150,22 +154,22 @@
                                 </td>
                                 <td>
                                     <c:choose>
-                                        <c:when test="${fn:length(llimiterConfig.config.level)==0}">
+                                        <c:when test="${'NON'==degradeConfig.config.level}">
                                             <a class="btn btn-success btn-xs btn-rounded">未设置</a>
                                         </c:when>
-                                        <c:when test="${'HINT'==limiterConfig.config.level}">
+                                        <c:when test="${'HINT'==degradeConfig.config.level}">
                                             <a class="btn btn-success btn-xs btn-rounded">提示</a>
                                         </c:when>
-                                        <c:when test="${'RECOMMEND'==limiterConfig.config.level}">
+                                        <c:when test="${'RECOMMEND'==degradeConfig.config.level}">
                                             <a class="btn btn-info btn-xs btn-rounded">推荐</a>
                                         </c:when>
-                                        <c:when test="${'NEED'==limiterConfig.config.level}">
+                                        <c:when test="${'NEED'==degradeConfig.config.level}">
                                             <a class="btn btn-primary btn-xs btn-rounded">需要</a>
                                         </c:when>
-                                        <c:when test="${'WARN'==limiterConfig.config.level}">
+                                        <c:when test="${'WARN'==degradeConfig.config.level}">
                                             <a class="btn btn-warning btn-xs btn-rounded">警告</a>
                                         </c:when>
-                                        <c:when test="${'SERIOUS'==limiterConfig.config.level}">
+                                        <c:when test="${'SERIOUS'==degradeConfig.config.level}">
                                             <a class="btn btn-danger btn-xs btn-rounded">严重</a>
                                         </c:when>
                                         <c:otherwise><a class="btn btn-danger btn-xs">未知等级</a></c:otherwise>
@@ -176,28 +180,23 @@
                                 </td>
                                 <td>
                                     <c:choose>
-                                        <c:when test="${'SKIP'==limiterConfig.config.strategy}">
+                                        <c:when test="${'NON'==degradeConfig.config.strategy}">
                                             <a class="btn btn-danger btn-xs btn-rounded">跳过</a>
                                         </c:when>
-                                        <c:when test="${'MOCK'==limiterConfig.config.strategy}">
+                                        <c:when test="${'MOCK'==degradeConfig.config.strategy}">
                                             <a class="btn btn-info btn-xs btn-rounded">Mock数据</a>
                                         </c:when>
-                                        <c:when test="${'FALLBACK'==limiterConfig.config.strategy}">
+                                        <c:when test="${'FALLBACK'==degradeConfig.config.strategy}">
                                             <a class="btn btn-info btn-xs btn-rounded">自定义</a></c:when>
                                         <c:otherwise><a class="btn btn-danger btn-xs btn-rounded">未知策略</a></c:otherwise>
                                     </c:choose>
                                 </td>
                                 <td>${degradeConfig.config.remarks}</td>
                                 <td>
-                                    <a href="${ctx}/limiter/limiter-config/${degradeConfig.identity.application}/${degradeConfig.identity.group}/${degradeConfig.identity.resource}">
+                                    <a href="${ctx}/degrade/degrade-config/${degradeConfig.identity.application}/${degradeConfig.identity.group}/${degradeConfig.identity.resource}">
                                         <button class="btn btn-success btn-xs" type="button"
                                                 style="background-color: #1AB394">
                                             <i class="fa fa-paste"></i> 编辑
-                                        </button>
-                                    </a>
-                                    <a href="${ctx}/limiter/limiter-monitor/${degradeConfig.identity.application}/${degradeConfig.identity.group}/${degradeConfig.identity.resource}">
-                                        <button class="btn btn-info btn-xs" type="button">
-                                            <i class="fa fa-line-chart"></i> 监控
                                         </button>
                                     </a>
                                 </td>
