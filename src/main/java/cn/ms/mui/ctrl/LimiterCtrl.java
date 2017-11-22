@@ -5,25 +5,29 @@ import javax.servlet.http.HttpServletRequest;
 
 import io.neural.common.Identity;
 import io.neural.limiter.support.LimiterConfigCenter;
-import org.apache.commons.beanutils.BeanUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.StringUtils;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 
 
 import io.neural.limiter.Limiter;
 import io.neural.limiter.support.LimiterConfig;
 import io.neural.limiter.support.LimiterConfig.GlobalConfig;
 
+/**
+ * 限流控制器
+ *
+ * @author lry
+ */
 @Controller
 @RequestMapping("limiter")
 public class LimiterCtrl {
 
-    @RequestMapping(value = "limiter-configs")
+    @RequestMapping(value = "limiter-configs", method = RequestMethod.GET)
     public String limiterConfigs(HttpServletRequest request) {
-        request.setAttribute("globalConfig", Limiter.LIMITER.getGlobalConfig());
+        request.setAttribute("globalConfig", Limiter.LIMITER.getConfigCenter().queryGlobalConfig());
         Map<Identity, LimiterConfig.Config> map = Limiter.LIMITER.getConfigCenter().queryConfigs();
         final Set<LimiterConfig> limiterConfigSet = new HashSet<>();
         for (Map.Entry<Identity, LimiterConfig.Config> entry : map.entrySet()) {
@@ -33,7 +37,7 @@ public class LimiterCtrl {
         return "limiter-configs";
     }
 
-    @RequestMapping(value = "limiter-monitor/{application}/{group}/{resource}")
+    @RequestMapping(value = "limiter-monitor/{application}/{group}/{resource}", method = RequestMethod.GET)
     public String limiterMonitor(HttpServletRequest request,
                                  @PathVariable("application") String application,
                                  @PathVariable("group") String group,
@@ -54,16 +58,15 @@ public class LimiterCtrl {
         }
 
         if (!map.isEmpty()) {
+            GlobalConfig globalConfig = LimiterConfig.parseGlobalConfig(map);
             LimiterConfigCenter configCenter = Limiter.LIMITER.getConfigCenter();
-            GlobalConfig globalConfig = configCenter.getGlobalConfig();
-            BeanUtils.copyProperties(globalConfig, map);
             configCenter.addGlobalConfig(globalConfig);
         }
 
         return "redirect:limiter-configs";
     }
 
-    @RequestMapping(value = "limiter-config/{application}/{group}/{resource}")
+    @RequestMapping(value = "limiter-config/{application}/{group}/{resource}", method = RequestMethod.GET)
     public String limiterConfig(HttpServletRequest request,
                                 @PathVariable("application") String application,
                                 @PathVariable("group") String group,
@@ -87,8 +90,12 @@ public class LimiterCtrl {
             LimiterConfigCenter configCenter = Limiter.LIMITER.getConfigCenter();
             Identity identity = Identity.parseIdentity(map);
             LimiterConfig.Config config = LimiterConfig.parseConfig(map);
-            if (!StringUtils.isEmpty(identity.getApplication()) && !StringUtils.isEmpty(identity.getGroup()) && !StringUtils.isEmpty(identity.getResource())) {
-                configCenter.addConfig(identity, config);
+            if (!StringUtils.isEmpty(identity.getApplication())) {
+                if (!StringUtils.isEmpty(identity.getGroup())) {
+                    if (!StringUtils.isEmpty(identity.getResource())) {
+                        configCenter.addConfig(identity, config);
+                    }
+                }
             }
         }
 

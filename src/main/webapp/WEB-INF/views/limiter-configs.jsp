@@ -36,7 +36,11 @@
                     <div class="ibox-content">
                         <table border="0" class="col-sm-12">
                             <tr>
-                                <td><h4 style="display:inline">全局配置 <small>（集群限流系统参数值配置）</small></h4></td>
+                                <td>
+                                    <h4 style="display:inline">全局配置
+                                        <small>（集群限流系统参数值配置）</small>
+                                    </h4>
+                                </td>
                                 <td style="text-align: right">
                                     <button class="btn btn-danger btn-xs" type="submit">
                                         <i class="fa fa-check"></i> 修改配置
@@ -54,10 +58,10 @@
                                     <th rowspan="2">打印限流日志</th>
                                     <th rowspan="2">推送限流事件</th>
                                     <th colspan="3" style="text-align: center">监控统计配置</th>
-                                    <th rowspan="2">配置拉取周期</th>
+
                                 </tr>
                                 <tr>
-                                    <th>统计上报</th>
+                                    <th>配置拉取周期</th>
                                     <th>上报周期</th>
                                     <th>数据过期周期</th>
                                 </tr>
@@ -66,46 +70,40 @@
                                 <tr>
                                     <th>
                                         <input type="text" name="enable"
-                                               value="${globalConfig.enable?'true':'false'}" style="display: none"/>
+                                               value="${globalConfig.enable}" style="display: none"/>
                                         <input type="checkbox" id="enable"
-                                               class="js-switch_1" ${globalConfig.enable?'checked':''}/>
-                                    </th>
-                                    <th>
-                                        <input type="text" name="printExceedLog"
-                                               value="${globalConfig.printExceedLog?'true':'false'}"
-                                               style="display: none"/>
-                                        <input type="checkbox" id="printExceedLog"
-                                               class="js-switch_2" ${globalConfig.printExceedLog?'checked':''} />
+                                               class="js-switch_1" ${globalConfig.enable=='ON'?'checked':''}/>
                                     </th>
                                     <th>
                                         <input type="text" name="broadcastEvent"
-                                               value="${globalConfig.broadcastEvent?'true':'false'}"
-                                               style="display: none"/>
+                                               value="${globalConfig.broadcastEvent}" style="display: none"/>
                                         <input type="checkbox" id="broadcastEvent"
-                                               class="js-switch_3" ${globalConfig.broadcastEvent?'checked':''} />
+                                               class="js-switch_3" ${globalConfig.broadcastEvent=='ON'?'checked':''} />
                                     </th>
                                     <th>
-                                        <input type="text" name="statisticReportEnable"
-                                               value="${globalConfig.statisticReportEnable?'true':'false'}"
+                                        <input type="text" name="printExceedLog"
+                                               value="${globalConfig.printExceedLog}"
                                                style="display: none"/>
-                                        <input type="checkbox" id="statisticReportEnable"
-                                               class="js-switch_4" ${globalConfig.statisticReportEnable?'checked':''}/>
-                                    </th>
-                                    <th><input type="text" placeholder="请输入参数……" name="pushStatisticCycle"
-                                               class="form-control" value="${globalConfig.pushStatisticCycle}"
-                                               style="width:75px;display:inline"/>
-                                        ms
-                                    </th>
-                                    <th><input type="text" placeholder="请输入参数……" name="statisticDataExpire"
-                                               class="form-control" value="${globalConfig.statisticDataExpire}"
-                                               style="width:90px;display:inline"/>
-                                        ms
+                                        <input type="checkbox" id="printExceedLog"
+                                               class="js-switch_2" ${globalConfig.printExceedLog=='ON'?'checked':''} />
                                     </th>
                                     <th>
                                         <input type="text" placeholder="请输入参数……" name="pullConfigCycle"
                                                class="form-control"
                                                onblur="onblus()" value="${globalConfig.pullConfigCycle}"
                                                style="width:75px;display:inline"/> ms
+                                    </th>
+                                    <th>
+                                        <input type="text" placeholder="请输入参数……" name="reportStatisticCycle"
+                                               class="form-control" value="${globalConfig.reportStatisticCycle}"
+                                               style="width:90px;display:inline"/>
+                                        ms
+                                    </th>
+                                    <th>
+                                        <input type="text" placeholder="请输入参数……" name="statisticDataExpire"
+                                               class="form-control" value="${globalConfig.statisticDataExpire}"
+                                               style="width:90px;display:inline"/>
+                                        ms
                                     </th>
                                 </tr>
                                 </tbody>
@@ -114,7 +112,9 @@
                     </div>
                 </form>
                 <div class="ibox-content" style="border-top: none;padding-top: 0px;padding-bottom: 5px">
-                    <h4 style="display:inline">限流规则 <small>（限流资源集群参数配置）</small></h4>
+                    <h4 style="display:inline">限流规则
+                        <small>（限流资源集群参数配置）</small>
+                    </h4>
                 </div>
                 <div class="ibox-content">
                     <table class="table table-striped table-bordered table-hover dataTables-example">
@@ -143,11 +143,11 @@
                                 <td>${limiterConfig.identity.application}</td>
                                 <td>
                                     <c:choose>
-                                        <c:when test="${limiterConfig.config.enable}">
+                                        <c:when test="${limiterConfig.config.enable=='ON'}">
                                             <button class="btn btn-info btn-circle" type="button">
                                                 <i class="fa fa-check"></i></button>
                                         </c:when>
-                                        <c:when test="${!limiterConfig.config.enable}">
+                                        <c:when test="${limiterConfig.config.enable=='OFF'}">
                                             <button class="btn btn-danger btn-circle" type="button">
                                                 <i class="fa fa-times"></i>
                                             </button>
@@ -155,10 +155,14 @@
                                         <c:otherwise><font color="red">非法状态</font></c:otherwise>
                                     </c:choose>
                                 </td>
-                                <td class="center" style="color: #1AB394">${limiterConfig.config.rate}t/${limiterConfig.config.granularity}</td>
+                                <td class="center" style="color: #1AB394">
+                                        ${limiterConfig.config.rate}
+                                    req/${limiterConfig.config.granularity}${limiterConfig.config.unit}
+                                </td>
                                 <td class="center" style="color: #1AB394">${limiterConfig.config.rateTimeout}ms</td>
                                 <td class="center" style="color: #1AB394">${limiterConfig.config.concurrency}c</td>
-                                <td class="center" style="color: #1AB394">${limiterConfig.config.concurrencyTimeout}ms</td>
+                                <td class="center" style="color: #1AB394">${limiterConfig.config.concurrencyTimeout}ms
+                                </td>
                                 <td>
                                     <c:choose>
                                         <c:when test="${'EXCEPTION'==limiterConfig.config.strategy}">
@@ -200,7 +204,8 @@
                                     <div class="btn-group hidden-xs" id="exampleTableEventsToolbar" role="group">
                                         <button class="btn btn-info" type="submit">批量禁用</button>
                                     </div>
-                                    <table id="exampleTableEvents" data-height="400" data-mobile-responsive="true" data-striped="true">
+                                    <table id="exampleTableEvents" data-height="400" data-mobile-responsive="true"
+                                           data-striped="true">
                                         <thead>
                                         <tr>
                                             <th data-field="state" data-checkbox="true"></th>
@@ -243,42 +248,34 @@
 <!-- Page-Level Scripts -->
 <script>
     $(document).ready(function () {
-            var colorArray = ['#ED5565', '#1AB394', '#1AB394', '#1AB394']
-            for (var i = 1; i <= 4; i++) {
+            var colorArray = ['#ED5565', '#1AB394', '#1AB394']
+            for (var i = 1; i < 4; i++) {
                 new Switchery(document.querySelector('.js-switch_' + i), {color: colorArray[i - 1]});
             }
 
             var nameArray = ['enable', 'printExceedLog', 'broadcastEvent', 'statisticReportEnable']
             $('span[id=enable]').click(function () {
                 var obj = $('input[name=enable]');
-                if (obj.val() == 'true') {
-                    obj.attr('value', false)
+                if (obj.val() == 'ON') {
+                    obj.attr('value', 'OFF')
                 } else {
-                    obj.attr('value', true)
-                }
-            });
-            $('span[id=printExceedLog]').click(function () {
-                var obj = $('input[name=printExceedLog]');
-                if (obj.val() == 'true') {
-                    obj.attr('value', false)
-                } else {
-                    obj.attr('value', true)
+                    obj.attr('value', 'ON')
                 }
             });
             $('span[id=broadcastEvent]').click(function () {
                 var obj = $('input[name=broadcastEvent]');
-                if (obj.val() == 'true') {
-                    obj.attr('value', false)
+                if (obj.val() == 'ON') {
+                    obj.attr('value', 'OFF')
                 } else {
-                    obj.attr('value', true)
+                    obj.attr('value', 'ON')
                 }
             });
-            $('span[id=statisticReportEnable]').click(function () {
-                var obj = $('input[name=statisticReportEnable]');
-                if (obj.val() == 'true') {
-                    obj.attr('value', false)
+            $('span[id=printExceedLog]').click(function () {
+                var obj = $('input[name=printExceedLog]');
+                if (obj.val() == 'ON') {
+                    obj.attr('value', 'OFF')
                 } else {
-                    obj.attr('value', true)
+                    obj.attr('value', 'ON')
                 }
             });
 

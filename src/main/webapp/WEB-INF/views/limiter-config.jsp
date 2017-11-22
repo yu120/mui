@@ -55,7 +55,6 @@
                                    class="form-control"/>
                         </div>
                     </div>
-                    <div class="hr-line-dashed"></div>
                     <div class="form-group">
                         <label class="col-sm-2 control-label">所属组</label>
                         <div class="col-sm-10">
@@ -63,7 +62,6 @@
                                    class="form-control"/>
                         </div>
                     </div>
-                    <div class="hr-line-dashed"></div>
                     <div class="form-group">
                         <label class="col-sm-2 control-label">所属应用</label>
                         <div class="col-sm-10">
@@ -76,21 +74,13 @@
                         <label class="col-sm-2 control-label">限流开关</label>
                         <div class="col-sm-10">
                             <div class="radio i-checks">
-                                <label><input type="radio" ${limiterConfig.config.enable?'checked':''} value="true"
+                                <label><input type="radio" ${limiterConfig.config.enable=='ON'?'checked':''} value="ON"
                                               name="enableRadio"> <i></i> 启用</label>
-                                <label><input type="radio" ${limiterConfig.config.enable?'':'checked'} value="false"
+                                <label><input type="radio" ${limiterConfig.config.enable=='OFF'?'checked':''} value="OFF"
                                               name="enableRadio"> <i></i> 禁用</label>
                             </div>
                             <input type="text" value="${limiterConfig.config.enable}" style="display: none"
                                    name="enable">
-                        </div>
-                    </div>
-                    <div class="hr-line-dashed"></div>
-                    <div class="form-group has-error">
-                        <label class="col-sm-2 control-label">并发量</label>
-                        <div class="col-sm-10">
-                            <input type="text" id="concurrency" value="${limiterConfig.config.concurrency}"
-                                   name="concurrency"/>
                         </div>
                     </div>
                     <div class="hr-line-dashed"></div>
@@ -102,11 +92,11 @@
                         </div>
                         <div class="col-sm-1 has-success">ms</div>
                     </div>
-                    <div class="hr-line-dashed"></div>
                     <div class="form-group has-error">
-                        <label class="col-sm-2 control-label">速率阀值</label>
+                        <label class="col-sm-2 control-label">并发量</label>
                         <div class="col-sm-10">
-                            <input type="text" id="rate" value="${limiterConfig.config.rate}" name="rate"/>
+                            <input type="text" id="concurrency" value="${limiterConfig.config.concurrency}"
+                                   name="concurrency"/>
                         </div>
                     </div>
                     <div class="hr-line-dashed"></div>
@@ -118,19 +108,25 @@
                         </div>
                         <div class="col-sm-1 has-success">ms</div>
                     </div>
-                    <div class="hr-line-dashed"></div>
                     <div class="form-group">
                         <label class="col-sm-2 control-label">速率时间窗</label>
                         <div class="col-sm-2">
-                            <input type="text" placeholder="请输入" class="form-control" required="" aria-required="true" value="0">
+                            <input type="text" placeholder="请输入速率时间窗大小" class="form-control" name="granularity"
+                                   required="" aria-required="true" value="${limiterConfig.config.granularity}">
                         </div>
                         <div class="col-sm-2">
-                            <select class="form-control m-b" name="granularity" value="${limiterConfig.config.granularity}">
-                                <option value="1s">秒</option>
-                                <option value="1m">分</option>
-                                <option value="1h">小时</option>
-                                <option value="1d">天</option>
+                            <select class="form-control m-b" name="unit" value="${limiterConfig.config.unit}">
+                                <option value="SEC">秒</option>
+                                <option value="MIN">分</option>
+                                <option value="HOU">时</option>
+                                <option value="DAY">天</option>
                             </select>
+                        </div>
+                    </div>
+                    <div class="form-group has-error">
+                        <label class="col-sm-2 control-label">速率阀值</label>
+                        <div class="col-sm-10">
+                            <input type="text" id="rate" value="${limiterConfig.config.rate}" name="rate"/>
                         </div>
                     </div>
                     <div class="hr-line-dashed"></div>
