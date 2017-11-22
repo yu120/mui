@@ -32,7 +32,7 @@
                         <small>微治理 > 服务降级</small>
                     </h5>
                 </div>
-                <form action="${ctx}/limiter/update-global-config" method="post">
+                <form action="${ctx}/degrade/update-global-config" method="post">
                     <div class="ibox-content">
                         <table border="0" class="col-sm-12">
                             <tr>
@@ -74,16 +74,16 @@
                                         <input type="text" name="broadcastEvent"
                                                value="${globalConfig.broadcastEvent}" style="display: none"/>
                                         <input type="checkbox" id="broadcastEvent"
-                                               class="js-switch_3" ${globalConfig.broadcastEvent=='ON'?'checked':''} />
+                                               class="js-switch_2" ${globalConfig.broadcastEvent=='ON'?'checked':''} />
                                     </th>
                                     <th>
-                                        <select class="form-control m-b" name="level" value="${globalConfig.level}">
-                                            <option value="NON">关闭</option>
-                                            <option value="HINT">提示</option>
-                                            <option value="RECOMMEND">推荐</option>
-                                            <option value="NEED">需要</option>
-                                            <option value="WARN">警告</option>
-                                            <option value="SERIOUS">必须</option>
+                                        <select class="form-control" name="level" value="${globalConfig.level}">
+                                            <option value="NON" ${globalConfig.level=='NON'?'selected':''}>关闭</option>
+                                            <option value="HINT" ${globalConfig.level=='HINT'?'selected':''}>提示</option>
+                                            <option value="RECOMMEND" ${globalConfig.level=='RECOMMEND'?'selected':''}>推荐</option>
+                                            <option value="NEED" ${globalConfig.level=='NEED'?'selected':''}>需要</option>
+                                            <option value="WARN" ${globalConfig.level=='WARN'?'selected':''}>警告</option>
+                                            <option value="SERIOUS" ${globalConfig.level=='SERIOUS'?'selected':''}>必须</option>
                                         </select>
                                     </th>
                                     <th>
@@ -176,15 +176,16 @@
                                     </c:choose>
                                 </td>
                                 <td title="连续${degradeConfig.config.requestVolume}笔交易,平均耗时超过${degradeConfig.config.elapsed}ms,则降级${degradeConfig.config.cycle}ms">
-                                        ${degradeConfig.config.requestVolume}t/${degradeConfig.config.elapsed}ms=>${degradeConfig.config.cycle}ms
+                                        ${degradeConfig.config.requestVolume}
+                                            req/${degradeConfig.config.elapsed}ms>${degradeConfig.config.cycle}ms
                                 </td>
                                 <td>
                                     <c:choose>
                                         <c:when test="${'NON'==degradeConfig.config.strategy}">
-                                            <a class="btn btn-danger btn-xs btn-rounded">跳过</a>
+                                            <a class="btn btn-danger btn-xs btn-rounded">不处理</a>
                                         </c:when>
                                         <c:when test="${'MOCK'==degradeConfig.config.strategy}">
-                                            <a class="btn btn-info btn-xs btn-rounded">Mock数据</a>
+                                            <a class="btn btn-info btn-xs btn-rounded">MOCK</a>
                                         </c:when>
                                         <c:when test="${'FALLBACK'==degradeConfig.config.strategy}">
                                             <a class="btn btn-info btn-xs btn-rounded">自定义</a></c:when>
@@ -233,42 +234,26 @@
 <!-- Page-Level Scripts -->
 <script>
     $(document).ready(function () {
-            var colorArray = ['#ED5565', '#1AB394', '#1AB394', '#1AB394']
-            for (var i = 1; i <= 4; i++) {
+            var colorArray = ['#ED5565', '#1AB394']
+            for (var i = 1; i <3; i++) {
                 new Switchery(document.querySelector('.js-switch_' + i), {color: colorArray[i - 1]});
             }
 
             var nameArray = ['enable', 'printExceedLog', 'broadcastEvent', 'statisticReportEnable']
             $('span[id=enable]').click(function () {
                 var obj = $('input[name=enable]');
-                if (obj.val() == 'true') {
-                    obj.attr('value', false)
+                if (obj.val() == 'ON') {
+                    obj.attr('value', 'OFF')
                 } else {
-                    obj.attr('value', true)
-                }
-            });
-            $('span[id=printExceedLog]').click(function () {
-                var obj = $('input[name=printExceedLog]');
-                if (obj.val() == 'true') {
-                    obj.attr('value', false)
-                } else {
-                    obj.attr('value', true)
+                    obj.attr('value', 'ON')
                 }
             });
             $('span[id=broadcastEvent]').click(function () {
                 var obj = $('input[name=broadcastEvent]');
-                if (obj.val() == 'true') {
-                    obj.attr('value', false)
+                if (obj.val() == 'ON') {
+                    obj.attr('value', 'OFF')
                 } else {
-                    obj.attr('value', true)
-                }
-            });
-            $('span[id=statisticReportEnable]').click(function () {
-                var obj = $('input[name=statisticReportEnable]');
-                if (obj.val() == 'true') {
-                    obj.attr('value', false)
-                } else {
-                    obj.attr('value', true)
+                    obj.attr('value', 'ON')
                 }
             });
 
@@ -307,66 +292,5 @@
 <script src="${ctx}/res/js/plugins/bootstrap-table/bootstrap-table.min.js"></script>
 <script src="${ctx}/res/js/plugins/bootstrap-table/bootstrap-table-mobile.min.js"></script>
 <script src="${ctx}/res/js/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js"></script>
-<!-- Peity -->
-<script>
-    (function (document, window, $) {
-        (function () {
-            $('#exampleTableEvents').bootstrapTable({
-                url: "${ctx}/res/js/demo/bootstrap_table_test.json",
-                search: true,
-                pagination: true,
-                showColumns: true,
-                iconSize: 'outline',
-                toolbar: '#exampleTableEventsToolbar',
-                icons: {
-                    refresh: 'glyphicon-repeat',
-                    toggle: 'glyphicon-list-alt',
-                    columns: 'glyphicon-list'
-                }
-            });
-
-            var $result = $('#examplebtTableEventsResult');
-            $('#exampleTableEvents').on('all.bs.table', function (e, name, args) {
-                console.log('Event:', name, ', data:', args);
-            })
-                .on('click-row.bs.table', function (e, row, $element) {
-                    $result.text('Event: click-row.bs.table');
-                })
-                .on('dbl-click-row.bs.table', function (e, row, $element) {
-                    $result.text('Event: dbl-click-row.bs.table');
-                })
-                .on('sort.bs.table', function (e, name, order) {
-                    $result.text('Event: sort.bs.table');
-                })
-                .on('check.bs.table', function (e, row) {
-                    $result.text('Event: check.bs.table');
-                })
-                .on('uncheck.bs.table', function (e, row) {
-                    $result.text('Event: uncheck.bs.table');
-                })
-                .on('check-all.bs.table', function (e) {
-                    $result.text('Event: check-all.bs.table');
-                })
-                .on('uncheck-all.bs.table', function (e) {
-                    $result.text('Event: uncheck-all.bs.table');
-                })
-                .on('load-success.bs.table', function (e, data) {
-                    $result.text('Event: load-success.bs.table');
-                })
-                .on('load-error.bs.table', function (e, status) {
-                    $result.text('Event: load-error.bs.table');
-                })
-                .on('column-switch.bs.table', function (e, field, checked) {
-                    $result.text('Event: column-switch.bs.table');
-                })
-                .on('page-change.bs.table', function (e, size, number) {
-                    $result.text('Event: page-change.bs.table');
-                })
-                .on('search.bs.table', function (e, text) {
-                    $result.text('Event: search.bs.table');
-                });
-        })();
-    })(document, window, jQuery);
-</script>
 </body>
 </html>

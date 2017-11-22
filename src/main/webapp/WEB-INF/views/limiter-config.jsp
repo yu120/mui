@@ -116,10 +116,10 @@
                         </div>
                         <div class="col-sm-2">
                             <select class="form-control m-b" name="unit" value="${limiterConfig.config.unit}">
-                                <option value="SEC">秒</option>
-                                <option value="MIN">分</option>
-                                <option value="HOU">时</option>
-                                <option value="DAY">天</option>
+                                <option value="SEC" ${limiterConfig.config.unit=='SEC'?'selected':''}>秒</option>
+                                <option value="MIN" ${limiterConfig.config.unit=='MIN'?'selected':''}>分</option>
+                                <option value="HOU" ${limiterConfig.config.unit=='HOU'?'selected':''}>时</option>
+                                <option value="DAY" ${limiterConfig.config.unit=='DAY'?'selected':''}>天</option>
                             </select>
                         </div>
                     </div>
