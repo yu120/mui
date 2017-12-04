@@ -208,7 +208,8 @@
                     </table>
                     <div class="ibox-content" style="border-top: none;padding-top: 0px;padding-left: 0px">
                         <h4 style="display:inline;color: red">注意：
-                            <small>①自动降级：{连续监控交易量}/{最大允许平均耗时}=>{降级周期}</small>
+                            <small>①降级模式：每条降级资源都有自己所属的降级模式，可以通过全局的降级模式配置来实现全局的不同模式降级</small>
+                            <small>②MOCK降级：MOCK降级可以支持十多种返回数据类型的适配，包括List&lt;T&gt;、MapList&lt;String,String&gt;等类型</small>
                         </h4>
                     </div>
                 </div>

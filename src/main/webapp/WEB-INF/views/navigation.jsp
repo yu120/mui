@@ -79,7 +79,7 @@
                         <a class="J_menuItem" href="${ctx}/degrade/degrade-configs">
                             <i class="fa fa-fire-extinguisher text-aqua"></i>
                             <span class="nav-label">服务降级 </span>
-                            <span class="label label-primary pull-right"><small>new</small></span>
+                            <span class="label label-primary pull-right"><small>hot</small></span>
                         </a>
                     </li>
                     <li>
@@ -87,6 +87,12 @@
                         	<i class="fa fa-bitbucket text-red"></i>
                         	<span class="nav-label">分布式限流</span>
                             <span class="label label-danger pull-right"><small>hot</small></span>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="J_menuItem" href="${ctx}/limiter/limiter-configs">
+                            <i class="fa fa-chain-broken text-green"></i>
+                            <span class="nav-label">熔断隔离</span>
                         </a>
                     </li>
                 </ul>
