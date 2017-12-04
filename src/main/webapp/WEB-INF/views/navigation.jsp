@@ -58,28 +58,13 @@
                             <span class="nav-label">统计分析</span>
                         </a>
 					</li>
-                    <%--<li class="line dk"></li>--%>
-                    <%--<li class="hidden-folded padder m-t m-b-sm text-muted text-xs">--%>
-                        <%--<span class="ng-scope">微视角</span>--%>
-                    <%--</li>--%>
-                    <%--<li>--%>
-                        <%--<a class="J_menuItem" href="${ctx}/mreg/applications">--%>
-                        	<%--<i class="fa fa-font"></i>--%>
-                        	<%--<span class="nav-label">微应用 </span>--%>
-                        <%--</a>--%>
-                    <%--</li>--%>
-                    <%--<li>--%>
-                        <%--<a class="J_menuItem" href="${ctx}/mreg/services">--%>
-                        	<%--<i class="fa fa-strikethrough"></i>--%>
-                        	<%--<span class="nav-label">微服务</span>--%>
-                        <%--</a>--%>
-                    <%--</li>--%>
-                    <%--<li>--%>
-                        <%--<a class="J_menuItem" href="${ctx}/mconf/confs">--%>
-                        	<%--<i class="fa fa-creative-commons"></i>--%>
-                        	<%--<span class="nav-label">微配置</span>--%>
-                       	<%--</a>--%>
-                    <%--</li>--%>
+                    <li>
+                        <a class="J_menuItem" href="#">
+                            <i class="fa fa fa-bell-o text-yellow"></i>
+                            <span class="nav-label">事件告警</span>
+                            <span class="label label-warning pull-right"><small>163</small></span>
+                        </a>
+                    </li>
                     <li class="line dk"></li>
                     <li class="hidden-folded padder m-t m-b-sm text-muted text-xs">
                         <span class="ng-scope">微治理</span>
