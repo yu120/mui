@@ -43,9 +43,9 @@
                     <div class="form-group">
                         <label class="col-sm-2 control-label">降级标题</label>
                         <div class="col-sm-10 has-success">
-                            <input type="text" placeholder="请输入降级标题" class="form-control" name="title" required=""
+                            <input type="text" placeholder="请输入降级名称" class="form-control" name="name" required=""
                                    aria-required="true"
-                                   value="${degradeConfig.config.title}">
+                                   value="${degradeConfig.config.name}">
                         </div>
                     </div>
                     <div class="hr-line-dashed"></div>

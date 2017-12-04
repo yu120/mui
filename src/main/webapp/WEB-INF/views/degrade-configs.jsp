@@ -119,22 +119,24 @@
                     <table class="table table-striped table-bordered table-hover dataTables-example">
                         <thead>
                         <tr>
-                            <th>标题</th>
+                            <th>名称</th>
                             <th>降级ID</th>
                             <th>所属组</th>
                             <th>所属应用</th>
-                            <th>降级开关</th>
-                            <th>等级</th>
-                            <th>自动降级</th>
-                            <th>处理策略</th>
-                            <th>备注信息</th>
+                            <th>开关</th>
+                            <th>降级模式</th>
+                            <th>返回类型</th>
+                            <th>MOCK_CLASS</th>
+                            <th>MOCK数据</th>
+                            <th>降级策略</th>
+                            <th>备注</th>
                             <th>操作</th>
                         </tr>
                         </thead>
                         <tbody>
                         <c:forEach items="${degradeConfigs}" var="degradeConfig">
                             <tr class="gradeX">
-                                <td>${degradeConfig.config.title}</td>
+                                <td>${degradeConfig.config.name}</td>
                                 <td>${degradeConfig.identity.resource}</td>
                                 <td>${degradeConfig.identity.group}</td>
                                 <td>${degradeConfig.identity.application}</td>
@@ -175,10 +177,9 @@
                                         <c:otherwise><a class="btn btn-danger btn-xs">未知等级</a></c:otherwise>
                                     </c:choose>
                                 </td>
-                                <td title="连续${degradeConfig.config.requestVolume}笔交易,平均耗时超过${degradeConfig.config.elapsed}ms,则降级${degradeConfig.config.cycle}ms">
-                                        ${degradeConfig.config.requestVolume}
-                                            req/${degradeConfig.config.elapsed}ms>${degradeConfig.config.cycle}ms
-                                </td>
+                                <td>${degradeConfig.config.mock}</td>
+                                <td>${degradeConfig.config.clazz}</td>
+                                <td>${degradeConfig.config.data}</td>
                                 <td>
                                     <c:choose>
                                         <c:when test="${'NON'==degradeConfig.config.strategy}">

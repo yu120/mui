@@ -1,10 +1,11 @@
 package cn.ms.mui.ctrl;
 
+import io.neural.common.Constants;
 import io.neural.common.Identity;
 import io.neural.degrade.Degrade;
-import io.neural.degrade.support.DegradeConfig;
-import io.neural.degrade.support.DegradeConfig.Config;
-import io.neural.degrade.support.DegradeConfigCenter;
+import io.neural.degrade.DegradeConfig;
+import io.neural.degrade.DegradeConfig.Config;
+import io.neural.degrade.DegradeConfig.GlobalConfig;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -25,8 +26,8 @@ public class DegradeCtrl {
 
     @RequestMapping(value = "degrade-configs")
     public String degradeConfigs(HttpServletRequest request) {
-        request.setAttribute("globalConfig", Degrade.DEGRADE.getConfigCenter().queryGlobalConfig());
-        Map<Identity, Config> map = Degrade.DEGRADE.getConfigCenter().queryConfigs();
+        request.setAttribute("globalConfig", Degrade.DEGRADE.getGovernor().queryGlobalConfig());
+        Map<Identity, Config> map = Degrade.DEGRADE.getGovernor().queryConfigs();
         final Set<DegradeConfig> degradeConfigSet = new HashSet<>();
         for (Map.Entry<Identity, Config> entry : map.entrySet()) {
             degradeConfigSet.add(new DegradeConfig(entry.getKey(), entry.getValue()));
@@ -45,9 +46,8 @@ public class DegradeCtrl {
         }
 
         if (!map.isEmpty()) {
-            DegradeConfig.GlobalConfig globalConfig = DegradeConfig.parseGlobalConfig(map);
-            DegradeConfigCenter configCenter = Degrade.DEGRADE.getConfigCenter();
-            configCenter.addGlobalConfig(globalConfig);
+            GlobalConfig globalConfig = Constants.parseObject(GlobalConfig.class, map);
+            Degrade.DEGRADE.getGovernor().addGlobalConfig(globalConfig);
         }
 
         return "redirect:degrade-configs";
@@ -59,7 +59,7 @@ public class DegradeCtrl {
                                 @PathVariable("group") String group,
                                 @PathVariable("resource") String resource) {
         Identity identity = new Identity(application, group, resource);
-        DegradeConfig.Config config = Degrade.DEGRADE.getConfigCenter().queryConfig(identity);
+        DegradeConfig.Config config = Degrade.DEGRADE.getGovernor().queryConfig(identity);
         request.setAttribute("degradeConfig", new DegradeConfig(identity, config));
         return "degrade-config";
     }
@@ -74,13 +74,12 @@ public class DegradeCtrl {
         }
 
         if (!map.isEmpty()) {
-            DegradeConfigCenter configCenter = Degrade.DEGRADE.getConfigCenter();
-            Identity identity = Identity.parseIdentity(map);
-            DegradeConfig.Config config = DegradeConfig.parseConfig(map);
+            Identity identity = Constants.parseObject(Identity.class, map);
+            Config config = Constants.parseObject(Config.class, map);
             if (!StringUtils.isEmpty(identity.getApplication())) {
                 if (!StringUtils.isEmpty(identity.getGroup())) {
                     if (!StringUtils.isEmpty(identity.getResource())) {
-                        configCenter.addConfig(identity, config);
+                        Degrade.DEGRADE.getGovernor().addConfig(identity, config);
                     }
                 }
             }

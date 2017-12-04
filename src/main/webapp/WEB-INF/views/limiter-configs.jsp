@@ -120,7 +120,7 @@
                     <table class="table table-striped table-bordered table-hover dataTables-example">
                         <thead>
                         <tr>
-                            <th>限流标题</th>
+                            <th>名称</th>
                             <th>限流ID</th>
                             <th>所属组</th>
                             <th>所属应用</th>
@@ -130,14 +130,14 @@
                             <th>并发量</th>
                             <th>并发超时</th>
                             <th>超额策略</th>
-                            <th>备注信息</th>
+                            <th>备注</th>
                             <th>操作</th>
                         </tr>
                         </thead>
                         <tbody>
                         <c:forEach items="${limiterConfigs}" var="limiterConfig">
                             <tr class="gradeX">
-                                <td>${limiterConfig.config.title}</td>
+                                <td>${limiterConfig.config.name}</td>
                                 <td>${limiterConfig.identity.resource}</td>
                                 <td>${limiterConfig.identity.group}</td>
                                 <td>${limiterConfig.identity.application}</td>
